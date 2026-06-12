@@ -49,7 +49,12 @@
 			//arbtn[i-1].style.opacity = "0";
 			
 			arbtn[i-1].link = linkbtn[i-1];
+			/*
 			arbtn[i-1].addEventListener("click", function(e) {
+				location.href = e.target.link;
+			});
+			*/
+			arbtn[i-1].addEventListener('pointerdown', (e) => {
 				location.href = e.target.link;
 			});
 		}

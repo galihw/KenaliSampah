@@ -34,8 +34,12 @@
 		myBG.style.backgroundImage = "url(img/atp.png)";
 		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
 		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+414)+'px';
-		myBtn.addEventListener("click", function() {
+		/*myBtn.addEventListener("click", function() {
 			location.href = "beranda.html";
+		});
+		*/
+		myBtn.addEventListener('pointerdown', (e) => {
+			location.href = e.target.link;
 		});
 		
 		
