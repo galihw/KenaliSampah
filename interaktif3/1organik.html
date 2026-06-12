@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.areaDrag {
+			position: absolute;
+			left: 15px;
+			top: 119px;
+			width: 220px;
+			height: 324px;
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.areaDrop {
+			position: absolute;
+			left: 251px;
+			top: 149px;
+			width: 175px;
+			height: 162px;
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.areaIn{
+			position: absolute;
+			left: 251px;
+			top: 149px;
+			width: 43px;
+			height: 80px;
+			/*background-color: #660022;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.areaImage{
+			position: absolute;
+			left: 251px;
+			top: 149px;
+			width: 384px;
+			height: 217px;
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: grab;
+			touch-action: none;
+			width: 119px; 
+			height: 56px; 
+			/*background-color: #ff0000;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn2 {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 101px; 
+			height: 41px; 
+			/*background-color: #ff0000;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.insert {
+			position: absolute;
+			touch-action: none;
+			width: 43px; 
+			height: 20px; 
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.center-text {
+			text-align: center;
+			userSelect: none;
+			position: absolute;
+			font-size:  24px;
+			width: 180px; 
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			/*background-color: lightblue;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.bubble {
+			position: absolute; /* atau relative/fixed */
+		}
+		.dragatas {
+			position: absolute; /* atau relative/fixed */
+			z-index: 9999;
+		}
+		.namabenda {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*background-color: lightblue;*/
+			width: 375px; 
+			height: 33px;
+			position: absolute;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-size:  20px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		div img {
+			-webkit-user-drag: none; /* Untuk Safari/Chrome */
+			user-drag: none;
+		}
+		.potensi {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*background-color: red;*/
+			background-color: rgb(255 255 255 / 0.8); /* 50% opacity blue */
+			width: 384px; 
+			height: 43px;
+			position: absolute;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-weight: bold;
+			font-size:  12px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="buka">
+	<div class="areaDrag" id="areaDrag"></div>
+	<div class="areaDrop" id="areaDrop"></div>
+	<img class="areaIn" id="areaIn"></img>
+	<img class="areaImage" src="img/Ahasil.png" id="areaImage"></img>
+	<img class="klikbtn" id="tombol1"></img>
+	<img class="klikbtn" id="tombol2"></img>
+	<img class="klikbtn" id="tombol3"></img>
+	<img class="klikbtn" id="tombol4"></img>
+	<img class="insert" id="insert1"></img>
+	<img class="insert" id="insert2"></img>
+	<img class="insert" id="insert3"></img>
+	<img class="insert" id="insert4"></img>
+	<img class="bubble" src="img/bubble.png" id="bubble"></img>
+	<div class="namabenda" id="dragtext"></div>
+	<div class="potensi" id="potensi"></div>
+	
+	<img class="dragatas" id="atas"></img>
+	<div class="klikbtn2" id="kembali" style="width: 101px; height: 41px;">
+		<img src="img/kembali.png" id="btnkembali"></img>
+	</div>
+	</div>
+	<script>
+		function RandomAngkaAtoB(a,b){ 
+			var r = a+Math.ceil(Math.random() * b);
+			return r;
+		}
+		function RandomMyArray(Arr){
+			for (var i=0; i<Arr.length; i++){
+				var r = Math.floor(Math.random() * Arr.length);
+				var a = Arr[i];
+				Arr[i] = Arr[r];
+				Arr[r] = a;
+			}
+			return Arr
+		}
+	</script>
+	<script>
+		const myBG = document.getElementById("buka");
+		myBG.style.backgroundImage = "url(img/1organik.png)";
+		var xybtn = [[65,147+0*70],[65,147+1*70],[65,147+2*70],[65,147+3*70]];
+		var xyinsert = [[297,205],[297,205+20],[297,205+2*20],[297,205+3*20]];
+		var arrData = [["Kulit semangka","img/Abig1.png","img/Asmall1.png",1],["Sisa sayuran","img/Abig2.png","img/Asmall2.png",2],["Daun","img/Abig3.png","img/Asmall3.png",3],["Kertas","img/Abig4.png","img/Asmall4.png",4]];
+		arrData = RandomMyArray(arrData);
+		var namaPotensi = "Nama produk: Kompos <br>Bahan: Kulit semangka, Sisa sayuran, Daun, dan Kertas"
+		for(var i=1;i<=4;i++){
+			document.getElementById('tombol'+i).src = arrData[i-1][1];
+			document.getElementById('tombol'+i).name = arrData[i-1][0];
+			document.getElementById('tombol'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+			document.getElementById('tombol'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			document.getElementById('tombol'+i).i = arrData[i-1][3];
+			
+			//document.getElementById('insert'+i).src = "img/Asmall"+i+".png";
+			document.getElementById('insert'+i).style.left = ''+(myBG.getBoundingClientRect().x+xyinsert[i-1][0])+'px';
+			document.getElementById('insert'+i).style.top = ''+(myBG.getBoundingClientRect().y+xyinsert[i-1][1])+'px';
+			document.getElementById('insert'+i).style.display = "none";//
+		}
+		
+		
+		document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715)+'px';
+		document.getElementById('kembali').style.top = ''+(myBG.getBoundingClientRect().y+420)+'px';
+		document.getElementById('areaDrag').style.left = ''+(myBG.getBoundingClientRect().x+15)+'px';
+		document.getElementById('areaDrag').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
+		document.getElementById('areaDrop').style.left = ''+(myBG.getBoundingClientRect().x+251)+'px';
+		document.getElementById('areaDrop').style.top = ''+(myBG.getBoundingClientRect().y+149)+'px';
+		document.getElementById('dragtext').style.left = ''+(myBG.getBoundingClientRect().x+413)+'px';
+		document.getElementById('dragtext').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
+		
+		document.getElementById('kembali').style.display = "none";//
+		document.getElementById('bubble').style.display = "none";//
+		document.getElementById('areaDrop').style.opacity = '0';
+		document.getElementById('areaImage').style.opacity = '0';
+		document.getElementById('areaIn').style.opacity = '0';
+		document.getElementById('areaIn').style.left = ''+(myBG.getBoundingClientRect().x+297)+'px';
+		document.getElementById('areaIn').style.top = ''+(myBG.getBoundingClientRect().y+205)+'px';
+		document.getElementById('areaImage').style.left = ''+(myBG.getBoundingClientRect().x+442)+'px';
+		document.getElementById('areaImage').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
+		document.getElementById('bubble').style.left = ''+(myBG.getBoundingClientRect().x+353)+'px';
+		document.getElementById('bubble').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
+		document.getElementById('potensi').style.left = ''+(myBG.getBoundingClientRect().x+441)+'px';
+		document.getElementById('potensi').style.top = ''+(myBG.getBoundingClientRect().y+292)+'px';
+		document.getElementById('potensi').innerHTML = namaPotensi;
+		document.getElementById('potensi').style.display = "none";//
+		
+		
+		window.addEventListener('resize', () => {
+			for(var i=1;i<=4;i++){
+				document.getElementById('tombol'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				document.getElementById('tombol'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+				document.getElementById('insert'+i).style.left = ''+(myBG.getBoundingClientRect().x+xyinsert[i-1][0])+'px';
+				document.getElementById('insert'+i).style.top = ''+(myBG.getBoundingClientRect().y+xyinsert[i-1][1])+'px';
+			}
+			document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715)+'px';
+			document.getElementById('kembali').style.top = ''+(myBG.getBoundingClientRect().y+420)+'px';
+			document.getElementById('areaDrag').style.left = ''+(myBG.getBoundingClientRect().x+15)+'px';
+			document.getElementById('areaDrag').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
+			document.getElementById('areaDrop').style.left = ''+(myBG.getBoundingClientRect().x+251)+'px';
+			document.getElementById('areaDrop').style.top = ''+(myBG.getBoundingClientRect().y+149)+'px';
+			document.getElementById('dragtext').style.left = ''+(myBG.getBoundingClientRect().x+413)+'px';
+			document.getElementById('dragtext').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
+			document.getElementById('areaIn').style.left = ''+(myBG.getBoundingClientRect().x+297)+'px';
+			document.getElementById('areaIn').style.top = ''+(myBG.getBoundingClientRect().y+205)+'px';
+			document.getElementById('areaImage').style.left = ''+(myBG.getBoundingClientRect().x+442)+'px';
+			document.getElementById('areaImage').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
+			document.getElementById('bubble').style.left = ''+(myBG.getBoundingClientRect().x+353)+'px';
+			document.getElementById('bubble').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
+			document.getElementById('potensi').style.left = ''+(myBG.getBoundingClientRect().x+441)+'px';
+			document.getElementById('potensi').style.top = ''+(myBG.getBoundingClientRect().y+292)+'px';
+		});
+	</script>
+	<script>
+		var ct = 0;
+		for (var i=1;i<=4;i++){
+			document.getElementById('tombol'+i).addEventListener('mousedown', startDrag);
+			document.getElementById('tombol'+i).addEventListener('touchstart', startDrag, { passive: false });
+
+			document.getElementById('tombol'+i).xAwal = document.getElementById('tombol'+i).getBoundingClientRect().left;
+			document.getElementById('tombol'+i).yAwal = document.getElementById('tombol'+i).getBoundingClientRect().top;
+		}
+
+		
+		var item = document.querySelector('.klikbtn');
+		const itemAtas = document.getElementById('atas');
+		itemAtas.style.visibility = "hidden";
+		function startDrag(e) {
+			// Prevent mobile screen scrolling while dragging
+			const targetElement = e.currentTarget || e.srcElement;
+			item = targetElement;
+			if (e.type === 'touchstart') {
+				e.preventDefault(); 
+				const touch = e.targetTouches[0];
+				offsetX = touch.clientX - item.getBoundingClientRect().left;
+				offsetY = touch.clientY - item.getBoundingClientRect().top;;
+			} else {
+				offsetX = e.clientX - item.getBoundingClientRect().left;
+				offsetY = e.clientY - item.getBoundingClientRect().top;
+			}
+			item.style.cursor = 'grabbing';
+			item.dataset.dragging = 'true';
+			
+			itemAtas.src = item.src;
+			itemAtas.style.visibility = "hidden";
+			itemAtas.style.cursor = 'grabbing';
+			itemAtas.dataset.dragging = 'true';
+			document.getElementById('dragtext').innerHTML = item.name;
+			document.getElementById('bubble').style.display = "";//none
+		}
+		
+		//const item = document.querySelector('.draggable');
+
+		let offsetX = 0;
+		let offsetY = 0;
+
+		// -- MOUSE EVENTS (Desktop) --
+		//item.addEventListener('mousedown', startDrag);
+		document.addEventListener('mousemove', moveDrag);
+		document.addEventListener('mouseup', stopDrag);
+
+		// -- TOUCH EVENTS (Mobile/Tablet) --
+		//item.addEventListener('touchstart', startDrag, { passive: false });
+		document.addEventListener('touchmove', moveDrag, { passive: false });
+		document.addEventListener('touchend', stopDrag);
+
+
+		function moveDrag(e) {
+			if (item.dataset.dragging !== 'true') return;
+			e.preventDefault();
+
+			let currentX, currentY;
+
+			if (e.type === 'touchmove') {
+				const touch = e.targetTouches[0];
+				currentX = touch.clientX;
+				currentY = touch.clientY;
+			} else {
+				currentX = e.clientX;
+				currentY = e.clientY;
+				
+			}
+			document.getElementById('dragtext').innerHTML = item.name;
+			
+			// Update element position
+			item.style.position = 'fixed';
+			item.style.left = `${currentX - offsetX}px`;
+			item.style.top = `${currentY - offsetY}px`;
+			itemAtas.style.left = `${currentX - offsetX}px`;
+			itemAtas.style.top = `${currentY - offsetY}px`;
+			itemAtas.style.visibility = "visible";
+			document.getElementById('bubble').style.display = "";//none
+
+		}
+
+		function stopDrag(e) {
+			if (item.dataset.dragging !== 'true') return;
+			item.dataset.dragging = 'false';
+
+			let releaseX, releaseY;
+
+			if (e.type === 'touchend') {
+				// touchend changedTouches contains the touch point that was lifted
+				const touch = e.changedTouches[0];
+				releaseX = touch.clientX;
+				releaseY = touch.clientY;
+			} else {
+				releaseX = e.clientX;
+				releaseY = e.clientY;
+			}
+			
+			// Hide the item briefly to see what is underneath it
+			item.style.display = 'none';
+			item.style.display = 'block';
+			document.getElementById('bubble').style.display = "none";//
+			var dT;
+			
+			var x0 = document.getElementById('areaDrop').getBoundingClientRect().x;
+			var ww = document.getElementById('areaDrop').offsetWidth;
+			var x1 = x0+ww;
+			var y0 = document.getElementById('areaDrop').getBoundingClientRect().y;
+			var hh = document.getElementById('areaDrop').offsetHeight;
+			var y1 = y0+hh;
+			var dT = "";
+			var ff1 = releaseX>x0 && releaseX<x1;
+			var ff2 = releaseY>y0 && releaseY<y1;
+			var fff = ff1 && ff2;
+			if(fff){
+				dT = document.getElementById('areaDrop');
+			}
+			document.getElementById('dragtext').innerHTML = "";
+			document.getElementById('bubble').style.display = "none";//
+			
+			// Check if target is your valid drop container
+			if (dT) {
+				//dropTarget.appendChild(item);
+				ct++;
+				document.getElementById('insert'+ct).src = "img/Asmall"+item.i+".png";
+				document.getElementById('insert'+ct).style.display = "";
+				//item.style.transform = `scale(${0.39}, ${0.394})`;	
+				//document.getElementById('areaIn').appendChild(item);
+				item.style.display = "none";
+				item.style.position = 'static';
+				item.style.left = '0px';
+				item.style.top = '0px';
+				item.style.float = "left";
+				
+				DaftarIsiImg();
+			}else{
+				item.style.left = ''+item.xAwal+'px';
+				item.style.top = ''+item.yAwal+'px';
+				item.style.position = 'fixed';
+			}
+			itemAtas.style.visibility = "hidden";
+		}
+		function DaftarIsiImg(){
+			if(ct==4){
+				DataSini[0] = 1;
+				console.log("DataSini = "+DataSini);
+				localStorage.setItem("arCData", DataSini);
+				document.getElementById('dragtext').innerHTML = "Good Job! \u{1F44D}";
+				document.getElementById('bubble').style.display = "";//none
+				document.getElementById('areaImage').style.opacity = '1';
+				document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715)+'px';
+				
+				document.getElementById("kembali").style.display = "";
+				document.getElementById('potensi').style.display = "";
+				document.getElementById("kembali").addEventListener("click", function() {
+					location.href = "Pembukaan.html";
+				});
+			}
+		}
+	</script>
+	<script>
+		let DataSaya = localStorage.getItem("arCData");
+		let DataSini = DataSaya.split(",");
+		console.log("DataSini = "+DataSini)
+	</script>
+	
+	
+</body>
+</html>

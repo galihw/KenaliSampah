@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 180px; 
+			height: 50px; 
+			background-color: #220022;
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+		.teks {
+			position: absolute;
+			width: 180px; 
+			height: 60px;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-size: 42px;
+			user-select: none;
+			-webkit-user-select: none;
+			
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			display: flex;
+			/*background-color: lightblue;*/
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="buka"></div>
+	<div class="klikbtn" id="lanjut" style="width: 100px; height: 40px;"></div>
+	<div class="klikbtn" id="tidak" style="width: 100px; height: 40px;"></div>
+	<div class="teks" id="teks1"></div>
+	<div class="teks" id="teks2"></div>
+	<div class="teks" id="teks3"></div>
+	<script>
+		const myBG = document.getElementById("buka");
+		myBG.style.backgroundImage = "url(img/review.png)";
+		var xy = [[590,400],[690,400]];
+		document.getElementById("lanjut").addEventListener("click", function() {
+			location.href = "../interaktif1/Pengantar.html";
+		});
+		document.getElementById("tidak").addEventListener("click", function() {
+			location.href = "../beranda/beranda.html";
+		});
+		document.getElementById("lanjut").style.position =  "absolute";
+		document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0][0])+'px';
+		document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[0][1])+'px';
+		document.getElementById("lanjut").style.zIndex = ""+(201)+"";
+		document.getElementById("lanjut").style.opacity = "0"; // mengatur hilang
+		document.getElementById("tidak").style.position =  "absolute";
+		document.getElementById("tidak").style.left = ''+(myBG.getBoundingClientRect().x+xy[1][0])+'px';
+		document.getElementById("tidak").style.top = ''+(myBG.getBoundingClientRect().y+xy[1][1])+'px';
+		document.getElementById("tidak").style.zIndex = ""+(202)+"";
+		document.getElementById("tidak").style.opacity = "0"; // mengatur hilang
+		
+		window.addEventListener('resize', () => {
+			document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0][0])+'px';
+			document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[0][1])+'px';
+			document.getElementById("tidak").style.left = ''+(myBG.getBoundingClientRect().x+xy[1][0])+'px';
+			document.getElementById("tidak").style.top = ''+(myBG.getBoundingClientRect().y+xy[1][1])+'px';
+			
+			document.getElementById("teks1").style.left = ''+(myBG.getBoundingClientRect().x+540)+'px';
+			document.getElementById("teks1").style.top = ''+(myBG.getBoundingClientRect().y+168)+'px';
+			document.getElementById("teks2").style.left = ''+(myBG.getBoundingClientRect().x+540)+'px';
+			document.getElementById("teks2").style.top = ''+(myBG.getBoundingClientRect().y+168+60+4)+'px';
+			document.getElementById("teks3").style.left = ''+(myBG.getBoundingClientRect().x+540)+'px';
+			document.getElementById("teks3").style.top = ''+(myBG.getBoundingClientRect().y+168+2*(60+4))+'px';
+		});
+	</script>
+	<script>
+		
+		let salah1 = Number(localStorage.getItem("Asalah1"));
+		let salah2 = Number(localStorage.getItem("Asalah2"));
+		let salah3 = Number(localStorage.getItem("Asalah3"));
+		let salah4 = Number(localStorage.getItem("Asalah4"));
+		let salahB = Number(localStorage.getItem("Bsalah"));
+		let salahC1 = Number(localStorage.getItem("Csalah1"));
+		let salahC2 = Number(localStorage.getItem("Csalah1"));
+		console.log(salahB);
+		var NilaiA = HitungA(salah1,salah2,salah3,salah4);
+		var NilaiB = HitungB(salahB);
+		var NilaiC = HitungB(salahC1,salahC2);
+		function HitungA(a,b,c,d){
+			var totalA = a+b+c+d;
+			var Nil;
+			if(totalA==0) Nil = 100;
+			else if(totalA==1)  Nil = 90;
+			else if(totalA==2)  Nil = 80;
+			else if(totalA==3)  Nil = 70;
+			else  Nil = 60;
+			return Nil
+		}
+		function HitungB(bb){
+			var Nil;
+			if(bb==0) Nil = 100;
+			else if(bb<=2)  Nil = 90;
+			else if(bb<=4)  Nil = 80;
+			else if(bb<=6)  Nil = 70;
+			else  Nil = 60;
+			return Nil
+		}
+		function HitungC(a,b){
+			var totalA = a+b;
+			var Nil;
+			if(totalA==0) Nil = 100;
+			else if(totalA==1)  Nil = 90;
+			else if(totalA==2)  Nil = 80;
+			else if(totalA==3)  Nil = 70;
+			else  Nil = 60;
+			return Nil
+		}
+		
+		var Teks1 = document.getElementById('teks1');
+		var Teks2 = document.getElementById('teks2');
+		document.getElementById("teks1").style.left = ''+(myBG.getBoundingClientRect().x+540)+'px';
+		document.getElementById("teks1").style.top = ''+(myBG.getBoundingClientRect().y+168)+'px';
+		document.getElementById("teks2").style.left = ''+(myBG.getBoundingClientRect().x+540)+'px';
+		document.getElementById("teks2").style.top = ''+(myBG.getBoundingClientRect().y+168+60+7)+'px';
+		document.getElementById("teks3").style.left = ''+(myBG.getBoundingClientRect().x+540)+'px';
+		document.getElementById("teks3").style.top = ''+(myBG.getBoundingClientRect().y+168+2*(60+7))+'px';
+		document.getElementById("teks1").innerHTML = NilaiA;
+		document.getElementById("teks2").innerHTML = NilaiB;
+		document.getElementById("teks3").innerHTML = NilaiC;
+		document.getElementById("teks1").style.zIndex = 101;
+		document.getElementById("teks2").style.zIndex = 102;
+		document.getElementById("teks3").style.zIndex = 103;
+	
+	</script>
+	
+	
+	<script>
+	</script>
+</body>
+</html>

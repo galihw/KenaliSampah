@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 101px; 
+			height: 41px; 
+			background-color: #ff0000;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.insert {
+			position: absolute;
+			touch-action: none;
+			width: 385px; 
+			height: 218px; 
+			background-color: #220022;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.teksnama {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*background-color: lightblue;*/
+			width: 156px; 
+			height: 76px;
+			position: absolute;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-size:  20px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.tekspenyusun {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*background-color: lightblue;*/
+			width: 156px; 
+			height: 120px;
+			position: absolute;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-size:  20px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		img {
+			position: absolute;
+			-webkit-user-drag: none; /* Safari */
+			user-drag: none;
+			-webkit-user-select: none; /* Safari */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg">
+		<div class="teksnama" id="teksnama"></div>
+		<div class="tekspenyusun" id="tekspenyusun"></div>
+		<img src="img/kembali.png" id="kembali"></img>
+		<div id="tombol1" class="klikbtn"></div>
+		<div id="tombol2" class="klikbtn"></div>
+		<div id="tombol3" class="klikbtn"></div>
+		<img class="insert" id="insert"></img>
+	</div>
+	<script>
+		const myBG = document.getElementById("bg");
+		myBG.style.backgroundImage = "url(img/3lainnya.png)";
+		document.getElementById("tombol1").style.left = ''+(myBG.getBoundingClientRect().x+471)+'px';
+		document.getElementById("tombol1").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+		document.getElementById("tombol2").style.left = ''+(myBG.getBoundingClientRect().x+574)+'px';
+		document.getElementById("tombol2").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+		document.getElementById("tombol3").style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+		document.getElementById("tombol3").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+		document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+		document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+		document.getElementById("insert").style.left = ''+(myBG.getBoundingClientRect().x+380)+'px';
+		document.getElementById("insert").style.top = ''+(myBG.getBoundingClientRect().y+128)+'px';
+		document.getElementById("teksnama").style.left = ''+(myBG.getBoundingClientRect().x+211)+'px';
+		document.getElementById("teksnama").style.top = ''+(myBG.getBoundingClientRect().y+170)+'px';
+		document.getElementById("tekspenyusun").style.left = ''+(myBG.getBoundingClientRect().x+211)+'px';
+		document.getElementById("tekspenyusun").style.top = ''+(myBG.getBoundingClientRect().y+288)+'px';
+		
+		document.getElementById("tombol3").style.display = "none";
+		document.getElementById("kembali").style.display = "none";
+		document.getElementById("tombol1").style.opacity = '0';
+		document.getElementById("tombol2").style.opacity = '0';
+		document.getElementById("tombol3").style.opacity = '0';
+		
+		var arrData = [
+						["Meja dan kursi ecobrick","Botol plastik<br>Bungkus plastik"],
+						["Tas","Kertas"],
+						["Pajangan","Kertas"],
+						["Vas bunga","Botol kaca"],
+						["Sapu","Botol plastik"],
+						["Tatakan","Kain perca"],
+						["Lukisan","Tutup botol plastik"]
+						]
+		document.getElementById("tombol1").addEventListener("click", function() {
+			Prev();
+		});
+		document.getElementById("tombol2").addEventListener("click", function() {
+			Next();
+		});
+		document.getElementById("tombol3").addEventListener("click", function() {
+			location.href = "Pembukaan.html";
+		});
+		
+		var ct = 1;
+		var sudah = [0,0,0,0,0,0,0];
+		getImage();
+		function Prev(){
+			ct++;
+			if(ct==8)	ct=1;
+			getImage();
+		}
+		function Next(){
+			ct--;
+			if(ct==0)	ct=7;
+			getImage();
+		}
+		function getImage(){
+			sudah[ct-1]=1;
+			var ctcoba = 0
+			for(i=0;i<7;i++) if(sudah[i]==1) ctcoba;
+			var ff = true;
+			for(i=0;i<7;i++) ff = ff&&sudah[i]==1
+			localStorage.setItem("Ccoba2", ctcoba);
+			
+			document.getElementById("teksnama").innerHTML = arrData[ct-1][0];
+			document.getElementById("tekspenyusun").innerHTML = arrData[ct-1][1];
+			
+			document.getElementById("insert").src = "img/Cbig"+ct+".png";
+			if(ff){
+				document.getElementById("tombol3").style.display = "";//none
+				document.getElementById("kembali").style.display = "";//none
+				DataSini[2]=1;
+				localStorage.setItem("Ccoba2", ctcoba);
+				localStorage.setItem("arCData", DataSini);
+			}	
+		}
+		
+		window.addEventListener('resize', () => {
+			document.getElementById("tombol1").style.left = ''+(myBG.getBoundingClientRect().x+471)+'px';
+			document.getElementById("tombol1").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+			document.getElementById("tombol2").style.left = ''+(myBG.getBoundingClientRect().x+574)+'px';
+			document.getElementById("tombol2").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+			document.getElementById("tombol3").style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+			document.getElementById("tombol3").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+			document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+			document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
+			document.getElementById("insert").style.left = ''+(myBG.getBoundingClientRect().x+380)+'px';
+			document.getElementById("insert").style.top = ''+(myBG.getBoundingClientRect().y+128)+'px';
+			document.getElementById("teksnama").style.left = ''+(myBG.getBoundingClientRect().x+211)+'px';
+			document.getElementById("teksnama").style.top = ''+(myBG.getBoundingClientRect().y+170)+'px';
+			document.getElementById("tekspenyusun").style.left = ''+(myBG.getBoundingClientRect().x+211)+'px';
+			document.getElementById("tekspenyusun").style.top = ''+(myBG.getBoundingClientRect().y+288)+'px';
+		});
+	</script>
+	
+	
+	<script>
+		let DataSaya = localStorage.getItem("arCData");
+		let DataSini = DataSaya.split(",");
+		let Ccoba2 = localStorage.getItem("Ccoba2");
+	</script>
+</body>
+</html>

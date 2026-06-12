@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 260px;
+			height: 50px; 
+			background-color: #220022;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.insert {
+			position: absolute;
+			touch-action: none;
+			width: 261px; 
+			height: 53px; 
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.kliknext {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 100px; 
+			height: 40px; 
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="buka"></div>
+	<div class="klikbtn" id="tombol1"></div>
+	<div class="klikbtn" id="tombol2"></div>
+	<div class="klikbtn" id="tombol3"></div>
+	<img class="insert" id="img1" src="img/hitamtutup.png"></img>
+	<img class="insert" id="img2" src="img/hitamtutup.png"></img>
+	<img class="insert" id="img3" src="img/hitamtutup.png"></img>
+	<img class="kliknext" id="lanjut" src="img/btnlanjut.png"></img>
+	<script>
+		let DataSaya3 = localStorage.getItem("arCData");
+		let DataSini3 = DataSaya3.split(",");
+		console.log("DataSini3 = "+DataSini3)
+		
+		const myBG = document.getElementById("buka");
+		myBG.style.backgroundImage = "url(img/buka.png)";
+		var xy = [679,385];
+		var arbtn = [];
+		var xybtn = [[357,180],[357,180+82],[357,180+2*82]];
+		var linkbtn = ["1organik.html","2anorganik.html","3lainnya.html"];
+		for(var i=1;i<=3;i++){
+			arbtn[i-1] = document.getElementById('tombol'+i);
+			arbtn[i-1].style.position =  "absolute";
+			arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+			arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			arbtn[i-1].style.zIndex = "auto";
+			arbtn[i-1].style.opacity = "0";
+			
+			document.getElementById('img'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+			document.getElementById('img'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			document.getElementById('img'+i).style.display = "none";
+			
+			arbtn[i-1].link = linkbtn[i-1];
+			arbtn[i-1].addEventListener("click", function(e) {
+				location.href = e.target.link;
+			});
+		}
+		document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+		document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		document.getElementById("lanjut").style.display = "none";
+		
+		var ncek = 0;
+		for(var i=1;i<=3;i++){
+			if(DataSini3[i-1]==1){
+				document.getElementById('img'+i).style.display = "";
+				document.getElementById("tombol"+i).style.display = "none"
+				ncek++;
+			}
+			if(ncek==3){
+				//location.href = "Penutupan.html";
+				document.getElementById("lanjut").style.display = "";//none]
+				document.getElementById("lanjut").addEventListener("click", function() {
+					location.href = "Review.html";
+				});
+			}
+		}
+		
+		
+		
+		window.addEventListener('resize', () => {
+			for(var i=1;i<=3;i++){
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+				document.getElementById('img'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				document.getElementById('img'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			}
+			document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+			document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		});
+	</script>
+	
+	
+	<script>
+	</script>
+</body>
+</html>
