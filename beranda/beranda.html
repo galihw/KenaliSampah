@@ -50,10 +50,16 @@
 			arbtn[i-1].addEventListener("click", function(e) {
 				location.href = e.target.link;
 			});
-			*/
 			arbtn[i-1].addEventListener('pointerdown', (e) => {
 				location.href = e.target.link;
 			});
+			*/
+			function myclick(e) {
+				e.preventDefault(); 
+				location.href = e.target.link;
+			}
+			arbtn[i-1].addEventListener('touchend', myclick);
+			arbtn[i-1].addEventListener('click', myclick);
 		}
 		
 		var arrect = [];
