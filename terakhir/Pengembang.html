@@ -27,20 +27,29 @@
 <body>
 	<div class ="bg" id="buka"></div>
 	<div class="klikbtn" id="tombol"></div>
+	<div class="klikbtn" id="aset"></div>
 	<script>
 		const myBtn = document.getElementById("tombol");
+		const myAset = document.getElementById("aset");
 		const myBG = document.getElementById("buka");
 		myBG.style.backgroundImage = "url(img/pengembang.png)";
 		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
 		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+394)+'px';
+		myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+		myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "../beranda/beranda.html";
+		});
+		myAset.addEventListener("click", function() {
+			location.href = "LinkGambar.html";
 		});
 		
 		
 		window.addEventListener('resize', () => {
 			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
 			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392)+'px';
+			myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+			myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
 		});
 	</script>
 	<script>
