@@ -61,7 +61,7 @@
 			arbtn[i-1].addEventListener('touchend', myclick);
 			arbtn[i-1].addEventListener('click', myclick);
 		}
-		
+		/*
 		var arrect = [];
 		var xyrect = [[110,148],[110+231,148],[110,148+133],[110+231,148+133]]
 		for(var i=1;i<=4;i++){
@@ -77,14 +77,16 @@
 			arrect[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xyrect[i-1][1])+'px';
 			myBG.appendChild(arrect[i-1]);
 		}
-		
+		*/
 		
 		window.addEventListener('resize', () => {
 			for(var i=1;i<=4;i++){
 				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
 				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+				/*
 				arrect[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xyrect[i-1][0])+'px';
 				arrect[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xyrect[i-1][1])+'px';
+				*/
 			}
 		});
 	</script>
