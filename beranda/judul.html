@@ -38,10 +38,16 @@
 		myBtn.addEventListener("click", function() {
 			location.href = "beranda.html";
 		});
-		*/
 		myBtn.addEventListener('pointerdown', (e) => {
 			location.href = "beranda.html";
 		});
+		*/
+		function myclick(e) {
+			e.preventDefault(); 
+			location.href = "beranda.html";
+		}
+		myBtn.addEventListener('touchend', myclick);
+		myBtn.addEventListener('click', myclick);
 		
 		
 		window.addEventListener('resize', () => {
