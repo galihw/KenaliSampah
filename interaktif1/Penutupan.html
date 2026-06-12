@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 180px; 
+			height: 50px; 
+			background-color: #220022;
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="buka"></div>
+	<div class="klikbtn" id="lanjut" style="width: 100px; height: 40px;"></div>
+	<script>
+		const myBG = document.getElementById("buka");
+		myBG.style.backgroundImage = "url(img/lanjut.png)";
+		var xy = [285,285];
+		document.getElementById("lanjut").addEventListener("click", function() {
+			location.href = "../interaktif2/Pembukaan.html";
+		});
+		document.getElementById("lanjut").style.position =  "absolute";
+		document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+		document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		document.getElementById("lanjut").style.zIndex = ""+(200)+"";
+		document.getElementById("lanjut").style.opacity = "0"; // mengatur hilang
+		
+		window.addEventListener('resize', () => {
+			document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+			document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		});
+	</script>
+	
+	
+	<script>
+	</script>
+</body>
+</html>

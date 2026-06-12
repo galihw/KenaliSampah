@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikable {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none; 
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 180px; 
+			height: 50px; 
+			background-color: #220022;
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+		.center-text {
+			text-align: center;
+			userSelect: none;
+			position: absolute;
+			font-size:  24px;
+			width: 180px; 
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			/*background-color: lightblue;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="buka"></div>
+	<div class="klikbtn" id="tombol1"></div>
+	<div class="klikbtn" id="tombol2"></div>
+	<div class="klikbtn" id="tombol3"></div>
+	<div class="klikbtn" id="kembali" style="width: 100px; height: 40px;"></div>
+	<script>
+		function RandomAngkaAtoB(a,b){ 
+			var r = a+Math.ceil(Math.random() * b);
+			return r;
+		}
+		function RandomMyArray(Arr){
+			for (var i=0; i<Arr.length; i++){
+				var r = Math.floor(Math.random() * Arr.length);
+				var a = Arr[i];
+				Arr[i] = Arr[r];
+				Arr[r] = a;
+			}
+			return Arr
+		}
+	</script>
+	<script>
+		let salah = Number(localStorage.getItem("Asalah1"));
+	
+		const myBG = document.getElementById("buka");
+		myBG.style.backgroundImage = "url(img/1taman.png)";
+				
+		var arDataBig = [
+						[["ranting","img/ranting1.png",256*100/256,144*100/256],["ranting","img/ranting2.png",200*100/200,115*100/200],["ranting","img/ranting3.png",200*100/200,164*100/200],["ranting","img/ranting4.png",200*100/200,105*100/200]],
+						[["baterai","img/baterai1.png",83*50/279,279*50/279],["baterai","img/baterai2.png",104*50/350,350*50/350],["baterai","img/baterai3.png",198*50/316,316*50/316],["baterai","img/baterai4.png",188*50/316,316*50/316]],
+						[["kaleng","img/kaleng1.png",104*100/200,200*100/200],["kaleng","img/kaleng2.png",139*100/200,200*100/200],["kaleng","img/kaleng3.png",102*100/200,200*100/200],["kaleng","img/kaleng4.png",96*100/200,200*100/200]]
+						];
+		/*
+		var arDataBig = [
+						[["kertas","img/kertas1.png",200*100/200,127*100/200],["kertas","img/kertas2.png",200*100/200,127*100/200],["kertas","img/kertas3.png",200*100/200,127*100/200],["kertas","img/kertas4.png",200*100/200,127*100/200]],
+						[["botol plastik","img/botol1.png",105*100/310,310*100/310],["botol plastik","img/botol2.png",238*100/585,585*100/585],["botol plastik","img/botol3.png",218*100/594,594*100/594],["botol plastik","img/botol4.png",227*100/605,605*100/605]],
+						[["kain","img/kain1.png",451*100/451,167*100/451],["kain","img/kain2.png",300*100/300,191*100/300],["kain","img/kain3.png",276*100/276,176*100/276],["kain","img/kain4.png",200*100/200,140*100/200]]
+						];
+		*/
+		/*			
+		var arDataBig = [
+						[["aki","img/aki1.png",100,105],["aki","img/aki2.png",200*100/200,156*100/200],["aki","img/aki3.png",200*100/200,153*100/200],["aki","img/aki4.png",321*100/321,200*100/321]],
+						[["telpon genggam","img/hp1.png",284*100/284,274*100/284],["telpon genggam","img/hp2.png",268*100/284,284*100/284],["telpon genggam","img/hp3.png",349*100/349,331*100/349],["telpon genggam","img/hp4.png",392*100/392,321*100/392]],
+						[["kayu","img/kayu1.png",200*100/200,82*100/200],["kayu","img/kayu2.png",184*100/184,130*100/184],["kayu","img/kayu3.png",175*100/175,113*100/175],["kayu","img/kayu4.png",200*100/200,154*100/200]]
+						];
+		*/
+		/*		
+		var arDataBig = [
+						[["kulit buah","img/kulitbuah1.png",157*100/166,166*100/166],["kulit buah","img/kulitbuah2.png",244*100/244,154*100/244],["kulit buah","img/kulitbuah3.png",200*100/200,128*100/200],["kulit buah","img/kulitbuah4.png",200*100/200,127*100/200]],
+						[["tas plastik","img/tasplastik1.png",165*100/200,200*100/200],["tas plastik","img/tasplastik2.png",291*100/338,338*100/338],["tas plastik","img/tasplastik3.png",171*100/200,200*100/200],["tas plastik","img/tasplastik4.png",154*100/200,200*100/200]],
+						[["sisa sayuran","img/sisasayuran1.png",173*100/173,121*100/173],["sisa sayuran","img/sisasayuran2.png",180*100/180,87*100/180],["sisa sayuran","img/sisasayuran3.png",180*100/180,121*100/180],["sisa sayuran","img/sisasayuran4.png",180*100/180,121*100/180]]
+						];
+		*/
+		
+		for(var i=0;i<3;i++) arDataBig[i] = RandomMyArray(arDataBig[i]);
+		var arData = [arDataBig[0][0], arDataBig[1][0], arDataBig[2][0]];
+		
+		arData = RandomMyArray(arData);
+		
+		var arbtn = [];
+		var xybtn = [[127,185],[127+231,185],[127,185+133],[10,10]];
+		var arri = [0,1,2];
+		arri = RandomMyArray(arri);
+		for(var i=1;i<=3;i++){
+			var xx = 55+190*arri[i-1];
+			var yy = 180+40*i;
+			xybtn[i-1][0]=xx;
+			xybtn[i-1][1]=yy;
+		}
+		
+		
+		var artext = [];
+		var arimage = [];
+		var cekimg = 0;
+		for(var i=1;i<=4;i++){
+			if(i==4)	arbtn[i-1] = document.getElementById('kembali');
+			else		arbtn[i-1] = document.getElementById('tombol'+i);
+			arbtn[i-1].style.position =  "absolute";
+			arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+			arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			arbtn[i-1].style.zIndex = ""+(200+i)+"";
+			arbtn[i-1].style.opacity = "0"; // mengatur hilang
+			if(i<4){
+				arbtn[i-1].addEventListener("click", function(e) {
+					e.target.style.display = "none";
+					e.target.mate.style.display = "none";
+					e.target.teks.style.opacity = "1"; // mengatur hilang
+					cek(e);
+				});
+			}else{
+				arbtn[i-1].addEventListener("click", function() {
+					localStorage.setItem("arData", DataSini);
+					if(ncek!==3){
+						salah++;
+						localStorage.setItem("Asalah1", salah);
+					}
+					location.href = "Pembukaan.html";
+				});
+			}
+			if(i<4){
+				arimage[i-1] = document.createElement('img');
+				arbtn[i-1].mate = arimage[i-1];
+				arimage[i-1].src = arData[i-1][1];
+				arimage[i-1].style.width = arData[i-1][2]+'px';
+				arimage[i-1].style.height = arData[i-1][3]+'px';
+				arimage[i-1].wid = arData[i-1][2];
+				arimage[i-1].hei = arData[i-1][3];
+				arimage[i-1].style.zIndex = ""+(150+i)+"";
+				arimage[i-1].onload = function(e) {
+					cekimg++;
+					if(cekimg==3)inWidHei();
+				};
+				arimage[i-1].style.position = "absolute"; 
+				arimage[i-1].style.left = arbtn[i-1].style.left;
+				arimage[i-1].style.top = arbtn[i-1].style.top;
+				
+				artext[i-1] = document.createElement('div');
+				arbtn[i-1].teks = artext[i-1];
+				
+				artext[i-1].width = "100px";
+				artext[i-1].height = "40px";
+				artext[i-1].classList.add('center-text');
+				
+				//artext[i-1].innerHTML = "nama"+i;
+				artext[i-1].innerHTML = arData[i-1][0];
+				artext[i-1].style.zIndex = ""+(100-i)+"";
+				artext[i-1].style.opacity = "0"; // mengatur hilang
+				artext[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				artext[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+				myBG.appendChild(artext[i-1]);
+				myBG.appendChild(arimage[i-1]);
+			}
+		}
+		
+		function inWidHei(){
+			for(var i=1;i<=3;i++){
+				arbtn[i-1].style.width = ""+arimage[i-1].wid+"px";
+				arbtn[i-1].style.height = ""+arimage[i-1].hei+"px";
+				artext[i-1].style.width = ""+arimage[i-1].wid+"px";
+				artext[i-1].style.height = ""+arimage[i-1].hei+"px";
+			}
+		}
+		
+		
+		var ncek = 0;
+		let DataSaya = localStorage.getItem("arData");
+		let DataSini = DataSaya.split(",");
+		function cek(e){
+			ncek++;
+			//console.log(ncek);
+			if(ncek==3){
+				DataSini[0] = 1;
+			}
+			//console.log("DataSini = "+DataSini)
+		}
+		
+		;
+		window.addEventListener('resize', () => {
+			for(var i=1;i<=4;i++){
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			}
+		});
+	</script>
+	
+	
+</body>
+</html>

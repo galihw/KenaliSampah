@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 175px; 
+			height: 62px; 
+			background-color: none;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg"></div>
+	<div class="klikbtn" id="tombol1"></div>
+	<div class="klikbtn" id="tombol2"></div>
+	<div class="klikbtn" id="tombol3"></div>
+	<div class="klikbtn" id="tombol4"></div>
+	<script>
+		let DataSaya = localStorage.getItem("arData");
+		let DataSini = DataSaya.split(",");
+		console.log(DataSini)
+		
+		const myBG = document.getElementById("bg");
+		myBG.style.backgroundImage = "url(img/beranda.png)";
+		
+		
+		var arbtn = [];
+		var xybtn = [[20,146],[20,220],[426,165],[20,294]];
+		var linkbtn = ["carapenggunaan.html","atp.html","../interaktif1/Pengantar.html","../terakhir/Pengembang.html"];
+		for(var i=1;i<=4;i++){
+			arbtn[i-1] = document.getElementById('tombol'+i);
+			arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+			arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			arbtn[i-1].style.zIndex = "auto";
+			//arbtn[i-1].style.opacity = "0";
+			
+			arbtn[i-1].link = linkbtn[i-1];
+			arbtn[i-1].addEventListener("click", function(e) {
+				location.href = e.target.link;
+			});
+		}
+		
+		var arrect = [];
+		var xyrect = [[110,148],[110+231,148],[110,148+133],[110+231,148+133]]
+		for(var i=1;i<=4;i++){
+			arrect[i-1] = document.createElement('div');
+			arrect[i-1].style.width = '215px';
+			arrect[i-1].style.height = '120px';
+			arrect[i-1].style.position =  "absolute";
+			arrect[i-1].style.backgroundColor = 'grey';
+			arrect[i-1].style.opacity = "0.7";
+			arrect[i-1].style.zIndex = "auto";
+			arrect[i-1].style.display = "none";
+			arrect[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xyrect[i-1][0])+'px';
+			arrect[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xyrect[i-1][1])+'px';
+			myBG.appendChild(arrect[i-1]);
+		}
+		
+		
+		window.addEventListener('resize', () => {
+			for(var i=1;i<=4;i++){
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+				arrect[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xyrect[i-1][0])+'px';
+				arrect[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xyrect[i-1][1])+'px';
+			}
+		});
+	</script>
+	
+	
+	<script>
+	</script>
+</body>
+</html>
