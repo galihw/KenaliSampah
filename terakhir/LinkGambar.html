@@ -202,6 +202,8 @@
 		]
 	</script>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/bgpustaka.png)";
 		const tempatA = document.getElementById("tempatA");
@@ -307,13 +309,23 @@
 		//document.getElementById("kembali").style.opacity = "0"; // mengatur hilang
 		
 		window.addEventListener('resize', () => {
-			document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
-			document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+			UbahWindow(0,0)
+		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+xy[0] + xc)+'px';
+			document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+xy[1] + yc)+'px';
 			for(var i=1;i<=3;i++){
-				myTempat[i-1].style.left = ''+(myBG.getBoundingClientRect().x+205)+'px';
-				myTempat[i-1].style.top = ''+(myBG.getBoundingClientRect().y+180)+'px';
-				myBtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+200+207*(i-1))+'px';
-				myBtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+122)+'px';
+				myTempat[i-1].style.left = ''+(myBG.getBoundingClientRect().x+205 + xc)+'px';
+				myTempat[i-1].style.top = ''+(myBG.getBoundingClientRect().y+180 + yc)+'px';
+				myBtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+200+207*(i-1) + xc)+'px';
+				myBtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+122 + yc)+'px';
 			}
 			for(var k=0;k<3;k++){
 				var nmax = arnA[k];
@@ -324,13 +336,13 @@
 						if(nA<=nmax){
 							var xx = 210+139*(i-1);
 							var yy = 182+24*(j-1);
-							arBtn[k][nA-1].style.left = ''+(myBG.getBoundingClientRect().x+xx)+'px';
-							arBtn[k][nA-1].style.top = ''+(myBG.getBoundingClientRect().y+yy)+'px';
+							arBtn[k][nA-1].style.left = ''+(myBG.getBoundingClientRect().x+xx + xc)+'px';
+							arBtn[k][nA-1].style.top = ''+(myBG.getBoundingClientRect().y+yy + yc)+'px';
 						}
 					}
 				}
 			}
-		});
+		}
 	</script>
 	<script>
 	</script>

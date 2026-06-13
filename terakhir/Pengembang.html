@@ -42,6 +42,8 @@
 	<div class="klikbtn" id="aset"></div>
 	<div class="klikgithub" id="github"></div>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBtn = document.getElementById("tombol");
 		const myAset = document.getElementById("aset");
 		const myGithub = document.getElementById("github");
@@ -65,13 +67,23 @@
 		
 		
 		window.addEventListener('resize', () => {
-			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392)+'px';
-			myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-			myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
-			myGithub.style.left = ''+(myBG.getBoundingClientRect().x+210)+'px';
-			myGithub.style.top = ''+(myBG.getBoundingClientRect().y+155)+'px';
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
+			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392 + yc)+'px';
+			myAset.style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
+			myAset.style.top = ''+(myBG.getBoundingClientRect().y+121 + yc)+'px';
+			myGithub.style.left = ''+(myBG.getBoundingClientRect().x+210 + xc)+'px';
+			myGithub.style.top = ''+(myBG.getBoundingClientRect().y+155 + yc)+'px';
+		}
 	</script>
 	<script>
 	</script>
