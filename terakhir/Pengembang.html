@@ -16,9 +16,18 @@
 		}
 		.klikbtn {
 			position: absolute;
-			/*position: relative;*/
 			width: 100px; 
 			height: 40px; 
+			background-color: none;
+			cursor: pointer;
+			touch-action: none;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikgithub {
+			position: absolute;
+			width: 230px; 
+			height: 25px; 
 			background-color: none;
 			cursor: pointer;
 			touch-action: none;
@@ -28,23 +37,30 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="buka"></div>
+	<div class ="bg" id="bg"></div>
 	<div class="klikbtn" id="tombol"></div>
 	<div class="klikbtn" id="aset"></div>
+	<div class="klikgithub" id="github"></div>
 	<script>
 		const myBtn = document.getElementById("tombol");
 		const myAset = document.getElementById("aset");
-		const myBG = document.getElementById("buka");
+		const myGithub = document.getElementById("github");
+		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/pengembang.png)";
 		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
 		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+394)+'px';
 		myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
 		myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
+		myGithub.style.left = ''+(myBG.getBoundingClientRect().x+210)+'px';
+		myGithub.style.top = ''+(myBG.getBoundingClientRect().y+155)+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "../beranda/beranda.html";
 		});
 		myAset.addEventListener("click", function() {
 			location.href = "LinkGambar.html";
+		});
+		myGithub.addEventListener("click", function() {
+			location.href = "https://galihw.github.io/GalihWidosamodra/index.html";
 		});
 		
 		
@@ -53,6 +69,8 @@
 			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392)+'px';
 			myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
 			myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
+			myGithub.style.left = ''+(myBG.getBoundingClientRect().x+210)+'px';
+			myGithub.style.top = ''+(myBG.getBoundingClientRect().y+155)+'px';
 		});
 	</script>
 	<script>
