@@ -175,6 +175,8 @@
 		}
 	</script>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBG = document.getElementById("buka");
 		myBG.style.backgroundImage = "url(img/2anorganik.png)";
 		var xybtn = [[65,147+0*90],[65,147+1*90],[65,147+2*90]];
@@ -236,32 +238,48 @@
 		
 		
 		window.addEventListener('resize', () => {
+			UbahWindow(0,0)
+		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
 			for(var i=1;i<=3;i++){
-				document.getElementById('tombol'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-				document.getElementById('tombol'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
-				//document.getElementById('tombol'+i).xAwal = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-				//document.getElementById('tombol'+i).yAwal = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+				document.getElementById('tombol'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
+				document.getElementById('tombol'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
+				//document.getElementById('tombol'+i).xAwal = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
+				//document.getElementById('tombol'+i).yAwal = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
 				
 			}
-			document.getElementById('insert').style.left = ''+(myBG.getBoundingClientRect().x+265)+'px';
-			document.getElementById('insert').style.top = ''+(myBG.getBoundingClientRect().y+199)+'px';
-			document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715)+'px';
-			document.getElementById('kembali').style.top = ''+(myBG.getBoundingClientRect().y+420)+'px';
-			document.getElementById('areaDrag').style.left = ''+(myBG.getBoundingClientRect().x+15)+'px';
-			document.getElementById('areaDrag').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
-			document.getElementById('areaDrop').style.left = ''+(myBG.getBoundingClientRect().x+251)+'px';
-			document.getElementById('areaDrop').style.top = ''+(myBG.getBoundingClientRect().y+149)+'px';
-			document.getElementById('dragtext').style.left = ''+(myBG.getBoundingClientRect().x+413)+'px';
-			document.getElementById('dragtext').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
-			document.getElementById('areaIn').style.left = ''+(myBG.getBoundingClientRect().x+297)+'px';
-			document.getElementById('areaIn').style.top = ''+(myBG.getBoundingClientRect().y+205)+'px';
-			document.getElementById('areaImage').style.left = ''+(myBG.getBoundingClientRect().x+442)+'px';
-			document.getElementById('areaImage').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
-			document.getElementById('bubble').style.left = ''+(myBG.getBoundingClientRect().x+353)+'px';
-			document.getElementById('bubble').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
-			document.getElementById('potensi').style.left = ''+(myBG.getBoundingClientRect().x+441)+'px';
-			document.getElementById('potensi').style.top = ''+(myBG.getBoundingClientRect().y+292)+'px';
-		});
+			document.getElementById('insert').style.left = ''+(myBG.getBoundingClientRect().x+265 + xc)+'px';
+			document.getElementById('insert').style.top = ''+(myBG.getBoundingClientRect().y+199 + yc)+'px';
+			document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715 + xc)+'px';
+			document.getElementById('kembali').style.top = ''+(myBG.getBoundingClientRect().y+420 + yc)+'px';
+			document.getElementById('areaDrag').style.left = ''+(myBG.getBoundingClientRect().x+15 + xc)+'px';
+			document.getElementById('areaDrag').style.top = ''+(myBG.getBoundingClientRect().y+119 + yc)+'px';
+			document.getElementById('areaDrop').style.left = ''+(myBG.getBoundingClientRect().x+251 + xc)+'px';
+			document.getElementById('areaDrop').style.top = ''+(myBG.getBoundingClientRect().y+149 + yc)+'px';
+			document.getElementById('dragtext').style.left = ''+(myBG.getBoundingClientRect().x+413 + xc)+'px';
+			document.getElementById('dragtext').style.top = ''+(myBG.getBoundingClientRect().y+366 + yc)+'px';
+			document.getElementById('areaIn').style.left = ''+(myBG.getBoundingClientRect().x+297 + xc)+'px';
+			document.getElementById('areaIn').style.top = ''+(myBG.getBoundingClientRect().y+205 + yc)+'px';
+			document.getElementById('areaImage').style.left = ''+(myBG.getBoundingClientRect().x+442 + xc)+'px';
+			document.getElementById('areaImage').style.top = ''+(myBG.getBoundingClientRect().y+119 + yc)+'px';
+			document.getElementById('bubble').style.left = ''+(myBG.getBoundingClientRect().x+353 + xc)+'px';
+			document.getElementById('bubble').style.top = ''+(myBG.getBoundingClientRect().y+366 + yc)+'px';
+			document.getElementById('potensi').style.left = ''+(myBG.getBoundingClientRect().x+441 + xc)+'px';
+			document.getElementById('potensi').style.top = ''+(myBG.getBoundingClientRect().y+292 + yc)+'px';
+			
+			for (var i=1;i<=3;i++){
+				document.getElementById('tombol'+i).xAwal = document.getElementById('tombol'+i).getBoundingClientRect().left;
+				document.getElementById('tombol'+i).yAwal = document.getElementById('tombol'+i).getBoundingClientRect().top;
+			}
+
+		}
 	</script>
 	<script>
 		var ct = 0;

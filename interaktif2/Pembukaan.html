@@ -32,6 +32,8 @@
 	<div class ="bg" id="buka"></div>
 	<div class="klikbtn" id="tombol"></div>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBtn = document.getElementById("tombol");
 		const myBG = document.getElementById("buka");
 		myBG.style.backgroundImage = "url(img/buka.png)";
@@ -43,9 +45,19 @@
 		
 		
 		window.addEventListener('resize', () => {
-			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392)+'px';
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
+			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392 + yc)+'px';
+		}
 	</script>
 	
 	

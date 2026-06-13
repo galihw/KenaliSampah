@@ -15,11 +15,15 @@
 			margin: 0px;
 			vertical-align: top;
 		}	
+		.redbox {
+			background-color: #3498db;
+		}	
 		.layar {
 			max-width: 842px; /* Lebar maksimal halaman */
 			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
 			width: 100%; 	  /* width: 842px; */
 			height: 195px;
+			/*background-color: #3498db;*/
 		}
 		.inlayar {
 			max-width: 800px; /* Lebar maksimal halaman */
@@ -236,6 +240,7 @@
 			myBox.style.height = "50px";
 			myBox.style.display = "inline-block";
 			myBox.style.margin = "0px";
+			//myBox.style.outline =  "3px dashed #ff5722";
 			//myBox.style.backgroundColor = "rgb("+(255-i)+", 255, 255)";
 			inlayar.appendChild(myBox);
 			ARmybox.push(myBox);
@@ -255,8 +260,14 @@
 			ARimg[i-1].style.position = 'fixed';
 			ARimg[i-1].style.zIndex = ""+(200+i)+"";
 			
+			
 			//ARmybox[i-1].appendChild(ARimg[i-1]);
 			ARmybox[ARno[i-1]].appendChild(ARimg[i-1]);
+			//ARimg[i-1].mate = ARmybox[ARno[i-1]];
+			//console.log(ARimg[i-1].mate)
+			ARimg[i-1].nn = ARno[i-1];
+			ARimg[i-1].x0 = ARimg[i-1].getBoundingClientRect().left;
+			ARimg[i-1].y0 = ARimg[i-1].getBoundingClientRect().top;
 		}
 		
 		var warnaBG = ["#00ff00","#00c1c1","#f2aa1d"]
@@ -270,18 +281,31 @@
 		
 		window.getSelection().removeAllRanges();
 		window.addEventListener('resize', () => {
+			UbahWindow(0,0)
+		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
 			var x0 = layar.getBoundingClientRect().left+2;
 			var y0 = dragText.getBoundingClientRect().top+dragText.offsetHeight;
 			myBG.style.left = ''+x0+'px';
 			for (var i=1;i<=3;i++){
-				ARboximg[i-1].style.left = ''+(x0+280*(i-1))+'px';
-				ARbox[i-1].style.left = ''+(x0+280*(i-1))+'px';
-				ARboximg[i-1].style.top = ''+(y0+20)+'px';
-				ARbox[i-1].style.top = ''+(y0+20)+'px';
+				ARboximg[i-1].style.left = ''+(x0+280*(i-1) + xc)+'px';
+				ARboximg[i-1].style.top = ''+(y0+20 + yc)+'px';
+				ARbox[i-1].style.left = ''+(x0+280*(i-1) + xc)+'px';
+				ARbox[i-1].style.top = ''+(y0+20 + yc)+'px';
 			}
-			document.getElementById("lanjut").style.left = ''+(x0+650)+'px';
-			document.getElementById("lanjut").style.top = ''+(y0-34)+'px';
-		});
+			document.getElementById("lanjut").style.left = ''+(x0+650 + xc)+'px';
+			document.getElementById("lanjut").style.top = ''+(y0-34 + yc)+'px';
+		}
+		
+		
+		
 
 		var x0 = layar.getBoundingClientRect().left+2;;
 		var y0 = dragText.getBoundingClientRect().top+dragText.offsetHeight;
@@ -320,6 +344,8 @@
 	</script>
 	<script>
 		//const item = document.querySelector('.draggable');
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 
 		let offsetX = 0;
 		let offsetY = 0;
@@ -411,9 +437,15 @@
 			}else{
 				item.style.left = ''+item.xAwal+'px';
 				item.style.top = ''+item.yAwal+'px';
-				item.style.position = 'fixed';
+				//item.style.position = 'fixed';
+				//layar.appendChild(item);
 				//item.style.zIndex = item.zold;
-				layar.appendChild(item);
+				
+				//item.xAwal = item.getBoundingClientRect().left;
+				//item.yAwal = item.getBoundingClientRect().top;
+				
+				item.style.position = 'static';
+				ARmybox[item.nn].appendChild(item);
 			}
 			itemAtas.style.visibility = "hidden";
 		}
