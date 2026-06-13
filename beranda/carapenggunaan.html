@@ -32,6 +32,8 @@
 	<div class ="bg" id="bg"></div>
 	<div class="klikbtn" id="tombol"></div>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBtn = document.getElementById("tombol");
 		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/carapenggunaan.png)";
@@ -40,23 +42,24 @@
 		myBtn.addEventListener("click", function() {
 			location.href = "beranda.html";
 		});
-		/*
-		myBtn.addEventListener('pointerdown', (e) => {
-			location.href = "beranda.html";
-		});
-		function myclick(e) {
-			e.preventDefault(); 
-			location.href = "beranda.html";
-		}
-		myBtn.addEventListener('touchend', myclick);
-		myBtn.addEventListener('click', myclick);
-		*/
 		
 		
 		window.addEventListener('resize', () => {
-			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392)+'px';
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			for(var i=1;i<=4;i++){
+				myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
+				myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392 + yc)+'px';
+			}
+		}
 	</script>
 	
 	

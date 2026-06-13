@@ -35,6 +35,8 @@
 	<script>
 		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/beranda.png)";
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		
 		
 		var arbtn = [];
@@ -52,25 +54,25 @@
 			arbtn[i-1].addEventListener("click", function(e) {
 				location.href = e.target.link;
 			});
-			/*
-			arbtn[i-1].addEventListener('pointerdown', (e) => {
-				location.href = e.target.link;
-			});
-			function myclick(e) {
-				e.preventDefault(); 
-				location.href = e.target.link;
-			}
-			arbtn[i-1].addEventListener('touchend', myclick);
-			arbtn[i-1].addEventListener('click', myclick);
-			*/
 		}
 		
 		window.addEventListener('resize', () => {
-			for(var i=1;i<=4;i++){
-				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
-			}
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xscroll,yscroll){
+			for(var i=1;i<=4;i++){
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xscroll)+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yscroll)+'px';
+			}
+		}
+		
 	</script>
 	
 	

@@ -71,6 +71,8 @@
 		}
 	</script>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		let salah = Number(localStorage.getItem("Asalah3"));
 		
 		const myBG = document.getElementById("buka");
@@ -205,13 +207,28 @@
 			//console.log("DataSini = "+DataSini)
 		}
 		
-		;
 		window.addEventListener('resize', () => {
-			for(var i=1;i<=4;i++){
-				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
-			}
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			for(var i=1;i<=4;i++){
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
+			}
+			for(var i=1;i<=3;i++){
+				arimage[i-1].style.left = arbtn[i-1].style.left;
+				arimage[i-1].style.top = arbtn[i-1].style.top;
+				artext[i-1].style.left = arbtn[i-1].style.left;
+				artext[i-1].style.top = arbtn[i-1].style.top;
+			}
+		}
 	</script>
 	
 	

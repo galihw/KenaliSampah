@@ -28,11 +28,13 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="buka"></div>
+	<div class ="bg" id="bg"></div>
 	<div class="klikbtn" id="tombol"></div>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBtn = document.getElementById("tombol");
-		const myBG = document.getElementById("buka");
+		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/pengantar.png)";
 		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+710)+'px';
 		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+412)+'px';
@@ -40,11 +42,20 @@
 			location.href = "Pembukaan.html";
 		});
 		
-		
 		window.addEventListener('resize', () => {
-			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+710)+'px';
-			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+412)+'px';
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+710 + xc)+'px';
+			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+412 + yc)+'px';
+		}
 	</script>
 	<script>
 		var DataSaya = [0,0,0,0];

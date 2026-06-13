@@ -34,6 +34,8 @@
 	<div class="klikbtn" id="tombol3"></div>
 	<div class="klikbtn" id="tombol4"></div>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		let DataSaya = localStorage.getItem("arData");
 		let DataSini = DataSaya.split(",");
 		console.log(DataSini)
@@ -90,13 +92,23 @@
 		
 		
 		window.addEventListener('resize', () => {
-			for(var i=1;i<=4;i++){
-				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
-				arrect[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xyrect[i-1][0])+'px';
-				arrect[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xyrect[i-1][1])+'px';
-			}
+			UbahWindow(0,0)
 		});
+		
+		window.addEventListener('scroll', () => {
+			const cX = window.scrollX || window.pageXOffset;
+			const cY = window.scrollY || window.pageYOffset;
+			UbahWindow(cX,cY)
+		});
+		
+		function UbahWindow(xc,yc){
+			for(var i=1;i<=4;i++){
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
+				arrect[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xyrect[i-1][0] + xc)+'px';
+				arrect[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xyrect[i-1][1] + yc)+'px';
+			}
+		}
 	</script>
 	
 	
