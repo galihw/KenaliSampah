@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			/*position: relative;*/
+			width: 100px; 
+			height: 40px; 
+			background-color: none;
+			cursor: pointer;
+			touch-action: none;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="buka"></div>
+	<div class="klikbtn" id="tombol"></div>
+	<div class="klikbtn" id="aset"></div>
+	<script>
+		const myBtn = document.getElementById("tombol");
+		const myAset = document.getElementById("aset");
+		const myBG = document.getElementById("buka");
+		myBG.style.backgroundImage = "url(img/pengembang.png)";
+		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+394)+'px';
+		myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+		myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
+		myBtn.addEventListener("click", function() {
+			location.href = "../beranda/beranda.html";
+		});
+		myAset.addEventListener("click", function() {
+			location.href = "LinkGambar.html";
+		});
+		
+		
+		window.addEventListener('resize', () => {
+			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392)+'px';
+			myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
+			myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
+		});
+	</script>
+	<script>
+	</script>
+	
+	
+	<script>
+	</script>
+</body>
+</html>

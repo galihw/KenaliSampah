@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Sampah di Sekitar Kita</title>
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 90px; 
+			height: 35px; 
+			/*background-color: #220022;*/
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+		.area {
+			position: absolute;
+			cursor: default ;
+			touch-action: none;
+			width: 564px; 
+			height: 245px; 
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+		.btn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 148px; 
+			height: 31px; 
+			/*background-color: blue;*/
+			user-select: none;
+			-webkit-user-select: none;
+			
+		}
+		.btnA {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			width: 139px; 
+			height: 24px; 
+			/*background-color: red;*/
+			
+			font-weight: normal;
+			color: black;
+			text-align: center;
+			userSelect: none;
+			font-size:  13px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			/*background-color: lightblue;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.btnA:hover {
+			/*background-color: #a8b8d0;*/
+			font-size:  16px;
+			color: purple;
+			font-weight: bold;
+		}
+		.teks {
+			position: absolute;
+			width: 180px; 
+			height: 90px;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-size: 42px;
+			user-select: none;
+			-webkit-user-select: none;
+			
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			display: flex;
+			/*background-color: lightblue;*/
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="ulang"></div>
+		<div class="btn" id="mcbtn"></div>
+		<div id="tempatA"></div>
+		<div class="btnA" id="mcbtnA"></div>
+		<div class="area" id="mckotak"></div>
+	</div>
+	<script>
+		var isiA = 
+		[
+		["aki1" , "https://storage.googleapis.com/planet-ban-website/product/original/accu-ntz6v-5ah-1761725683-2.png"],
+		["aki2" , "https://storage.googleapis.com/planet-ban-website/product/original/accu-ntz5s-35ah-1761725859-2.png"],
+		["aki3" , "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/img/VqbcmM/2021/9/29/cd537c23-a727-455d-ac9d-564123cf6029.png~tplv-aphluv4xwc-resize-jpeg:700:0.png"],
+		["aki4" , "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30062025/635b8f2340bc475967ab487d/68623d3e425786b6faf065d7/a83a05ec259df4461d5110e31734c6.png?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"],
+		["baterai(1,2,3,4)" , "https://img.magnific.com/vektor-gratis/different-sizes-of-battery_1308-35340.jpg?semt=ais_incoming&w=740&q=80"],
+		["botol1" , "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-compressed-plastic-bottle-png-image_11919981.png"],
+		["botol(2,3,4)" , "https://cdn.pixabay.com/photo/2024/11/21/16/21/plastic-bottles-9214183_960_720.png"],
+		["hp1" , "https://png.pngtree.com/png-vector/20231218/ourmid/pngtree-broken-screen-mobile-phone-isolated-on-white-background-png-image_11371743"],
+		["hp2" , "https://png.pngtree.com/png-vector/20240328/ourmid/pngtree-smartphone-function-corrupt-png-image_12235861.png"],
+		["hp3" , "https://png.pngtree.com/png-vector/20240129/ourmid/pngtree-mobile-phone-broken-screen-png-image_11584584.png"],
+		["hp4" , "https://serviceiphone.co.id/wp-content/uploads/2025/10/Kenapa-LCD-iPhone-Bisa-Rusak.png"],
+		["kain1" , "https://static.vecteezy.com/system/resources/thumbnails/049/678/687/small/torn-piece-of-denim-fabric-laying-on-a-white-background-transparent-png.png"],
+		["kain2" , "https://png.pngtree.com/png-clipart/20240512/original/pngtree-torn-fabric-with-holes-png-image_15075630.png"],
+		["kain3" , "https://png.pngtree.com/png-vector/20250731/ourmid/pngtree-ripped-fabric-with-threads-and-holes-png-image_16946556.webp"],
+		["kain4" , "https://png.pngtree.com/png-clipart/20240512/original/pngtree-torn-fabric-with-holes-png-image_15075629.png"],
+		["kaleng1" , "https://www.pngarts.com/files/3/Sprite-PNG-Photo.png"],
+		["kaleng2" , "https://www.pngarts.com/files/3/Coca-Cola-PNG-Picture.png"],
+		["kaleng3" , "https://pngimg.com/uploads/pepsi/pepsi_PNG8939.png"],
+		["kaleng4" , "https://www.pngarts.com/files/4/Coca-Cola-Can-Free-PNG-Image.png"],
+		["kayu1" , "https://static.vecteezy.com/system/resources/thumbnails/079/935/559/small/old-broken-weathered-wood-beam-piece-png.png"],
+		["kayu2" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDCBaYHKmN3VNLEhzR0HWEbnl9ZIuJJWN4_w&s"],
+		["kayu3" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR00be2PhjT-p15VVyzaU8bmr8W0UAykgQplg&s"],
+		["kayu4" , "https://www.mexicomiamor.de/cdn/shop/files/Mexgrocer_Zimtstangen_2.png?v=1763660270&width=1214"],
+		["kertas(1,2,3,4)" , "https://png.pngtree.com/png-clipart/20240817/original/pngtree-different-clean-paper-shapes-with-ripped-edges-png-image_15790645.png"],
+		["kulitbuah1" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7wVV-yBq9IqvzwtvBRHQxkDH53W9CkjIpWg&s"],
+		["kulitbuah2" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB9g_AWLvbg6jxZZCTmdBfHhvmBTsMHui-8A&s"],
+		["kulitbuah3" , "https://png.pngtree.com/png-vector/20231224/ourmid/pngtree-watermelon-rind-cut-png-image_11224998.png"],
+		["kulitbuah4" , "https://png.pngtree.com/png-clipart/20221110/ourmid/pngtree-banana-peel-illustration-png-image_6436325.png"],
+		["ranting1" , "https://png.pngtree.com/png-vector/20240507/ourmid/pngtree-vector-illustration-of-brown-tree-twigs-forest-trees-ancient-png-image_12370441.png"],
+		["ranting2" , "https://png.pngtree.com/png-vector/20221128/ourmid/pngtree-tree-twig-vector-branch-with-green-leaves-png-image_6483891.png"],
+		["ranting3" , "https://cdn.creazilla.com/cliparts/3152142/branch-clipart-original.png"],
+		["ranting4" , "https://img.magnific.com/vektor-gratis/cabang-pohon-terisolasi-di-latar-belakang-putih_1308-115352.jpg?semt=ais_hybrid&w=740&q=80"],
+		["sisasayuran(1,2,3,4)" , "https://foodandbeverageknowledge.com/wp-content/uploads/2021/08/12-types-of-vegetable-cuts-infographic-1024x580.webp"],
+		["tasplastik1" , "https://static.vecteezy.com/system/resources/thumbnails/067/229/409/small_2x/blue-plastic-shopping-bag-with-handle-depicted-in-realistic-style-isolated-on-transparency-background-bag-appears-crumpled-and-shiny-suggesting-lightweight-material-png.png"],
+		["tasplastik2" , "https://static.vecteezy.com/system/resources/thumbnails/023/870/319/small/plastic-bag-pollution-environmental-protection-vinyl-disposable-eco-bag-arrondissement-shopping-3d-international-plastic-bag-free-day-png.png"],
+		["tasplastik3" , "https://cdn.creazilla.com/cliparts/1797504/plastic-bag-clipart-lg.png"],
+		["tasplastik4", "https://www.pngplay.com/wp-content/uploads/12/Plastic-Bag-Transparent-Clip-Art-PNG.png"]
+		]
+		//37
+		
+		
+		var isiB = 
+		[
+		["sayuran" , "https://foodandbeverageknowledge.com/wp-content/uploads/2021/08/12-types-of-vegetable-cuts-infographic-1024x580.webp"], 
+		["kulit buah" , "https://png.pngtree.com/png-clipart/20221110/ourmid/pngtree-banana-peel-illustration-png-image_6436325.png"],
+		["kayu" , "https://static.vecteezy.com/system/resources/thumbnails/079/935/559/small/old-broken-weathered-wood-beam-piece-png.png"],
+		["bola kertas" , "https://png.pngtree.com/png-clipart/20230802/original/pngtree-crumpled-paper-ball-rough-sheet-rumple-vector-picture-image_9324965.png"],
+		["daun" , "https://png.pngtree.com/png-vector/20240625/ourmid/pngtree-green-aspen-leaf-single-detail-alive-png-image_12865748.png"],
+		["ranting daun" , "https://png.pngtree.com/png-vector/20221128/ourmid/pngtree-tree-twig-vector-branch-with-green-leaves-png-image_6483891.png"],
+		["botol plastik" , "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-compressed-plastic-bottle-png-image_11919981.png"],
+		["kaleng" , "https://png.pngtree.com/png-clipart/20230820/original/pngtree-used-crumpled-tin-can-picture-image_8113249.png"],
+		["tas plastik" , "https://png.pngtree.com/png-clipart/20210311/original/pngtree-used-plastic-bag-clip-art-png-image_6034881.png"],
+		["bungkus snack" , "https://png.pngtree.com/png-clipart/20230320/original/pngtree-red-snack-wrapper-illustration-suitable-for-packaging-food-product-decoration-png-image_8997363.png"],
+		["lampu" , "https://png.pngtree.com/png-clipart/20230609/ourmid/pngtree-broken-lamp-symbol-bad-idea-png-image_7123439.png"],
+		["aki" , "https://static.vecteezy.com/system/resources/previews/011/081/817/non_2x/broken-car-battery-rechargeable-electricity-accumulator-damaged-object-red-and-yellow-lightning-and-green-acid-leaked-electrolyte-breakdown-and-accident-short-circuit-element-of-auto-vector.jpg"],
+		["baterai" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3x9yeAP7S9uHO1DxDMDfPB0pWT7S1w6tFiQ&s"],
+		["taman", "https://img.magnific.com/vektor-gratis/templat-latar-belakang-taman-luar-ruangan_1308-119234.jpg?semt=ais_hybrid&w=740&q=80"],
+		["tanah rumput", "https://www.magnific.com/idn/vektor-gratis/pemandangan-latar-belakang-alam-luar-ruangan-yang-indah-dari-beranda_20720049.htm#fromView=search&page=1&position=25&uuid=c8b394c3-84f4-4c05-b3d0-f430cc5e8e3a&query=garden+floor+"],
+		["bunga", "https://png.pngtree.com/png-clipart/20220213/original/pngtree-sunflower-plant-vector-illustration-png-image_7269061.png"],
+		["sarang semut", "https://png.pngtree.com/png-vector/20230803/ourmid/pngtree-ant-hill-vector-png-image_6882362.png"],
+		["sekolah", "https://img.magnific.com/vektor-gratis/pemandangan-alam-gedung-sekolah_1308-29206.jpg"],
+		["kelas", "https://www.magnific.com/idn/vektor-gratis/adegan-ruang-kelas-sekolah-dengan-papan-tulis_4942794.htm#fromView=search&page=1&position=1&uuid=2050832d-68f4-4da3-a905-0173d187d1f4&query=inside+school+class+floor"],
+		["bengkel", "https://www.magnific.com/idn/vektor-gratis/komposisi-mekanik-otomotif_9581354.htm#fromView=search&page=1&position=15&uuid=ec007f6e-ec61-4f61-94d8-a68d6b660195&query=garage+service"],
+		["rumah", "https://img.magnific.com/vektor-gratis/pemandangan-dengan-rumah-dan-kebun_1308-102898.jpg"],
+		["tempat sampah", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Zxogt6w64IceeTILwqDjMHVuboU0yD6ccA&s"],
+		["judul", "https://www.textstudio.com/ea2a4031-2d89-4aee-ab64-774d7f641720"],
+		["converter png", "https://ezgif.com/webp-to-png"]
+		]
+		//24
+		
+		var isiC = 
+		[
+		["kulit semangka" , "https://png.pngtree.com/png-vector/20231224/ourmid/pngtree-watermelon-rind-cut-png-image_11224998.png"],
+		["sisa sayur" , "https://foodandbeverageknowledge.com/wp-content/uploads/2021/08/12-types-of-vegetable-cuts-infographic-1024x580.webp"],
+		["daun" , "https://png.pngtree.com/png-vector/20240625/ourmid/pngtree-green-aspen-leaf-single-detail-alive-png-image_12865748.png"],
+		["kertas" , "https://png.pngtree.com/png-clipart/20240817/original/pngtree-different-clean-paper-shapes-with-ripped-edges-png-image_15790645.png"],
+		["kompos" , "https://greencampus.uad.ac.id/wp-content/uploads/WhatsApp-Image-2024-06-12-at-02.04.34.jpeg"],
+		["kulit semangka" , "https://png.pngtree.com/png-vector/20231224/ourmid/pngtree-watermelon-rind-cut-png-image_11224998.png"],
+		["sisa sayur" , "https://foodandbeverageknowledge.com/wp-content/uploads/2021/08/12-types-of-vegetable-cuts-infographic-1024x580.webp"],
+		["daun" , "https://png.pngtree.com/png-vector/20240625/ourmid/pngtree-green-aspen-leaf-single-detail-alive-png-image_12865748.png"],
+		["kertas" , "https://greencampus.uad.ac.id/wp-content/uploads/WhatsApp-Image-2024-06-12-at-02.04.34.jpeg"],
+		["botol plastik" , "https://tsml.co.id/assets/images/event/aqua-600ml.png"],
+		["bungkus kopi" , "https://s3.belanjapasti.com/media/image/torabika-cappuccino-extra-choco-granule-bag-30x25g-239662.png"],
+		["kaleng makanan" , "https://img.lazcdn.com/g/p/a597098e0f471d6a9734cc9d66d09eb1.png_720x720q80.png"],
+		["tempat pensil" , "https://cdn1-production-images-kly.akamaized.net/jvFey0wt7EJF90UsmsVOhFip-mE=/1280x720/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2756920/original/002560200_1553138962-foto_5_botol.jpg"],
+		["pot tanaman" , "https://media-public.dekoruma.com/article/2025/03/Membuat-Pot-Bunga-Gantung-Sederhana-dari-Botol-Plastik.webp"],
+		["tas" , "https://awsimages.detik.net.id/community/media/visual/2023/05/11/pensiun-dari-guru-wanita-ini-jual-tas-dari-bungkus-kopi-modal-rp-100000-1.jpeg?w=1500"],
+		["dompet" , "https://i.pinimg.com/736x/c0/09/9d/c0099dd9a5fddba1537b92cbcb91ea08.jpg"],
+		["celengan" , "https://i.ytimg.com/vi/csHcMB-6fK4/maxresdefault.jpg"],
+		["tempat lilin" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQME_6WbyH8KO3KnFBr5TqJYG1tK0skhGAUZw&s"],
+		["ekobrick botol plastik" , "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZ1WJCgrzs2etb_WhoNOBYI-omfn6uA4eCjqscgoUR5WUZ8LHbnbBWeZJRilpHCxk0mm-u8c8Vv82Jo2wMTxfGIWH-0hc2jUM0EYnCuCk5LBloCbjHz5iByo4thx1FhttCOeDBLa1ggrGD/s1600/IMG-20170317-WA0005.jpg"],
+		["tas kertas" , "https://cdn.gadis.co.id/bucket-gadis-production/wysywig-contents/1599038883.jpg"],
+		["pajangan kertas" , "https://akcdn.detik.net.id/community/media/visual/2018/05/07/0dd46c01-dcbe-439a-bbe9-7360ebc66630_169.jpeg?w=620"],
+		["vas botol kaca" , "https://asset.kompas.com/crops/dea6uFcIYNe1BU78ithf_wvHzD0=/0x36:400x302/1200x800/data/photo/2023/08/29/64ed5255eb51e.jpg"],
+		["sapu plastik" , "https://img.merahputih.com/media/a0/f5/61/a0f56190e4f5866d5665418e26169a3e.png"],
+		["tatakan kain perca" , "https://demediapustaka.com/wp-content/uploads/2014/11/perca-head.jpg"],
+		["lukisan tutup botol" , "https://cdn1.katadata.co.id/media/images/thumb/2022/12/22/Lukisan_Abstrak-2022_12_22-21_19_16_82b0c055b1baeb27256957de91ae7001_960x640_thumb.jpg"]
+		]
+	</script>
+	<script>
+		const myBG = document.getElementById("bg");
+		myBG.style.backgroundImage = "url(img/bgpustaka.png)";
+		const tempatA = document.getElementById("tempatA");
+		
+		
+		var myArea = [];
+		var myBtn = [];
+		var myBtnA = [];
+		var myBtnB = [];
+		var myBtnC = [];
+		var arBtn = [myBtnA,myBtnB,myBtnC];
+		var arnA = [37,24,25];
+		var arIsi = [isiA,isiB,isiC];
+		var myTempat = [];
+		for(var i=1;i<=3;i++){
+			myTempat[i-1] = document.getElementById("mckotak").cloneNode(true);
+			myTempat[i-1].style.left = ''+(myBG.getBoundingClientRect().x+205)+'px';
+			myTempat[i-1].style.top = ''+(myBG.getBoundingClientRect().y+180)+'px';
+			myBG.appendChild(myTempat[i-1]);
+			myTempat[i-1].style.backgroundImage = "url(img/bgteks"+i+".png)";
+			
+		}
+		for(var i=1;i<=3;i++){
+			myBtn[i-1] = document.getElementById("mcbtn").cloneNode(true);
+			myBtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+200+207*(i-1))+'px';
+			myBtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+122)+'px';
+			myBtn[i-1].no = i;
+			myBtn[i-1].id = "btn"+i;
+			myBtn[i-1].addEventListener("click", function(e) {
+				Kliks(e);
+			});
+			myBG.appendChild(myBtn[i-1]);
+		}
+		var nA = 0;
+		for(var k=0;k<3;k++){
+			var dataIsi = arIsi[k];
+			var nmax = arnA[k];
+			for(var i=1;i<=nmax;i++){
+				arBtn[k][i-1] = document.getElementById("mcbtnA").cloneNode(true);
+				arBtn[k][i-1].id = "btnA"+i;
+				arBtn[k][i-1].no = i;
+				arBtn[k][i-1].link = dataIsi[i-1][1];
+				arBtn[k][i-1].innerHTML = dataIsi[i-1][0];
+				myBG.appendChild(arBtn[k][i-1]);
+				arBtn[k][i-1].addEventListener("click", function(e) {
+					KliksA(e);
+				});
+			}
+			nA = 0;
+			for(var i=1;i<=4;i++){
+				for(var j=1;j<=10;j++){
+					nA++;
+					if(nA<=nmax){
+						var xx = 210+139*(i-1);
+						var yy = 182+24*(j-1);
+						arBtn[k][nA-1].style.left = ''+(myBG.getBoundingClientRect().x+xx)+'px';
+						arBtn[k][nA-1].style.top = ''+(myBG.getBoundingClientRect().y+yy)+'px';
+					}
+				}
+			}
+		}
+		
+		var naktif = 0;
+		Hidden(naktif)
+		function Hidden(no){
+			// memperlihatkan kumpulan
+			for(var k=0;k<3;k++){
+				myTempat[k].style.display = "none";
+				if(no==k+1)	myTempat[k].style.display = "";
+				var max = arBtn[k].length;
+				for(var i=0;i<max;i++){
+					if(no==k+1) arBtn[k][i].style.display = "";
+					else		arBtn[k][i].style.display = "none";
+					//arBtn[k][i].style.display = "none";
+				}
+			}
+		}
+		
+		document.getElementById("mcbtn").style.display = 'none'; // setelah duplicate langsung hilang
+		document.getElementById("mcbtnA").style.display = 'none'; // setelah duplicate langsung hilang
+		
+		var ct = 0;
+		function Kliks(e){
+			//console.log(e.currentTarget.no);
+			naktif = e.currentTarget.no;
+			Hidden(naktif)
+			//location.href = "../interaktif1/Awal.html";
+		}
+		function KliksA(e){
+			//console.log(e.currentTarget.no)
+			location.href = e.currentTarget.link;
+		}
+		
+		var xy = [40,200];
+		document.getElementById("ulang").addEventListener("click", function() {
+			location.href = "../beranda/beranda.html";
+		});
+		document.getElementById("ulang").style.position =  "absolute";
+		//document.getElementById("ulang").style.backgroundImage = "url(img/bgpustaka.png)";
+		document.getElementById("ulang").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+		document.getElementById("ulang").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		document.getElementById("ulang").style.zIndex = ""+(200)+"";
+		//document.getElementById("coba").style.opacity = "0"; // mengatur hilang
+		
+		window.addEventListener('resize', () => {
+			document.getElementById("ulang").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+			document.getElementById("ulang").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+			for(var i=1;i<=3;i++){
+				myArea[i-1].style.left = ''+(myBG.getBoundingClientRect().x+200+207*(i-1))+'px';
+				myArea[i-1].style.top = ''+(myBG.getBoundingClientRect().y+122)+'px';
+			}
+		});
+	</script>
+	<script>
+	</script>
+	
+	
+	<script>
+	</script>
+</body>
+</html>
