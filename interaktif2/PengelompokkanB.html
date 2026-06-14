@@ -473,10 +473,10 @@
 			var dT
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
-				var ww = ARboximg[i-1].offsetWidth*fixscale;
+				var ww = ARboximg[i-1].offsetWidth;
 				var x1 = x0+ww;
 				var y0 = ARboximg[i-1].getBoundingClientRect().y;
-				var hh = ARboximg[i-1].offsetHeight*fixscale;
+				var hh = ARboximg[i-1].offsetHeight;
 				var y1 = y0+hh;
 				var ff1 = releaseX>x0 && releaseX<x1;
 				var ff2 = releaseY>y0 && releaseY<y1;
