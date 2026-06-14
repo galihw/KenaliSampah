@@ -15,8 +15,10 @@
 			margin: 0px;
 			vertical-align: top;
 		}	
-		.redbox {
+		.bg {
 			background-color: #3498db;
+			width: 840px;
+			height: 472px;
 		}	
 		.layar {
 			max-width: 842px; /* Lebar maksimal halaman */
@@ -437,8 +439,8 @@
 			//var widIn = 840/scl
 			//var heiIn = 472/scl;
 			//var scl = 840/mBG.getBoundingClientRect().width;
-			var widIn = ARboximg[0].getBoundingClientRect().x + 3*ARboximg[0].getBoundingClientRect().width;
-			var heiIn = ARboximg[0].getBoundingClientRect().y + ARboximg[0].getBoundingClientRect().height;
+			var widIn = bg.getBoundingClientRect().left + bg.getBoundingClientRect().width;
+			var heiIn = bg.getBoundingClientRect().top + bg.getBoundingClientRect().height;
 			//console.log(scl,fixscale)
 			var dX = Math.max(mBG.getBoundingClientRect().x,Math.min(dX,widIn-item.getBoundingClientRect().width))
 			var dY = Math.max(mBG.getBoundingClientRect().y,Math.min(dY,heiIn-item.getBoundingClientRect().height))
