@@ -155,6 +155,24 @@
 		namatrue[1].sort();
 		namatrue[2].sort();
 	</script>
+	
+	<script>
+		var fixscale
+		var fixzoom
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			fixscale = Math.min(xscale,yscale)-2/100;
+			fixzoom = fixscale*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+		}
+
+		//window.resizeTo(840, 472);
+		document.body.style.backgroundColor = "black";
+		ZoomAll();
+	</script>
 	<script>
 	
 		//var item = null
@@ -168,11 +186,11 @@
 			if (e.type === 'touchstart') {
 				e.preventDefault(); 
 				const touch = e.targetTouches[0];
-				offsetX = touch.clientX - item.getBoundingClientRect().left;
-				offsetY = touch.clientY - item.getBoundingClientRect().top;;
+				offsetX = touch.clientX/fixscale - item.getBoundingClientRect().left;
+				offsetY = touch.clientY/fixscale - item.getBoundingClientRect().top;
 			} else {
-				offsetX = e.clientX - item.getBoundingClientRect().left;
-				offsetY = e.clientY - item.getBoundingClientRect().top;
+				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
+				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
 			}
 			item.style.cursor = 'grabbing';
 			item.dataset.dragging = 'true';
@@ -226,8 +244,11 @@
 		centerTextDiv(dragText);
 		centerTextDiv(judul);
 		
-		window.resizeTo(840, 472);
-		
+	</script>
+	
+	
+	
+	<script>		
 		var ntot = 16*3;//64;
 		var ARmybox = [];
 		var ARno = []
@@ -245,6 +266,8 @@
 			inlayar.appendChild(myBox);
 			ARmybox.push(myBox);
 			ARno[i-1]=i-1;
+			ARmybox[i-1].x = myBox.style.left;
+			ARmybox[i-1].y = myBox.style.top;
 		}
 		ARno = RandomMyArray(ARno);
 		
@@ -281,12 +304,19 @@
 		
 		window.getSelection().removeAllRanges();
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			UbahWindow(0,0);
+			ZoomAll();
 		});
+		
+		
 		
 		window.addEventListener('scroll', () => {
 			const cX = window.scrollX || window.pageXOffset;
 			const cY = window.scrollY || window.pageYOffset;
+			for (var i=1;i<=nn;i++){
+				ARimg[i-1].xx = ARimg[i-1].style.left;
+				ARimg[i-1].yy = ARimg[i-1].style.top;
+			}
 			UbahWindow(cX,cY)
 		});
 		
@@ -302,8 +332,25 @@
 			}
 			document.getElementById("lanjut").style.left = ''+(x0+650 + xc)+'px';
 			document.getElementById("lanjut").style.top = ''+(y0-34 + yc)+'px';
+			//inlayar.style.left = ''+(x0+xc)+'px';
+			//inlayar.style.top = ''+(y0+yc)+'px';
+			for (var i=1;i<=ntot;i++){
+				var myBox = document.createElement('div');
+				myBox.style.width = "50px";
+				myBox.style.height = "50px";
+				myBox.style.display = "inline-block";
+				myBox.style.margin = "0px";
+				//myBox.style.outline =  "3px dashed #ff5722";
+				//myBox.style.backgroundColor = "rgb("+(255-i)+", 255, 255)";
+				//inlayar.appendChild(myBox);
+				//ARmybox.push(myBox);
+				//ARno[i-1]=i-1;
+				//ARmybox[i-1].style.left = (x0+ARmybox[i-1].x)/fixscale;
+				//ARmybox[i-1].style.top = (y0+ARmybox[i-1].y)/fixscale;
+			}
 		}
 		
+
 		
 		
 
@@ -379,11 +426,15 @@
 			dragText.innerHTML = "Nama Benda = "+item.name;
 			
 			// Update element position
+			var dX = (currentX/fixscale - offsetX);
+			var dY = (currentY/fixscale - offsetY);
+			//var dX = (currentX - offsetX); //asli
+			//var dY = (currentY - offsetY); //asli
 			item.style.position = 'fixed';
-			item.style.left = `${currentX - offsetX}px`;
-			item.style.top = `${currentY - offsetY}px`;
-			itemAtas.style.left = `${currentX - offsetX}px`;
-			itemAtas.style.top = `${currentY - offsetY}px`;
+			item.style.left = `${dX}px`;
+			item.style.top = `${dY}px`;
+			itemAtas.style.left = `${dX}px`;
+			itemAtas.style.top = `${dY}px`;
 			itemAtas.style.visibility = "visible";
 
 		}
@@ -397,11 +448,11 @@
 			if (e.type === 'touchend') {
 				// touchend changedTouches contains the touch point that was lifted
 				const touch = e.changedTouches[0];
-				releaseX = touch.clientX;
-				releaseY = touch.clientY;
+				releaseX = touch.clientX/fixscale;
+				releaseY = touch.clientY/fixscale;
 			} else {
-				releaseX = e.clientX;
-				releaseY = e.clientY;
+				releaseX = e.clientX/fixscale;
+				releaseY = e.clientY/fixscale;
 			}
 
 			// Hide the item briefly to see what is underneath it
