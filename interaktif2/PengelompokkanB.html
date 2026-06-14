@@ -436,9 +436,9 @@
 			var scl = 840/mBG.getBoundingClientRect().width;
 			var widIn = 840/scl
 			var heiIn = 472/scl;
-			console.log(scl,fixscale)
-			var dX = Math.max(mBG.getBoundingClientRect().x,Math.min(dX,widIn-item.width))
-			var dY = Math.max(mBG.getBoundingClientRect().y,Math.min(dY,heiIn-item.height))
+			//console.log(scl,fixscale)
+			var dX = Math.max(mBG.getBoundingClientRect().x,Math.min(dX,widIn-item.getBoundingClientRect().width))
+			var dY = Math.max(mBG.getBoundingClientRect().y,Math.min(dY,heiIn-item.getBoundingClientRect().height))
 			
 			//var dX = (currentX - offsetX); //asli
 			//var dY = (currentY - offsetY); //asli
@@ -450,7 +450,8 @@
 			itemAtas.style.visibility = "visible";
 
 		}
-
+		
+		
 		function stopDrag(e) {
 			if (item.dataset.dragging !== 'true') return;
 			item.dataset.dragging = 'false';
