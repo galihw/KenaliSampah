@@ -187,8 +187,8 @@
 			if (e.type === 'touchstart') {
 				e.preventDefault(); 
 				const touch = e.targetTouches[0];
-				offsetX = touch.clientX - item.getBoundingClientRect().left;
-				offsetY = touch.clientY - item.getBoundingClientRect().top;
+				offsetX = touch.clientX/fixscale - item.getBoundingClientRect().left;
+				offsetY = touch.clientY/fixscale - item.getBoundingClientRect().top;
 			} else {
 				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
 				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
@@ -419,8 +419,8 @@
 
 			if (e.type === 'touchmove') {
 				const touch = e.targetTouches[0];
-				currentX = touch.clientX;
-				currentY = touch.clientY;
+				currentX = touch.clientX/fixscale;
+				currentY = touch.clientY/fixscale;
 			} else {
 				currentX = e.clientX/fixscale;
 				currentY = e.clientY/fixscale;
@@ -460,8 +460,8 @@
 			if (e.type === 'touchend') {
 				// touchend changedTouches contains the touch point that was lifted
 				const touch = e.changedTouches[0];
-				releaseX = touch.clientX;
-				releaseY = touch.clientY;
+				releaseX = touch.clientX/fixscale;
+				releaseY = touch.clientY/fixscale;
 			} else {
 				releaseX = e.clientX/fixscale;
 				releaseY = e.clientY/fixscale;
