@@ -437,8 +437,8 @@
 			//var widIn = 840/scl
 			//var heiIn = 472/scl;
 			//var scl = 840/mBG.getBoundingClientRect().width;
-			var widIn = 840/fixscale;
-			var heiIn = 472/fixscale;
+			var widIn = 840*fixscale;
+			var heiIn = 472*fixscale;
 			//console.log(scl,fixscale)
 			var dX = Math.max(mBG.getBoundingClientRect().x,Math.min(dX,widIn-item.getBoundingClientRect().width))
 			var dY = Math.max(mBG.getBoundingClientRect().y,Math.min(dY,heiIn-item.getBoundingClientRect().height))
