@@ -437,8 +437,8 @@
 			//var widIn = 840/scl
 			//var heiIn = 472/scl;
 			//var scl = 840/mBG.getBoundingClientRect().width;
-			var widIn = mBG.getBoundingClientRect().width;
-			var heiIn = ARboximg[0].getBoundingClientRect().y+ARboximg[0].getBoundingClientRect().height;
+			var widIn = ARboximg[0].getBoundingClientRect().x + 3*ARboximg[0].getBoundingClientRect().width;
+			var heiIn = ARboximg[0].getBoundingClientRect().y + ARboximg[0].getBoundingClientRect().height;
 			//console.log(scl,fixscale)
 			var dX = Math.max(mBG.getBoundingClientRect().x,Math.min(dX,widIn-item.getBoundingClientRect().width))
 			var dY = Math.max(mBG.getBoundingClientRect().y,Math.min(dY,heiIn-item.getBoundingClientRect().height))
