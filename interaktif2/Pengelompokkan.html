@@ -306,6 +306,8 @@
 		window.addEventListener('resize', () => {
 			UbahWindow(0,0);
 			ZoomAll();
+			window.location.reload();
+			
 		});
 		
 		
@@ -317,7 +319,7 @@
 				ARimg[i-1].xx = ARimg[i-1].style.left;
 				ARimg[i-1].yy = ARimg[i-1].style.top;
 			}
-			UbahWindow(cX,cY)
+			//UbahWindow(cX,cY)
 		});
 		
 		function UbahWindow(xc,yc){
