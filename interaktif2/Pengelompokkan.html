@@ -352,11 +352,10 @@
 			dX = Math.min(dX,myBG.x+840-item.width);
 			dY = Math.min(dY,myBG.y+472-item.height);
 			
-			var x0 = ARboximg[0].getBoundingClientRect().x;
-			var ww = ARboximg[0].offsetWidth;
-			var x1 = x0+ww;
-			
-			dragText.innerHTML = "Nama Benda = "+item.name+" "+Math.round(dX)+" "+Math.round(x0)+" "+Math.round(x1);
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 			
 			//console.log(item.width,item.height)
 			//var dX = (currentX - offsetX); //asli
@@ -365,8 +364,8 @@
 			item.style.left = `${dX}px`;
 			item.style.top = `${dY}px`;
 			if (e.type === 'touchmove') {
-				itemAtas.style.left = `${dX}px`;
-				itemAtas.style.top = `${dY}px`;
+				itemAtas.style.left = `${dX-myBG.x}px`;
+				itemAtas.style.top = `${dY-myBG.y}px`;
 			}else{
 				itemAtas.style.left = `${dX-myBG.x}px`;
 				itemAtas.style.top = `${dY-myBG.y}px`;
