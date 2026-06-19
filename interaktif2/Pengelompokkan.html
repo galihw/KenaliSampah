@@ -351,7 +351,13 @@
 			dY = Math.max(myBG.y,dY);
 			dX = Math.min(dX,myBG.x+840-item.width);
 			dY = Math.min(dY,myBG.y+472-item.height);
-			dragText.innerHTML = "Nama Benda = "+item.name+" "+Math.round(dX)+" "+Math.round(dY);
+			
+			var x0 = ARboximg[0].getBoundingClientRect().x;
+			var ww = ARboximg[0].offsetWidth;
+			var x1 = x0+ww;
+			
+			dragText.innerHTML = "Nama Benda = "+item.name+" "+Math.round(dX)+" "+Math.round(x0)+" "+Math.round(x1);
+			
 			//console.log(item.width,item.height)
 			//var dX = (currentX - offsetX); //asli
 			//var dY = (currentY - offsetY); //asli
