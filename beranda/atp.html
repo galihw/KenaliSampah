@@ -15,7 +15,6 @@
 			height: 472px;
 			position: absolute;
 		}
-		
 		.klikbtn {
 			position: absolute;
 			width: 100px; 
@@ -31,7 +30,7 @@
 			position: absolute;
 			width: 40px; 
 			height: 40px; 
-			background-color: red;
+			background-color: purple;
 			cursor: default;
 			touch-action: none;
 			user-select: none;
@@ -49,11 +48,22 @@
 		const myBG = document.getElementById("bg");
 		const myHP = document.getElementById("HP");
 		myBG.style.backgroundImage = "url(img/atp.png)";
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 0.95;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
+		var xybtn = [685,414];
+		myBtn.style.left = ''+(xybtn[0])+'px';
+		myBtn.style.top = ''+(xybtn[1])+'px';
+		/*
 		myBG.x = myBG.getBoundingClientRect().x;
 		myBG.y = myBG.getBoundingClientRect().y;
-		var xybtn = [685,414];
 		myBtn.style.left = ''+(myBG.x+xybtn[0])+'px';
 		myBtn.style.top = ''+(myBG.y+xybtn[1])+'px';
+		*/
 		myBtn.addEventListener("click", function() {
 			location.href = "beranda.html";
 		});
@@ -63,8 +73,8 @@
 			ZoomAll();
 		});
 		
-		myHP.style.left = ''+(myBG.x)+'px';
-		myHP.style.top = ''+(myBG.y)+'px';
+		myHP.style.left = ''+(0)+'px';
+		myHP.style.top = ''+(0)+'px';
 		myHP.style.display = '';//none
 		
 		
@@ -72,15 +82,6 @@
 	
 	
 	<script>
-		var scl = 1;
-		//function isMobileUserAgent() {
-		//	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-		//}
-
-		//if (isMobileUserAgent()) {
-		//	console.log("Terdeteksi menggunakan HP via User Agent");
-		//	myHP.style.display = '';
-		//}
 		function UbahWindow(xc,yc){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
@@ -90,8 +91,8 @@
 			myBG.style.top = ''+(myBG.y)+'px';
 			myHP.style.left = ''+(0)+'px';
 			myHP.style.top = ''+(0)+'px';
-			myBtn.style.left = ''+(+xybtn[0])+'px';
-			myBtn.style.top = ''+(+xybtn[1])+'px';
+			myBtn.style.left = ''+(xybtn[0])+'px';
+			myBtn.style.top = ''+(xybtn[1])+'px';
 			/*
 			myBG.x = myBG.getBoundingClientRect().x;
 			myBG.y = myBG.getBoundingClientRect().y;
