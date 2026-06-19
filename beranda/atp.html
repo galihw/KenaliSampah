@@ -66,8 +66,8 @@
 			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
 			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
 			if (isMobileUserAgent()) {
-				myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0]/scl)+'px';
-				myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1]/scl)+'px';
+				myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0]*scl)+'px';
+				myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1]*scl)+'px';
 			}
 		}
 		function ZoomAll(){
