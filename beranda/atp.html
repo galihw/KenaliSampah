@@ -83,6 +83,8 @@
 		function UbahWindow(xc,yc){
 			myBG.x = myBG.getBoundingClientRect().x;
 			myBG.y = myBG.getBoundingClientRect().y;
+			myBG.x = window.scrollX;
+			myBG.y = window.scrollY;
 			myBtn.style.left = ''+(myBG.x+xybtn[0])+'px';
 			myBtn.style.top = ''+(myBG.y+xybtn[1])+'px';
 			myHP.style.left = ''+(myBG.x)+'px';
