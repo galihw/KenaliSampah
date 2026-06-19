@@ -81,14 +81,12 @@
 		//	myHP.style.display = '';
 		//}
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
+			myBG.x = myBG.getBoundingClientRect().x*window.devicePixelRatio;
+			myBG.y = myBG.getBoundingClientRect().y*window.devicePixelRatio;
 			myBtn.style.left = ''+(myBG.x+xybtn[0])+'px';
 			myBtn.style.top = ''+(myBG.y+xybtn[1])+'px';
 			myHP.style.left = ''+(myBG.x)+'px';
 			myHP.style.top = ''+(myBG.y)+'px';
-			myHP.style.left = ''+(window.scrollX)+'px';
-			myHP.style.top = ''+(window.scrollY)+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
