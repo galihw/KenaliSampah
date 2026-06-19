@@ -13,14 +13,14 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
 		}
 		
 		.klikbtn {
 			position: absolute;
 			width: 100px; 
 			height: 40px; 
-			background-color: none;
+			background-color: blue;
+			opacity: 0.5;
 			cursor: pointer;
 			touch-action: none;
 			user-select: none;
@@ -62,9 +62,9 @@
 			ZoomAll();
 		});
 		
-		myHP.style.left = ''+(myBG.x+100)+'px';
-		myHP.style.top = ''+(myBG.x+100)+'px';
-		myHP.style.display = 'none';
+		myHP.style.left = ''+(myBG.x)+'px';
+		myHP.style.top = ''+(myBG.y)+'px';
+		myHP.style.display = '';//none
 		
 		
 	</script>
@@ -72,23 +72,21 @@
 	
 	<script>
 		var scl = 1;
-		function isMobileUserAgent() {
-			return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-		}
+		//function isMobileUserAgent() {
+		//	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+		//}
 
-		if (isMobileUserAgent()) {
-			console.log("Terdeteksi menggunakan HP via User Agent");
-			myHP.style.display = '';
-		}
+		//if (isMobileUserAgent()) {
+		//	console.log("Terdeteksi menggunakan HP via User Agent");
+		//	myHP.style.display = '';
+		//}
 		function UbahWindow(xc,yc){
 			myBG.x = myBG.getBoundingClientRect().x;
 			myBG.y = myBG.getBoundingClientRect().y;
 			myBtn.style.left = ''+(myBG.x+xybtn[0])+'px';
 			myBtn.style.top = ''+(myBG.y+xybtn[1])+'px';
-			if (isMobileUserAgent()) {
-				myBtn.style.left = ''+((myBG.x+xybtn[0])*scl)+'px';
-				myBtn.style.top = ''+((myBG.y+xybtn[1])*scl)+'px';
-			}
+			myHP.style.left = ''+(myBG.x)+'px';
+			myHP.style.top = ''+(myBG.y)+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
