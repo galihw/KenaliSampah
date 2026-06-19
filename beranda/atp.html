@@ -81,8 +81,8 @@
 		//	myHP.style.display = '';
 		//}
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x/window.devicePixelRatio;
-			myBG.y = myBG.getBoundingClientRect().y/window.devicePixelRatio;
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
 			myBtn.style.left = ''+(myBG.x+xybtn[0])+'px';
 			myBtn.style.top = ''+(myBG.y+xybtn[1])+'px';
 			myHP.style.left = ''+(myBG.x)+'px';
