@@ -355,8 +355,13 @@
 			item.style.position = 'fixed';
 			item.style.left = `${dX}px`;
 			item.style.top = `${dY}px`;
-			itemAtas.style.left = `${dX-myBG.x}px`;
-			itemAtas.style.top = `${dY-myBG.y}px`;
+			if (e.type === 'touchmove') {
+				itemAtas.style.left = `${dX}px`;
+				itemAtas.style.top = `${dY}px`;
+			}else{
+				itemAtas.style.left = `${dX-myBG.x}px`;
+				itemAtas.style.top = `${dY-myBG.y}px`;
+			}
 			itemAtas.style.visibility = "visible";
 
 		}
