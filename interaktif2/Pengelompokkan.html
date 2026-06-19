@@ -345,8 +345,8 @@
 			dragText.innerHTML = "Nama Benda = "+item.name;
 				
 			// Update element position
-			var dX = (currentX/fixscale - offsetX);
-			var dY = (currentY/fixscale - offsetY);
+			var dX = (currentX/fixscale - offsetX+myBG.x);
+			var dY = (currentY/fixscale - offsetY+myBG.y);
 			dX = Math.max(myBG.x,dX);
 			dY = Math.max(myBG.y,dY);
 			dX = Math.min(dX,myBG.x+840-item.width);
@@ -361,8 +361,8 @@
 			//var dX = (currentX - offsetX); //asli
 			//var dY = (currentY - offsetY); //asli
 			item.style.position = 'fixed';
-			item.style.left = `${dX}px`;
-			item.style.top = `${dY}px`;
+			item.style.left = `${dX-myBG.x}px`;
+			item.style.top = `${dY-myBG.y}px`;
 			if (e.type === 'touchmove') {
 				itemAtas.style.left = `${dX-myBG.x}px`;
 				itemAtas.style.top = `${dY-myBG.y}px`;
