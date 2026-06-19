@@ -408,7 +408,7 @@
 					dT = ARboximg[i-1];
 				}
 			}
-			dragText.innerHTML = "Nama Benda = ..."+" "+ww+" "+hh;
+			dragText.innerHTML = "Nama Benda = ..."+" "+Math.round(ARboximg[0].getBoundingClientRect().x)+" "+Math.round(releaseX)+" "+Math.round(ARboximg[0].getBoundingClientRect().x+ARboximg[0].offsetWidth);
 			
 			// Check if target is your valid drop container
 			if (dT) {
