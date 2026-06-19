@@ -19,7 +19,7 @@
 			position: absolute;
 			width: 100px; 
 			height: 40px; 
-			background-color: blue;
+			background-color: none;
 			opacity: 0.5;
 			cursor: pointer;
 			touch-action: none;
@@ -30,7 +30,7 @@
 			position: absolute;
 			width: 40px; 
 			height: 40px; 
-			background-color: purple;
+			background-color: none;
 			cursor: default;
 			touch-action: none;
 			user-select: none;
@@ -50,7 +50,7 @@
 		myBG.style.backgroundImage = "url(img/atp.png)";
 		let lebarJendela = window.innerWidth;
 		let tinggiJendela = window.innerHeight;
-		var scl = 0.95;
+		var scl = 1;
 		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
 		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 		myBG.style.left = ''+(myBG.x)+'px';
@@ -83,8 +83,8 @@
 	
 	<script>
 		function UbahWindow(xc,yc){
-			let lebarJendela = window.innerWidth;
-			let tinggiJendela = window.innerHeight;
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
 			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
 			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 			myBG.style.left = ''+(myBG.x)+'px';
@@ -101,8 +101,8 @@
 			*/
 		}
 		function ZoomAll(){
-			let lebarJendela = window.innerWidth;
-			let tinggiJendela = window.innerHeight;
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
 			scl = 0.95*Math.min(xscale,yscale);
