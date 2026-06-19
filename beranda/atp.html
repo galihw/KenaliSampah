@@ -35,9 +35,11 @@
 		const myBtn = document.getElementById("tombol");
 		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/atp.png)";
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
 		var xybtn = [685,414];
-		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
-		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
+		myBtn.style.left = ''+(myBG.x+xybtn[0])+'px';
+		myBtn.style.top = ''+(myBG.y+xybtn[1])+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "beranda.html";
 		});
@@ -50,18 +52,30 @@
 	
 	
 	<script>
+		var scl = 1;
+		function isMobileUserAgent() {
+			return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+		}
+
+		if (isMobileUserAgent()) {
+			console.log("Terdeteksi menggunakan HP via User Agent");
+		}
 		function UbahWindow(xc,yc){
 			myBG.x = myBG.getBoundingClientRect().x;
 			myBG.y = myBG.getBoundingClientRect().y;
 			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
 			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
+			if (isMobileUserAgent()) {
+				myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0]/scl)+'px';
+				myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1]/scl)+'px';
+			}
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
+			scl = 0.95*Math.min(xscale,yscale);
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
 			UbahWindow(0,0);
