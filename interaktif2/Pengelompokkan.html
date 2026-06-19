@@ -13,7 +13,7 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
+			position: absolute;
 		}
 		.box {
 			width: 280px;
@@ -159,14 +159,19 @@
 		const myBG = document.getElementById('bg');
 		const btnLanjut = document.getElementById("lanjut");
 		btnLanjut.style.display = "none";//
-		myBG.x = myBG.getBoundingClientRect().x;
-		myBG.y = myBG.getBoundingClientRect().y;
-		layar.style.left = myBG.x+'px';
-		layar.style.top = myBG.y+50+'px';
-		btnLanjut.style.left = ''+(myBG.x+650)+'px';
-		btnLanjut.style.top = ''+(myBG.y+260)+'px';
-		dragText.style.left = myBG.x+'px';
-		dragText.style.top = myBG.y+255+'px';
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
+		layar.style.left = 0+'px';
+		layar.style.top = 50+'px';
+		btnLanjut.style.left = ''+(650)+'px';
+		btnLanjut.style.top = ''+(260)+'px';
+		dragText.style.left = 0+'px';
+		dragText.style.top = 255+'px';
 		
 		//var item = null
 		var item = document.querySelector('.draggable');
@@ -278,8 +283,8 @@
 			
 		for (var i=1;i<=3;i++){
 			ARboximg[i-1].style.zIndex = ""+(100+i)+"";
-			ARboximg[i-1].style.left = ''+(myBG.x+280*(i-1))+'px';
-			ARboximg[i-1].style.top = ''+(myBG.y+310)+'px';
+			ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
+			ARboximg[i-1].style.top = ''+(310)+'px';
 		}
 		for (var i=1;i<=nn;i++){
 			ARimg[i-1].name=nama[i-1];
@@ -350,8 +355,8 @@
 			item.style.position = 'fixed';
 			item.style.left = `${dX}px`;
 			item.style.top = `${dY}px`;
-			itemAtas.style.left = `${dX}px`;
-			itemAtas.style.top = `${dY}px`;
+			itemAtas.style.left = `${dX-myBG.x}px`;
+			itemAtas.style.top = `${dY-myBG.y}px`;
 			itemAtas.style.visibility = "visible";
 
 		}
@@ -458,25 +463,29 @@
 	</script>
 	<script>
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
 			for (var i=1;i<=3;i++){
-				ARboximg[i-1].style.left = ''+(myBG.x+280*(i-1))+'px';
-				ARboximg[i-1].style.top = ''+(myBG.y+310)+'px';
+				ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
+				ARboximg[i-1].style.top = ''+(310)+'px';
 			}
-			layar.style.left = myBG.x+'px';
-			layar.style.top = myBG.y+50+'px';
-			btnLanjut.style.left = ''+(myBG.x+650)+'px';
-			btnLanjut.style.top = ''+(myBG.y+260)+'px';
-			dragText.style.left = myBG.x+'px';
-			dragText.style.top = myBG.y+255+'px';
+			layar.style.left = 0+'px';
+			layar.style.top = 50+'px';
+			btnLanjut.style.left = ''+(650)+'px';
+			btnLanjut.style.top = ''+(260)+'px';
+			dragText.style.left = 0+'px';
+			dragText.style.top = 255+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
+			scl = 0.95*Math.min(xscale,yscale);
 			fixscale = scl;
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
