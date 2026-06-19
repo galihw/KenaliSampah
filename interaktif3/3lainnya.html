@@ -83,24 +83,24 @@
 		<img class="insert" id="insert"></img>
 	</div>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		const myBG = document.getElementById("bg");
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
 		myBG.style.backgroundImage = "url(img/3lainnya.png)";
-		document.getElementById("tombol1").style.left = ''+(myBG.getBoundingClientRect().x+471)+'px';
-		document.getElementById("tombol1").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
-		document.getElementById("tombol2").style.left = ''+(myBG.getBoundingClientRect().x+574)+'px';
-		document.getElementById("tombol2").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
-		document.getElementById("tombol3").style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-		document.getElementById("tombol3").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
-		document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-		document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+387)+'px';
-		document.getElementById("insert").style.left = ''+(myBG.getBoundingClientRect().x+380)+'px';
-		document.getElementById("insert").style.top = ''+(myBG.getBoundingClientRect().y+128)+'px';
-		document.getElementById("teksnama").style.left = ''+(myBG.getBoundingClientRect().x+211)+'px';
-		document.getElementById("teksnama").style.top = ''+(myBG.getBoundingClientRect().y+170)+'px';
-		document.getElementById("tekspenyusun").style.left = ''+(myBG.getBoundingClientRect().x+211)+'px';
-		document.getElementById("tekspenyusun").style.top = ''+(myBG.getBoundingClientRect().y+288)+'px';
+		document.getElementById("tombol1").style.left = ''+(myBG.x+471)+'px';
+		document.getElementById("tombol1").style.top = ''+(myBG.y+387)+'px';
+		document.getElementById("tombol2").style.left = ''+(myBG.x+574)+'px';
+		document.getElementById("tombol2").style.top = ''+(myBG.y+387)+'px';
+		document.getElementById("tombol3").style.left = ''+(myBG.x+685)+'px';
+		document.getElementById("tombol3").style.top = ''+(myBG.y+387)+'px';
+		document.getElementById("kembali").style.left = ''+(myBG.x+685)+'px';
+		document.getElementById("kembali").style.top = ''+(myBG.y+387)+'px';
+		document.getElementById("insert").style.left = ''+(myBG.x+380)+'px';
+		document.getElementById("insert").style.top = ''+(myBG.y+128)+'px';
+		document.getElementById("teksnama").style.left = ''+(myBG.x+211)+'px';
+		document.getElementById("teksnama").style.top = ''+(myBG.y+170)+'px';
+		document.getElementById("tekspenyusun").style.left = ''+(myBG.x+211)+'px';
+		document.getElementById("tekspenyusun").style.top = ''+(myBG.y+288)+'px';
 		
 		document.getElementById("tombol3").style.display = "none";
 		document.getElementById("kembali").style.display = "none";
@@ -160,33 +160,6 @@
 				localStorage.setItem("arCData", DataSini);
 			}	
 		}
-		
-		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
-		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
-		function UbahWindow(xc,yc){
-			document.getElementById("tombol1").style.left = ''+(myBG.getBoundingClientRect().x+471 + xc)+'px';
-			document.getElementById("tombol1").style.top = ''+(myBG.getBoundingClientRect().y+387 + yc)+'px';
-			document.getElementById("tombol2").style.left = ''+(myBG.getBoundingClientRect().x+574 + xc)+'px';
-			document.getElementById("tombol2").style.top = ''+(myBG.getBoundingClientRect().y+387 + yc)+'px';
-			document.getElementById("tombol3").style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
-			document.getElementById("tombol3").style.top = ''+(myBG.getBoundingClientRect().y+387 + yc)+'px';
-			document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
-			document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+387 + yc)+'px';
-			document.getElementById("insert").style.left = ''+(myBG.getBoundingClientRect().x+380 + xc)+'px';
-			document.getElementById("insert").style.top = ''+(myBG.getBoundingClientRect().y+128 + yc)+'px';
-			document.getElementById("teksnama").style.left = ''+(myBG.getBoundingClientRect().x+211 + xc)+'px';
-			document.getElementById("teksnama").style.top = ''+(myBG.getBoundingClientRect().y+170 + yc)+'px';
-			document.getElementById("tekspenyusun").style.left = ''+(myBG.getBoundingClientRect().x+211 + xc)+'px';
-			document.getElementById("tekspenyusun").style.top = ''+(myBG.getBoundingClientRect().y+288 + yc)+'px';
-		}
 	</script>
 	
 	
@@ -194,6 +167,59 @@
 		let DataSaya = localStorage.getItem("arCData");
 		let DataSini = DataSaya.split(",");
 		let Ccoba2 = localStorage.getItem("Ccoba2");
+	</script>
+	<script>
+		var fixscale = 1;
+		var fixzoom
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
+
+		function UbahWindow(xc,yc){
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			document.getElementById("tombol1").style.left = ''+(myBG.x+471 + xc)+'px';
+			document.getElementById("tombol1").style.top = ''+(myBG.y+387 + yc)+'px';
+			document.getElementById("tombol2").style.left = ''+(myBG.x+574 + xc)+'px';
+			document.getElementById("tombol2").style.top = ''+(myBG.y+387 + yc)+'px';
+			document.getElementById("tombol3").style.left = ''+(myBG.x+685 + xc)+'px';
+			document.getElementById("tombol3").style.top = ''+(myBG.y+387 + yc)+'px';
+			document.getElementById("kembali").style.left = ''+(myBG.x+685 + xc)+'px';
+			document.getElementById("kembali").style.top = ''+(myBG.y+387 + yc)+'px';
+			document.getElementById("insert").style.left = ''+(myBG.x+380 + xc)+'px';
+			document.getElementById("insert").style.top = ''+(myBG.y+128 + yc)+'px';
+			document.getElementById("teksnama").style.left = ''+(myBG.x+211 + xc)+'px';
+			document.getElementById("teksnama").style.top = ''+(myBG.y+170 + yc)+'px';
+			document.getElementById("tekspenyusun").style.left = ''+(myBG.x+211 + xc)+'px';
+			document.getElementById("tekspenyusun").style.top = ''+(myBG.y+288 + yc)+'px';
+			
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+		// Membaca ukuran pertama kali saat halaman dibuka
+		//window.dispatchEvent(new Event("resize"));	
 	</script>
 </body>
 </html>

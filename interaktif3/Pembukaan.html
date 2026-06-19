@@ -47,7 +47,7 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="buka"></div>
+	<div class ="bg" id="bg"></div>
 	<div class="klikbtn" id="tombol1"></div>
 	<div class="klikbtn" id="tombol2"></div>
 	<div class="klikbtn" id="tombol3"></div>
@@ -56,13 +56,13 @@
 	<img class="insert" id="img3" src="img/hitamtutup.png"></img>
 	<img class="kliknext" id="lanjut" src="img/btnlanjut.png"></img>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		let DataSaya3 = localStorage.getItem("arCData");
 		let DataSini3 = DataSaya3.split(",");
 		console.log("DataSini3 = "+DataSini3)
 		
-		const myBG = document.getElementById("buka");
+		const myBG = document.getElementById("bg");
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
 		myBG.style.backgroundImage = "url(img/buka.png)";
 		var xy = [679,385];
 		var arbtn = [];
@@ -71,13 +71,13 @@
 		for(var i=1;i<=3;i++){
 			arbtn[i-1] = document.getElementById('tombol'+i);
 			arbtn[i-1].style.position =  "absolute";
-			arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-			arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			arbtn[i-1].style.left = ''+(myBG.x+xybtn[i-1][0])+'px';
+			arbtn[i-1].style.top = ''+(myBG.y+xybtn[i-1][1])+'px';
 			arbtn[i-1].style.zIndex = "auto";
 			arbtn[i-1].style.opacity = "0";
 			
-			document.getElementById('img'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-			document.getElementById('img'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			document.getElementById('img'+i).style.left = ''+(myBG.x+xybtn[i-1][0])+'px';
+			document.getElementById('img'+i).style.top = ''+(myBG.y+xybtn[i-1][1])+'px';
 			document.getElementById('img'+i).style.display = "none";
 			
 			arbtn[i-1].link = linkbtn[i-1];
@@ -85,8 +85,8 @@
 				location.href = e.target.link;
 			});
 		}
-		document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
-		document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		document.getElementById("lanjut").style.left = ''+(myBG.x+xy[0])+'px';
+		document.getElementById("lanjut").style.top = ''+(myBG.y+xy[1])+'px';
 		document.getElementById("lanjut").style.display = "none";
 		
 		var ncek = 0;
@@ -104,29 +104,53 @@
 				});
 			}
 		}
-		
-		
-		
+	</script>
+	<script>
+		var fixscale = 1;
+		var fixzoom
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+
 		function UbahWindow(xc,yc){
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
 			for(var i=1;i<=3;i++){
-				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
-				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
-				document.getElementById('img'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
-				document.getElementById('img'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
+				arbtn[i-1].style.left = ''+(myBG.x+xybtn[i-1][0] + xc)+'px';
+				arbtn[i-1].style.top = ''+(myBG.y+xybtn[i-1][1] + yc)+'px';
+				document.getElementById('img'+i).style.left = ''+(myBG.x+xybtn[i-1][0] + xc)+'px';
+				document.getElementById('img'+i).style.top = ''+(myBG.y+xybtn[i-1][1] + yc)+'px';
 			}
-			document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0] + xc)+'px';
-			document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1] + yc)+'px';
+			document.getElementById("lanjut").style.left = ''+(myBG.x+xy[0] + xc)+'px';
+			document.getElementById("lanjut").style.top = ''+(myBG.y+xy[1] + yc)+'px';
+			
 		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+		// Membaca ukuran pertama kali saat halaman dibuka
+		//window.dispatchEvent(new Event("resize"));	
 	</script>
 	
 	

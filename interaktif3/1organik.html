@@ -142,7 +142,7 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="buka">
+	<div class ="bg" id="bg">
 	<div class="areaDrag" id="areaDrag"></div>
 	<div class="areaDrop" id="areaDrop"></div>
 	<img class="areaIn" id="areaIn"></img>
@@ -180,9 +180,9 @@
 		}
 	</script>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
-		const myBG = document.getElementById("buka");
+		const myBG = document.getElementById("bg");
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
 		myBG.style.backgroundImage = "url(img/1organik.png)";
 		var xybtn = [[65,147+0*70],[65,147+1*70],[65,147+2*70],[65,147+3*70]];
 		var xyinsert = [[297,205],[297,205+20],[297,205+2*20],[297,205+3*20]];
@@ -192,39 +192,39 @@
 		for(var i=1;i<=4;i++){
 			document.getElementById('tombol'+i).src = arrData[i-1][1];
 			document.getElementById('tombol'+i).name = arrData[i-1][0];
-			document.getElementById('tombol'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
-			document.getElementById('tombol'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
+			document.getElementById('tombol'+i).style.left = ''+(myBG.x+xybtn[i-1][0])+'px';
+			document.getElementById('tombol'+i).style.top = ''+(myBG.y+xybtn[i-1][1])+'px';
 			document.getElementById('tombol'+i).i = arrData[i-1][3];
 			
 			//document.getElementById('insert'+i).src = "img/Asmall"+i+".png";
-			document.getElementById('insert'+i).style.left = ''+(myBG.getBoundingClientRect().x+xyinsert[i-1][0])+'px';
-			document.getElementById('insert'+i).style.top = ''+(myBG.getBoundingClientRect().y+xyinsert[i-1][1])+'px';
+			document.getElementById('insert'+i).style.left = ''+(myBG.x+xyinsert[i-1][0])+'px';
+			document.getElementById('insert'+i).style.top = ''+(myBG.y+xyinsert[i-1][1])+'px';
 			document.getElementById('insert'+i).style.display = "none";//
 		}
 		
 		
-		document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715)+'px';
-		document.getElementById('kembali').style.top = ''+(myBG.getBoundingClientRect().y+420)+'px';
-		document.getElementById('areaDrag').style.left = ''+(myBG.getBoundingClientRect().x+15)+'px';
-		document.getElementById('areaDrag').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
-		document.getElementById('areaDrop').style.left = ''+(myBG.getBoundingClientRect().x+251)+'px';
-		document.getElementById('areaDrop').style.top = ''+(myBG.getBoundingClientRect().y+149)+'px';
-		document.getElementById('dragtext').style.left = ''+(myBG.getBoundingClientRect().x+413)+'px';
-		document.getElementById('dragtext').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
+		document.getElementById('kembali').style.left = ''+(myBG.x+715)+'px';
+		document.getElementById('kembali').style.top = ''+(myBG.y+420)+'px';
+		document.getElementById('areaDrag').style.left = ''+(myBG.x+15)+'px';
+		document.getElementById('areaDrag').style.top = ''+(myBG.y+119)+'px';
+		document.getElementById('areaDrop').style.left = ''+(myBG.x+251)+'px';
+		document.getElementById('areaDrop').style.top = ''+(myBG.y+149)+'px';
+		document.getElementById('dragtext').style.left = ''+(myBG.x+413)+'px';
+		document.getElementById('dragtext').style.top = ''+(myBG.y+366)+'px';
 		
 		document.getElementById('kembali').style.display = "none";//
 		document.getElementById('bubble').style.display = "none";//
 		document.getElementById('areaDrop').style.opacity = '0';
 		document.getElementById('areaImage').style.opacity = '0';
 		document.getElementById('areaIn').style.opacity = '0';
-		document.getElementById('areaIn').style.left = ''+(myBG.getBoundingClientRect().x+297)+'px';
-		document.getElementById('areaIn').style.top = ''+(myBG.getBoundingClientRect().y+205)+'px';
-		document.getElementById('areaImage').style.left = ''+(myBG.getBoundingClientRect().x+442)+'px';
-		document.getElementById('areaImage').style.top = ''+(myBG.getBoundingClientRect().y+119)+'px';
-		document.getElementById('bubble').style.left = ''+(myBG.getBoundingClientRect().x+353)+'px';
-		document.getElementById('bubble').style.top = ''+(myBG.getBoundingClientRect().y+366)+'px';
-		document.getElementById('potensi').style.left = ''+(myBG.getBoundingClientRect().x+441)+'px';
-		document.getElementById('potensi').style.top = ''+(myBG.getBoundingClientRect().y+292)+'px';
+		document.getElementById('areaIn').style.left = ''+(myBG.x+297)+'px';
+		document.getElementById('areaIn').style.top = ''+(myBG.y+205)+'px';
+		document.getElementById('areaImage').style.left = ''+(myBG.x+442)+'px';
+		document.getElementById('areaImage').style.top = ''+(myBG.y+119)+'px';
+		document.getElementById('bubble').style.left = ''+(myBG.x+353)+'px';
+		document.getElementById('bubble').style.top = ''+(myBG.y+366)+'px';
+		document.getElementById('potensi').style.left = ''+(myBG.x+441)+'px';
+		document.getElementById('potensi').style.top = ''+(myBG.y+292)+'px';
 		document.getElementById('potensi').innerHTML = namaPotensi;
 		document.getElementById('potensi').style.display = "none";//
 		
@@ -239,36 +239,6 @@
 			UbahWindow(cX,cY)
 		});
 		
-		function UbahWindow(xc,yc){
-			for(var i=1;i<=4;i++){
-				document.getElementById('tombol'+i).style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
-				document.getElementById('tombol'+i).style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
-				document.getElementById('insert'+i).style.left = ''+(myBG.getBoundingClientRect().x+xyinsert[i-1][0] + xc)+'px';
-				document.getElementById('insert'+i).style.top = ''+(myBG.getBoundingClientRect().y+xyinsert[i-1][1] + yc)+'px';
-			}
-			document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715 + xc)+'px';
-			document.getElementById('kembali').style.top = ''+(myBG.getBoundingClientRect().y+420 + yc)+'px';
-			document.getElementById('areaDrag').style.left = ''+(myBG.getBoundingClientRect().x+15 + xc)+'px';
-			document.getElementById('areaDrag').style.top = ''+(myBG.getBoundingClientRect().y+119 + yc)+'px';
-			document.getElementById('areaDrop').style.left = ''+(myBG.getBoundingClientRect().x+251 + xc)+'px';
-			document.getElementById('areaDrop').style.top = ''+(myBG.getBoundingClientRect().y+149 + yc)+'px';
-			document.getElementById('dragtext').style.left = ''+(myBG.getBoundingClientRect().x+413 + xc)+'px';
-			document.getElementById('dragtext').style.top = ''+(myBG.getBoundingClientRect().y+366 + yc)+'px';
-			document.getElementById('areaIn').style.left = ''+(myBG.getBoundingClientRect().x+297 + xc)+'px';
-			document.getElementById('areaIn').style.top = ''+(myBG.getBoundingClientRect().y+205 + yc)+'px';
-			document.getElementById('areaImage').style.left = ''+(myBG.getBoundingClientRect().x+442 + xc)+'px';
-			document.getElementById('areaImage').style.top = ''+(myBG.getBoundingClientRect().y+119 + yc)+'px';
-			document.getElementById('bubble').style.left = ''+(myBG.getBoundingClientRect().x+353 + xc)+'px';
-			document.getElementById('bubble').style.top = ''+(myBG.getBoundingClientRect().y+366 + yc)+'px';
-			document.getElementById('potensi').style.left = ''+(myBG.getBoundingClientRect().x+441 + xc)+'px';
-			document.getElementById('potensi').style.top = ''+(myBG.getBoundingClientRect().y+292 + yc)+'px';
-			
-			for (var i=1;i<=4;i++){
-				document.getElementById('tombol'+i).xAwal = document.getElementById('tombol'+i).getBoundingClientRect().left;
-				document.getElementById('tombol'+i).yAwal = document.getElementById('tombol'+i).getBoundingClientRect().top;
-			}
-
-		}
 	</script>
 	<script>
 		var ct = 0;
@@ -291,11 +261,11 @@
 			if (e.type === 'touchstart') {
 				e.preventDefault(); 
 				const touch = e.targetTouches[0];
-				offsetX = touch.clientX - item.getBoundingClientRect().left;
-				offsetY = touch.clientY - item.getBoundingClientRect().top;;
+				offsetX = touch.clientX/fixscale - item.getBoundingClientRect().left;
+				offsetY = touch.clientY/fixscale - item.getBoundingClientRect().top;
 			} else {
-				offsetX = e.clientX - item.getBoundingClientRect().left;
-				offsetY = e.clientY - item.getBoundingClientRect().top;
+				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
+				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
 			}
 			item.style.cursor = 'grabbing';
 			item.dataset.dragging = 'true';
@@ -341,12 +311,18 @@
 			}
 			document.getElementById('dragtext').innerHTML = item.name;
 			
+			var dX = (currentX/fixscale - offsetX);
+			var dY = (currentY/fixscale - offsetY);
+			dX = Math.max(myBG.x,dX);
+			dY = Math.max(myBG.y,dY);
+			dX = Math.min(dX,myBG.x+840-item.width);
+			dY = Math.min(dY,myBG.y+472-item.height);
 			// Update element position
 			item.style.position = 'fixed';
-			item.style.left = `${currentX - offsetX}px`;
-			item.style.top = `${currentY - offsetY}px`;
-			itemAtas.style.left = `${currentX - offsetX}px`;
-			itemAtas.style.top = `${currentY - offsetY}px`;
+			item.style.left = `${dX}px`;
+			item.style.top = `${dY}px`;
+			itemAtas.style.left = `${dX}px`;
+			itemAtas.style.top = `${dY}px`;
 			itemAtas.style.visibility = "visible";
 			document.getElementById('bubble').style.display = "";//none
 
@@ -361,11 +337,11 @@
 			if (e.type === 'touchend') {
 				// touchend changedTouches contains the touch point that was lifted
 				const touch = e.changedTouches[0];
-				releaseX = touch.clientX;
-				releaseY = touch.clientY;
+				releaseX = touch.clientX/fixscale;
+				releaseY = touch.clientY/fixscale;
 			} else {
-				releaseX = e.clientX;
-				releaseY = e.clientY;
+				releaseX = e.clientX/fixscale;
+				releaseY = e.clientY/fixscale;
 			}
 			
 			// Hide the item briefly to see what is underneath it
@@ -436,6 +412,71 @@
 		let DataSaya = localStorage.getItem("arCData");
 		let DataSini = DataSaya.split(",");
 		console.log("DataSini = "+DataSini)
+	</script>
+	<script>
+		var fixscale = 1;
+		var fixzoom
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
+
+		function UbahWindow(xc,yc){
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			for(var i=1;i<=4;i++){
+				document.getElementById('tombol'+i).style.left = ''+(myBG.x+xybtn[i-1][0] + xc)+'px';
+				document.getElementById('tombol'+i).style.top = ''+(myBG.y+xybtn[i-1][1] + yc)+'px';
+				document.getElementById('insert'+i).style.left = ''+(myBG.x+xyinsert[i-1][0] + xc)+'px';
+				document.getElementById('insert'+i).style.top = ''+(myBG.y+xyinsert[i-1][1] + yc)+'px';
+			}
+			document.getElementById('kembali').style.left = ''+(myBG.x+715 + xc)+'px';
+			document.getElementById('kembali').style.top = ''+(myBG.y+420 + yc)+'px';
+			document.getElementById('areaDrag').style.left = ''+(myBG.x+15 + xc)+'px';
+			document.getElementById('areaDrag').style.top = ''+(myBG.y+119 + yc)+'px';
+			document.getElementById('areaDrop').style.left = ''+(myBG.x+251 + xc)+'px';
+			document.getElementById('areaDrop').style.top = ''+(myBG.y+149 + yc)+'px';
+			document.getElementById('dragtext').style.left = ''+(myBG.x+413 + xc)+'px';
+			document.getElementById('dragtext').style.top = ''+(myBG.y+366 + yc)+'px';
+			document.getElementById('areaIn').style.left = ''+(myBG.x+297 + xc)+'px';
+			document.getElementById('areaIn').style.top = ''+(myBG.y+205 + yc)+'px';
+			document.getElementById('areaImage').style.left = ''+(myBG.x+442 + xc)+'px';
+			document.getElementById('areaImage').style.top = ''+(myBG.y+119 + yc)+'px';
+			document.getElementById('bubble').style.left = ''+(myBG.x+353 + xc)+'px';
+			document.getElementById('bubble').style.top = ''+(myBG.y+366 + yc)+'px';
+			document.getElementById('potensi').style.left = ''+(myBG.x+441 + xc)+'px';
+			document.getElementById('potensi').style.top = ''+(myBG.y+292 + yc)+'px';
+			
+			for (var i=1;i<=4;i++){
+				document.getElementById('tombol'+i).xAwal = document.getElementById('tombol'+i).getBoundingClientRect().left;
+				document.getElementById('tombol'+i).yAwal = document.getElementById('tombol'+i).getBoundingClientRect().top;
+			}
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+		// Membaca ukuran pertama kali saat halaman dibuka
+		//window.dispatchEvent(new Event("resize"));	
 	</script>
 	
 	

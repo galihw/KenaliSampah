@@ -202,9 +202,9 @@
 		]
 	</script>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		const myBG = document.getElementById("bg");
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
 		myBG.style.backgroundImage = "url(img/bgpustaka.png)";
 		const tempatA = document.getElementById("tempatA");
 		document.getElementById("kembali").style.backgroundImage = "url(img/btnkembali.png)";
@@ -220,16 +220,16 @@
 		var myTempat = [];
 		for(var i=1;i<=3;i++){
 			myTempat[i-1] = document.getElementById("mckotak").cloneNode(true);
-			myTempat[i-1].style.left = ''+(myBG.getBoundingClientRect().x+205)+'px';
-			myTempat[i-1].style.top = ''+(myBG.getBoundingClientRect().y+180)+'px';
+			myTempat[i-1].style.left = ''+(myBG.x+205)+'px';
+			myTempat[i-1].style.top = ''+(myBG.y+180)+'px';
 			myBG.appendChild(myTempat[i-1]);
 			myTempat[i-1].style.backgroundImage = "url(img/bgteks"+i+".png)";
 			
 		}
 		for(var i=1;i<=3;i++){
 			myBtn[i-1] = document.getElementById("mcbtn").cloneNode(true);
-			myBtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+200+213*(i-1))+'px';
-			myBtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+122)+'px';
+			myBtn[i-1].style.left = ''+(myBG.x+200+213*(i-1))+'px';
+			myBtn[i-1].style.top = ''+(myBG.y+122)+'px';
 			myBtn[i-1].no = i;
 			myBtn[i-1].id = "btn"+i;
 			myBtn[i-1].addEventListener("click", function(e) {
@@ -259,8 +259,8 @@
 					if(nA<=nmax){
 						var xx = 210+139*(i-1);
 						var yy = 182+24*(j-1);
-						arBtn[k][nA-1].style.left = ''+(myBG.getBoundingClientRect().x+xx)+'px';
-						arBtn[k][nA-1].style.top = ''+(myBG.getBoundingClientRect().y+yy)+'px';
+						arBtn[k][nA-1].style.left = ''+(myBG.x+xx)+'px';
+						arBtn[k][nA-1].style.top = ''+(myBG.y+yy)+'px';
 					}
 				}
 			}
@@ -303,29 +303,30 @@
 		});
 		document.getElementById("kembali").style.position =  "absolute";
 		//document.getElementById("kembali").style.backgroundImage = "url(img/bgpustaka.png)";
-		document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
-		document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
+		document.getElementById("kembali").style.left = ''+(myBG.x+xy[0])+'px';
+		document.getElementById("kembali").style.top = ''+(myBG.y+xy[1])+'px';
 		document.getElementById("kembali").style.zIndex = ""+(200)+"";
 		//document.getElementById("kembali").style.opacity = "0"; // mengatur hilang
 		
+	</script>
+	<script>
+		var fixscale = 1;
+		var fixzoom
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+
 		function UbahWindow(xc,yc){
-			document.getElementById("kembali").style.left = ''+(myBG.getBoundingClientRect().x+xy[0] + xc)+'px';
-			document.getElementById("kembali").style.top = ''+(myBG.getBoundingClientRect().y+xy[1] + yc)+'px';
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			document.getElementById("kembali").style.left = ''+(myBG.x+xy[0])+'px';
+			document.getElementById("kembali").style.top = ''+(myBG.y+xy[1])+'px';
 			for(var i=1;i<=3;i++){
-				myTempat[i-1].style.left = ''+(myBG.getBoundingClientRect().x+205 + xc)+'px';
-				myTempat[i-1].style.top = ''+(myBG.getBoundingClientRect().y+180 + yc)+'px';
-				myBtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+200+207*(i-1) + xc)+'px';
-				myBtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+122 + yc)+'px';
+				myTempat[i-1].style.left = ''+(myBG.x+205)+'px';
+				myTempat[i-1].style.top = ''+(myBG.y+180)+'px';
+				myBtn[i-1].style.left = ''+(myBG.x+200+207*(i-1))+'px';
+				myBtn[i-1].style.top = ''+(myBG.y+122)+'px';
 			}
 			for(var k=0;k<3;k++){
 				var nmax = arnA[k];
@@ -336,19 +337,38 @@
 						if(nA<=nmax){
 							var xx = 210+139*(i-1);
 							var yy = 182+24*(j-1);
-							arBtn[k][nA-1].style.left = ''+(myBG.getBoundingClientRect().x+xx + xc)+'px';
-							arBtn[k][nA-1].style.top = ''+(myBG.getBoundingClientRect().y+yy + yc)+'px';
+							arBtn[k][nA-1].style.left = ''+(myBG.x+xx)+'px';
+							arBtn[k][nA-1].style.top = ''+(myBG.y+yy)+'px';
 						}
 					}
 				}
 			}
 		}
-	</script>
-	<script>
-	</script>
-	
-	
-	<script>
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+		// Membaca ukuran pertama kali saat halaman dibuka
+		//window.dispatchEvent(new Event("resize"));	
 	</script>
 </body>
 </html>

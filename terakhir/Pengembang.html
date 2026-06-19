@@ -42,19 +42,19 @@
 	<div class="klikbtn" id="aset"></div>
 	<div class="klikgithub" id="github"></div>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		const myBtn = document.getElementById("tombol");
 		const myAset = document.getElementById("aset");
 		const myGithub = document.getElementById("github");
 		const myBG = document.getElementById("bg");
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
 		myBG.style.backgroundImage = "url(img/pengembang.png)";
-		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+394)+'px';
-		myAset.style.left = ''+(myBG.getBoundingClientRect().x+685)+'px';
-		myAset.style.top = ''+(myBG.getBoundingClientRect().y+121)+'px';
-		myGithub.style.left = ''+(myBG.getBoundingClientRect().x+210)+'px';
-		myGithub.style.top = ''+(myBG.getBoundingClientRect().y+155)+'px';
+		myBtn.style.left = ''+(myBG.x+685)+'px';
+		myBtn.style.top = ''+(myBG.y+394)+'px';
+		myAset.style.left = ''+(myBG.x+685)+'px';
+		myAset.style.top = ''+(myBG.y+121)+'px';
+		myGithub.style.left = ''+(myBG.x+210)+'px';
+		myGithub.style.top = ''+(myBG.y+155)+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "../beranda/beranda.html";
 		});
@@ -65,31 +65,50 @@
 			location.href = "https://galihw.github.io/GalihWidosamodra/index.html";
 		});
 		
-		
+	</script>
+	<script>
+		var fixscale = 1;
+		var fixzoom
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+
 		function UbahWindow(xc,yc){
-			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
-			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+392 + yc)+'px';
-			myAset.style.left = ''+(myBG.getBoundingClientRect().x+685 + xc)+'px';
-			myAset.style.top = ''+(myBG.getBoundingClientRect().y+121 + yc)+'px';
-			myGithub.style.left = ''+(myBG.getBoundingClientRect().x+210 + xc)+'px';
-			myGithub.style.top = ''+(myBG.getBoundingClientRect().y+155 + yc)+'px';
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			myBtn.style.left = ''+(myBG.x+685 + xc)+'px';
+			myBtn.style.top = ''+(myBG.y+392 + yc)+'px';
+			myAset.style.left = ''+(myBG.x+685 + xc)+'px';
+			myAset.style.top = ''+(myBG.y+121 + yc)+'px';
+			myGithub.style.left = ''+(myBG.x+210 + xc)+'px';
+			myGithub.style.top = ''+(myBG.y+155 + yc)+'px';
 		}
-	</script>
-	<script>
-	</script>
-	
-	
-	<script>
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+		// Membaca ukuran pertama kali saat halaman dibuka
+		//window.dispatchEvent(new Event("resize"));	
 	</script>
 </body>
 </html>
