@@ -31,8 +31,6 @@
 	<div class ="bg" id="buka"></div>
 	<div class="klikbtn" id="lanjut" style="width: 100px; height: 40px;"></div>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		const myBG = document.getElementById("buka");
 		myBG.style.backgroundImage = "url(img/lanjut.png)";
 		var xy = [285,285];
@@ -45,20 +43,39 @@
 		document.getElementById("lanjut").style.zIndex = ""+(200)+"";
 		document.getElementById("lanjut").style.opacity = "0"; // mengatur hilang
 		
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+	</script>
+	<script>
 		function UbahWindow(xc,yc){
-			document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0] + xc)+'px';
-			document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1] + yc)+'px';
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			document.getElementById("lanjut").style.left = ''+(myBG.getBoundingClientRect().x+xy[0])+'px';
+			document.getElementById("lanjut").style.top = ''+(myBG.getBoundingClientRect().y+xy[1])+'px';
 		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 50);
 	</script>
 	
 	

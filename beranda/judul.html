@@ -38,32 +38,50 @@
 		const myBtn = document.getElementById("tombol");
 		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/judul.png)";
-		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+320)+'px';
-		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+270)+'px';
+		var xybtn = [320,270]
+		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
+		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
 		function myclick(e) {
-			e.preventDefault(); 
+			e.preventDefault();
 			location.href = "beranda.html";
 		}
 		myBtn.addEventListener('touchend', myclick);
 		myBtn.addEventListener('click', myclick);
 		
 		
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+	</script>
+	<script>
 		function UbahWindow(xc,yc){
-			for(var i=1;i<=4;i++){
-				myBtn.style.left = ''+(myBG.getBoundingClientRect().x+320 + xc)+'px';
-				myBtn.style.top = ''+(myBG.getBoundingClientRect().y+270 + yc)+'px';
-			}
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
+			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
 		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 50);
 	</script>
 	
 	

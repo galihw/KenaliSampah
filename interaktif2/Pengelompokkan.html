@@ -8,39 +8,45 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="../terakhir/favicon_io/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="../terakhir/favicon_io/favicon-16x16.png">
 	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+		}
 		.box {
 			width: 280px;
 			height: 160px;
 			display: inline-block;
 			margin: 0px;
 			vertical-align: top;
+			/*background-color: #3498db;*/
+			position: absolute;
 		}	
 		.redbox {
 			background-color: #3498db;
 		}	
 		.layar {
 			max-width: 842px; /* Lebar maksimal halaman */
-			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
+			margin: 0 auto;    /*Otomatis rata tengah kiri-kanan */
 			width: 100%; 	  /* width: 842px; */
 			height: 195px;
-			/*background-color: #3498db;*/
+			/*background-color: red;*/
+			position: absolute;
 		}
 		.inlayar {
 			max-width: 800px; /* Lebar maksimal halaman */
 			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
 			height: 195px;
-		}
-		.judul {
-			max-width: 842px; /* Lebar maksimal halaman */
-			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
-			width: 100%;
-			height: 60px;
+			/*background-color: blue;*/
 		}
 		.namabenda {
-			max-width: 842px; /* Lebar maksimal halaman */
-			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
+			/*max-width: 842px;  Lebar maksimal halaman */
+			/*margin: 0 auto;    Otomatis rata tengah kiri-kanan */
 			width: 100%;
 			height: 40px;
+			/*background-color: grey;*/
+			position: absolute;
 		}
 		.draggable {
 			/*width: 100px;*/
@@ -58,12 +64,6 @@
 			position: absolute; /* atau relative/fixed */
 			z-index: 9999;
 		}
-		.bg {
-			width: 842px;
-			height: 472px;
-			position: absolute; /* atau relative/fixed */
-			z-index: -1;
-		}
 		img {
 			-webkit-user-drag: none; /* Safari */
 			user-drag: none;
@@ -73,6 +73,8 @@
 			user-select: none;
 		}
 		.klikbtn {
+			width: 101px;
+			height: 41px;
 			position: absolute;
 			cursor: pointer;
 			touch-action: none;
@@ -82,38 +84,32 @@
 	</style>
 </head>
 <body>
-	<div class="bg" id="bg"></div>
-	<div class="judul" id="judul"></div>
-	<div class="layar" id="layar">
-		<img id="drag1" class="draggable" >
-		<img id="drag2" class="draggable" >
-		<img id="drag3" class="draggable" >
-		<img id="drag4" class="draggable" >
-		<img id="drag5" class="draggable" >
-		<img id="drag6" class="draggable" >
-		<img id="drag7" class="draggable" >
-		<img id="drag8" class="draggable" >
-		<img id="drag9" class="draggable" >
-		<img id="drag10" class="draggable" >
-		<img id="drag11" class="draggable" >
-		<img id="drag12" class="draggable" >
-		<img id="drag13" class="draggable" >
+	<div class="bg" id="bg">
+		<div class="layar" id="layar">
+			<img id="drag1" class="draggable">
+			<img id="drag2" class="draggable">
+			<img id="drag3" class="draggable">
+			<img id="drag4" class="draggable">
+			<img id="drag5" class="draggable">
+			<img id="drag6" class="draggable">
+			<img id="drag7" class="draggable">
+			<img id="drag8" class="draggable">
+			<img id="drag9" class="draggable">
+			<img id="drag10" class="draggable">
+			<img id="drag11" class="draggable">
+			<img id="drag12" class="draggable">
+			<img id="drag13" class="draggable">
+		</div>
 		<div class="box" id="box1"></div>
 		<div class="box" id="box2"></div>
 		<div class="box" id="box3"></div>
-		
-		<img id="ibox1">
-		<img id="ibox2">
-		<img id="ibox3">
+		<div class="namabenda" id="textBenda"></div>
+		<img class="dragatas" id="atas">
+		<div class="klikbtn" id="lanjut">
+			<img src="img/btnlanjut.png" alt="btnlanjut">
+		</div>
 	</div>
-	<div class="namabenda" id="drag-text"></div>
-	<img class="dragatas" id="atas">
-	<div class="klikbtn" id="lanjut" style="width: 101px; height: 41px;">
-		<img src="img/btnlanjut.png" alt="btnlanjut">
-	</div>
-	
 	<script>
-		document.getElementById("lanjut").style.display = "none";
 		var nama = [
 					"SISA SAYURAN",
 					"KULIT BUAH",
@@ -157,24 +153,20 @@
 	</script>
 	
 	<script>
-		var fixscale = 1;
-		var fixzoom
-		function ZoomAll(){
-			let lebarJendela = window.innerWidth;
-			let tinggiJendela = window.innerHeight;
-			var xscale = lebarJendela/840;
-			var yscale = tinggiJendela/472;
-			fixscale = Math.min(xscale,yscale)-2/100;
-			fixzoom = fixscale*100;
-			document.body.style.zoom = ""+fixzoom+"%";
-		}
+		const dragText = document.getElementById('textBenda');
+		const layar = document.getElementById('layar');
+		const myBG = document.getElementById('bg');
+		const btnLanjut = document.getElementById("lanjut");
+		btnLanjut.style.display = "none";//
+		myBG.x = myBG.getBoundingClientRect().x;
+		myBG.y = myBG.getBoundingClientRect().y;
+		layar.style.left = myBG.x+'px';
+		layar.style.top = myBG.y+50+'px';
+		btnLanjut.style.left = ''+(myBG.x+650)+'px';
+		btnLanjut.style.top = ''+(myBG.y+260)+'px';
+		dragText.style.left = myBG.x+'px';
+		dragText.style.top = myBG.y+255+'px';
 		
-		//window.resizeTo(840, 472);
-		document.body.style.backgroundColor = "black";
-		//ZoomAll();
-	</script>
-	<script>
-	
 		//var item = null
 		var item = document.querySelector('.draggable');
 		const itemAtas = document.getElementById('atas');
@@ -227,22 +219,13 @@
 			nameDiv.style.alignItems = "center";     // Centers vertically
 		}
 		
-	
-		const dragText = document.getElementById('drag-text');
-		const judul = document.getElementById('judul');
-		const layar = document.getElementById('layar');
-		const myBG = document.getElementById('bg');
 				
-		myBG.style.left = ''+(3+judul.getBoundingClientRect().x)+'px';
-		myBG.style.top = ''+(0+judul.getBoundingClientRect().y)+'px';
 		myBG.style.backgroundImage = "url(img/desainbg.png)";
 		dragText.innerHTML = "Nama Benda : ...";
 		dragText.style.fontFamily = "'Arial Rounded MT Bold', sans-serif";
 		dragText.style.fontSize = "24px";
 		dragText.style.userSelect = "none";
-		judul.style.fontSize = "24px";
 		centerTextDiv(dragText);
-		centerTextDiv(judul);
 		
 	</script>
 	
@@ -261,8 +244,6 @@
 			myBox.style.height = "50px";
 			myBox.style.display = "inline-block";
 			myBox.style.margin = "0px";
-			//myBox.style.outline =  "3px dashed #ff5722";
-			//myBox.style.backgroundColor = "rgb("+(255-i)+", 255, 255)";
 			inlayar.appendChild(myBox);
 			ARmybox.push(myBox);
 			ARno[i-1]=i-1;
@@ -282,12 +263,7 @@
 			ARimg[i-1].src = "img/kecil"+i+".png";
 			ARimg[i-1].style.position = 'fixed';
 			ARimg[i-1].style.zIndex = ""+(200+i)+"";
-			
-			
-			//ARmybox[i-1].appendChild(ARimg[i-1]);
 			ARmybox[ARno[i-1]].appendChild(ARimg[i-1]);
-			//ARimg[i-1].mate = ARmybox[ARno[i-1]];
-			//console.log(ARimg[i-1].mate)
 			ARimg[i-1].nn = ARno[i-1];
 			ARimg[i-1].x0 = ARimg[i-1].getBoundingClientRect().left;
 			ARimg[i-1].y0 = ARimg[i-1].getBoundingClientRect().top;
@@ -296,86 +272,13 @@
 		var warnaBG = ["#00ff00","#00c1c1","#f2aa1d"]
 		var arteks = ["sampah 1","sampah 2","sampah 3"]
 		for (var i=1;i<=3;i++){
-			ARbox.push(document.getElementById('ibox'+i))
 			ARboximg.push(document.getElementById('box'+i))
 		}
-		
-		
-		
-		window.getSelection().removeAllRanges();
-		window.addEventListener('resize', () => {
-			UbahWindow(0,0);
-			//ZoomAll();
-			//window.location.reload();
 			
-		});
-		
-		
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			for (var i=1;i<=nn;i++){
-				ARimg[i-1].xx = ARimg[i-1].style.left;
-				ARimg[i-1].yy = ARimg[i-1].style.top;
-			}
-			//UbahWindow(cX,cY)
-		});
-		
-		function UbahWindow(xc,yc){
-			var x0 = layar.getBoundingClientRect().left+2;
-			var y0 = dragText.getBoundingClientRect().top+dragText.offsetHeight;
-			myBG.style.left = ''+x0+'px';
-			for (var i=1;i<=3;i++){
-				ARboximg[i-1].style.left = ''+(x0+280*(i-1) + xc)+'px';
-				ARboximg[i-1].style.top = ''+(y0+20 + yc)+'px';
-				ARbox[i-1].style.left = ''+(x0+280*(i-1) + xc)+'px';
-				ARbox[i-1].style.top = ''+(y0+20 + yc)+'px';
-			}
-			document.getElementById("lanjut").style.left = ''+(x0+650 + xc)+'px';
-			document.getElementById("lanjut").style.top = ''+(y0-34 + yc)+'px';
-			//inlayar.style.left = ''+(x0+xc)+'px';
-			//inlayar.style.top = ''+(y0+yc)+'px';
-			for (var i=1;i<=ntot;i++){
-				var myBox = document.createElement('div');
-				myBox.style.width = "50px";
-				myBox.style.height = "50px";
-				myBox.style.display = "inline-block";
-				myBox.style.margin = "0px";
-				//myBox.style.outline =  "3px dashed #ff5722";
-				//myBox.style.backgroundColor = "rgb("+(255-i)+", 255, 255)";
-				//inlayar.appendChild(myBox);
-				//ARmybox.push(myBox);
-				//ARno[i-1]=i-1;
-				//ARmybox[i-1].style.left = (x0+ARmybox[i-1].x)/fixscale;
-				//ARmybox[i-1].style.top = (y0+ARmybox[i-1].y)/fixscale;
-			}
-		}
-		
-
-		
-		
-
-		var x0 = layar.getBoundingClientRect().left+2;;
-		var y0 = dragText.getBoundingClientRect().top+dragText.offsetHeight;
-		myBG.style.left = ''+x0+'px';
-		
 		for (var i=1;i<=3;i++){
-			ARboximg[i-1].style.position = 'fixed';
 			ARboximg[i-1].style.zIndex = ""+(100+i)+"";
-			ARboximg[i-1].style.top = ''+312+'px';
-			ARboximg[i-1].style.left = ''+(x0+280*(i-1))+'px';
-			ARboximg[i-1].style.top = ''+(y0+20)+'px';
-			
-			//ARbox[i-1].src = "img/imgbox"+i+".png";
-			ARbox[i-1].style.position = 'fixed';
-			ARbox[i-1].style.zIndex = ""+(10+i)+"";
-			ARbox[i-1].style.top = ''+312+'px';
-			ARbox[i-1].style.left = ''+(x0+280*(i-1))+'px';
-			ARbox[i-1].style.top = ''+(y0+20)+'px';
-			
-			layar.appendChild(ARboximg[i-1]);
-			layar.appendChild(ARbox[i-1]);
+			ARboximg[i-1].style.left = ''+(myBG.x+280*(i-1))+'px';
+			ARboximg[i-1].style.top = ''+(myBG.y+310)+'px';
 		}
 		for (var i=1;i<=nn;i++){
 			ARimg[i-1].name=nama[i-1];
@@ -387,14 +290,20 @@
 			ARimg[i-1].yAwal = ARimg[i-1].getBoundingClientRect().top;
 			//console.log("Posisi X awal dari gambar:", ARimg[i-1].xAwal, ARimg[i-1].yAwal);
 		}
+	</script>
+	<script>
+		var Bsalah = 10;
+		localStorage.setItem("Bsalah", Bsalah);
+		var memulai = false;
 		
-		
+		btnLanjut.style.display = "none";
+		btnLanjut.addEventListener("click", function() {
+			location.href = "../interaktif3/Pembukaan.html";
+		});
 		
 	</script>
 	<script>
 		//const item = document.querySelector('.draggable');
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 
 		let offsetX = 0;
 		let offsetY = 0;
@@ -430,6 +339,11 @@
 			// Update element position
 			var dX = (currentX/fixscale - offsetX);
 			var dY = (currentY/fixscale - offsetY);
+			dX = Math.max(myBG.x,dX);
+			dY = Math.max(myBG.y,dY);
+			dX = Math.min(dX,myBG.x+840-item.width);
+			dY = Math.min(dY,myBG.y+472-item.height);
+			//console.log(item.width,item.height)
 			//var dX = (currentX - offsetX); //asli
 			//var dY = (currentY - offsetY); //asli
 			item.style.position = 'fixed';
@@ -479,7 +393,6 @@
 			
 			// Check if target is your valid drop container
 			if (dT) {
-				//dropTarget.appendChild(item);
 				dT.appendChild(item);
 				item.style.position = 'static';
 				item.style.left = '0px';
@@ -490,13 +403,6 @@
 			}else{
 				item.style.left = ''+item.xAwal+'px';
 				item.style.top = ''+item.yAwal+'px';
-				//item.style.position = 'fixed';
-				//layar.appendChild(item);
-				//item.style.zIndex = item.zold;
-				
-				//item.xAwal = item.getBoundingClientRect().left;
-				//item.yAwal = item.getBoundingClientRect().top;
-				
 				item.style.position = 'static';
 				ARmybox[item.nn].appendChild(item);
 			}
@@ -522,12 +428,11 @@
 				// jika sudah selesai semua
 				dragText.innerHTML = "Good Job! \u{1F44D}";
 				for (var i=1;i<=nn;i++){
-					//ARimg[i-1].setAttribute('draggable', 'false');
 					ARimg[i-1].removeEventListener('mousedown', startDrag);
 					ARimg[i-1].removeEventListener('touchstart', startDrag, { passive: false });
 				}
 				localStorage.setItem("Bsalah", Bsalah);
-				document.getElementById("lanjut").style.display = "";
+				btnLanjut.style.display = "";
 			}else{
 				if(!memulai){
 					memulai=true
@@ -543,17 +448,53 @@
 		
 	</script>
 	<script>
-		var Bsalah = 10;
-		localStorage.setItem("Bsalah", Bsalah);
-		var memulai = false;
-		
-		document.getElementById("lanjut").style.display = "none";
-		document.getElementById("lanjut").addEventListener("click", function() {
-			location.href = "../interaktif3/Pembukaan.html";
+		var fixscale = 1;
+		var fixzoom
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
 		});
+	</script>
+	<script>
+		function UbahWindow(xc,yc){
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			for (var i=1;i<=3;i++){
+				ARboximg[i-1].style.left = ''+(myBG.x+280*(i-1))+'px';
+				ARboximg[i-1].style.top = ''+(myBG.y+310)+'px';
+			}
+			layar.style.left = myBG.x+'px';
+			layar.style.top = myBG.y+50+'px';
+			btnLanjut.style.left = ''+(myBG.x+650)+'px';
+			btnLanjut.style.top = ''+(myBG.y+260)+'px';
+			dragText.style.left = myBG.x+'px';
+			dragText.style.top = myBG.y+255+'px';
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
 		
-		document.getElementById("lanjut").style.left = ''+(x0+650)+'px';
-		document.getElementById("lanjut").style.top = ''+(y0-34)+'px';
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+		// Membaca ukuran pertama kali saat halaman dibuka
+		//window.dispatchEvent(new Event("resize"));
 	</script>
 </body>
 </html>

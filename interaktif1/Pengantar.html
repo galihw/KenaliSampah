@@ -31,31 +31,49 @@
 	<div class ="bg" id="bg"></div>
 	<div class="klikbtn" id="tombol"></div>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		const myBtn = document.getElementById("tombol");
 		const myBG = document.getElementById("bg");
 		myBG.style.backgroundImage = "url(img/pengantar.png)";
-		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+710)+'px';
-		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+412)+'px';
+		var xybtn = [710,412];
+		myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
+		myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "Pembukaan.html";
 		});
 		
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+	</script>
+	<script>
 		function UbahWindow(xc,yc){
-			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+710 + xc)+'px';
-			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+412 + yc)+'px';
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
+			myBtn.style.left = ''+(myBG.getBoundingClientRect().x+xybtn[0])+'px';
+			myBtn.style.top = ''+(myBG.getBoundingClientRect().y+xybtn[1])+'px';
 		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 50);
 	</script>
 	<script>
 		var DataSaya = [0,0,0,0];

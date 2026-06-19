@@ -71,8 +71,6 @@
 		}
 	</script>
 	<script>
-		const cX = window.scrollX;
-		const cY = window.scrollY;
 		let salah = Number(localStorage.getItem("Asalah2"));
 		
 		const myBG = document.getElementById("buka");
@@ -207,20 +205,20 @@
 			//console.log("DataSini = "+DataSini)
 		}
 		
+
+		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
+			ZoomAll();
 		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
+	</script>
+	<script>		
 		
 		function UbahWindow(xc,yc){
+			myBG.x = myBG.getBoundingClientRect().x;
+			myBG.y = myBG.getBoundingClientRect().y;
 			for(var i=1;i<=4;i++){
-				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0] + xc)+'px';
-				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1] + yc)+'px';
+				arbtn[i-1].style.left = ''+(myBG.getBoundingClientRect().x+xybtn[i-1][0])+'px';
+				arbtn[i-1].style.top = ''+(myBG.getBoundingClientRect().y+xybtn[i-1][1])+'px';
 			}
 			for(var i=1;i<=3;i++){
 				arimage[i-1].style.left = arbtn[i-1].style.left;
@@ -229,8 +227,27 @@
 				artext[i-1].style.top = arbtn[i-1].style.top;
 			}
 		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			var scl = 0.95*Math.min(xscale,yscale);
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 50);
 	</script>
-	
-	
 </body>
 </html>
