@@ -84,6 +84,16 @@
 			user-select: none;
 			-webkit-user-select: none;
 		}
+		.persegi {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			touch-action: none;
+			pointer-events: none;
+			background-color: red;
+			opacity: 0.5;
+			
+		}
 	</style>
 </head>
 <body>
@@ -111,6 +121,7 @@
 		<div class="klikbtn" id="lanjut">
 			<img src="img/btnlanjut.png" alt="btnlanjut">
 		</div>
+		<img class="persegi" id="persegi">
 	</div>
 	<script>
 		var nama = [
@@ -160,6 +171,7 @@
 		const layar = document.getElementById('layar');
 		const myBG = document.getElementById('bg');
 		const btnLanjut = document.getElementById("lanjut");
+		const persegi = document.getElementById("persegi");
 		btnLanjut.style.display = "none";//
 		let lebarJendela = window.innerWidth;
 		let tinggiJendela = window.innerHeight;
@@ -200,7 +212,18 @@
 			itemAtas.style.cursor = 'grabbing';
 			itemAtas.dataset.dragging = 'true';
 			dragText.innerHTML = "Nama Benda = "+item.name;
-
+			
+			if (e.type === 'touchmove') {
+				const touch = e.targetTouches[0];
+				currentX = touch.clientX;
+				currentY = touch.clientY;
+			} else {
+				currentX = e.clientX;
+				currentY = e.clientY;
+				
+			}
+			persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
+			persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
 		}
 	</script>
 	
@@ -340,7 +363,6 @@
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
-				
 			}
 			dragText.innerHTML = "Nama Benda = "+item.name;
 				
@@ -372,6 +394,8 @@
 			}
 			itemAtas.style.visibility = "visible";
 
+			persegi.style.left = dX+'px';
+			persegi.style.top = dY+'px';
 		}
 
 		function stopDrag(e) {
