@@ -217,8 +217,8 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
-				persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
+				persegi.style.left = (currentX/fixscale-offsetX-myBG.x+item.getBoundingClientRect().width)+"px"
+				persegi.style.top = (currentY/fixscale-offsetY-myBG.y+item.getBoundingClientRect().heigth)+"px"
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
@@ -362,8 +362,10 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				dX = (currentX - offsetX+2*myBG.x);
-				dY = (currentY - offsetY+2*myBG.y);
+				//dX = (currentX - offsetX+2*myBG.x);
+				//dY = (currentY - offsetY+2*myBG.y);
+				dX = (currentX/fixscale - offsetX+myBG.x+item.getBoundingClientRect().width);
+				dY = (currentY/fixscale - offsetY+myBG.y+item.getBoundingClientRect().width);
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
