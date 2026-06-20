@@ -84,16 +84,6 @@
 			user-select: none;
 			-webkit-user-select: none;
 		}
-		.persegi {
-			position: absolute;
-			width: 100px;
-			height: 100px;
-			touch-action: none;
-			pointer-events: none;
-			background-color: red;
-			opacity: 0.5;
-			
-		}
 	</style>
 </head>
 <body>
@@ -121,7 +111,6 @@
 		<div class="klikbtn" id="lanjut">
 			<img src="img/btnlanjut.png" alt="btnlanjut">
 		</div>
-		<img class="persegi" id="persegi">
 	</div>
 	<script>
 		var nama = [
@@ -171,7 +160,6 @@
 		const layar = document.getElementById('layar');
 		const myBG = document.getElementById('bg');
 		const btnLanjut = document.getElementById("lanjut");
-		const persegi = document.getElementById("persegi");
 		btnLanjut.style.display = "none";//
 		let lebarJendela = window.innerWidth;
 		let tinggiJendela = window.innerHeight;
@@ -217,13 +205,9 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
-				persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
-				persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
-				persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
 			}
 			
 		}
@@ -371,21 +355,19 @@
 				dY = (currentY/fixscale - offsetY+myBG.y);
 			}
 			dragText.innerHTML = "Nama Benda = "+item.name;
-			persegi.style.left = (dX-2*myBG.x)+'px';
-			persegi.style.top = (dY-2*myBG.y)+'px';
 				
 			// Update element position
-			//var dX = (currentX/fixscale - offsetX+myBG.x);
-			//var dY = (currentY/fixscale - offsetY+myBG.y);
-			dX = Math.max(2*myBG.x,dX);
-			dY = Math.max(2*myBG.y,dY);
-			dX = Math.min(dX,2*myBG.x+myBG.getBoundingClientRect().width-item.width);
-			dY = Math.min(dY,2*myBG.y+myBG.getBoundingClientRect().height-item.height);
-			
 			lebarJendela = window.innerWidth;
 			tinggiJendela = window.innerHeight;
 			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
 			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			//var dX = (currentX/fixscale - offsetX+myBG.x);
+			//var dY = (currentY/fixscale - offsetY+myBG.y);
+			dX = Math.max(2*myBG.x,dX);
+			dY = Math.max(2*myBG.y,dY);
+			dX = Math.min(dX,2*myBG.x+myBG.offsetWidth-item.width);
+			dY = Math.min(dY,2*myBG.y+myBG.offsetHeight-item.height);
+			
 			
 			//console.log(item.width,item.height)
 			//var dX = (currentX - offsetX); //asli
