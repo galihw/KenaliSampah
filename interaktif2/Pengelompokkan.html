@@ -217,15 +217,13 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				persegi.style.left = (currentX/fixscale-offsetX-myBG.x+item.getBoundingClientRect().width)+"px"
-				persegi.style.top = (currentY/fixscale-offsetY-myBG.y+item.getBoundingClientRect().heigth)+"px"
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
-				persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
-				persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
 			}
 			
+			persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
+			persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
 		}
 	</script>
 	
@@ -362,10 +360,8 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				//dX = (currentX - offsetX+2*myBG.x);
-				//dY = (currentY - offsetY+2*myBG.y);
-				dX = (currentX/fixscale - offsetX+myBG.x+item.getBoundingClientRect().width);
-				dY = (currentY/fixscale - offsetY+myBG.y+item.getBoundingClientRect().width);
+				dX = (currentX/fixscale - offsetX+myBG.x);
+				dY = (currentY/fixscale - offsetY+myBG.y);
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
@@ -373,6 +369,8 @@
 				dY = (currentY/fixscale - offsetY+myBG.y);
 			}
 			dragText.innerHTML = "Nama Benda = "+item.name;
+			persegi.style.left = (dX-2*myBG.x)+'px';
+			persegi.style.top = (dY-2*myBG.y)+'px';
 				
 			// Update element position
 			//var dX = (currentX/fixscale - offsetX+myBG.x);
@@ -402,8 +400,6 @@
 			}
 			itemAtas.style.visibility = "visible";
 			dT=null;
-			persegi.style.left = (dX-2*myBG.x)+'px';
-			persegi.style.top = (dY-2*myBG.y)+'px';
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
 				var ww = ARboximg[i-1].offsetWidth;
