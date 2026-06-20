@@ -379,8 +379,8 @@
 			//var dY = (currentY/fixscale - offsetY+myBG.y);
 			dX = Math.max(2*myBG.x,dX);
 			dY = Math.max(2*myBG.y,dY);
-			//dX = Math.min(dX,myBG.x+840-item.width);
-			//dY = Math.min(dY,myBG.y+472-item.height);
+			dX = Math.min(dX,2*myBG.x+myBG.getBoundingClientRect().width-item.width);
+			dY = Math.min(dY,2*myBG.y+myBG.getBoundingClientRect().height-item.height);
 			
 			lebarJendela = window.innerWidth;
 			tinggiJendela = window.innerHeight;
@@ -405,11 +405,11 @@
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
 				//var ww = ARboximg[i-1].offsetWidth;
-				var ww = ARboximg[i-1].getBoundingClientRect().width;
+				var ww = ARboximg[i-1].getBoundingClientRect().width-item.getBoundingClientRect().width;
 				var x1 = x0+ww;
 				var y0 = ARboximg[i-1].getBoundingClientRect().y;
 				//var hh = ARboximg[i-1].offsetHeight;
-				var hh = ARboximg[i-1].getBoundingClientRect().height;
+				var hh = ARboximg[i-1].getBoundingClientRect().height-item.getBoundingClientRect().height;
 				var y1 = y0+hh;
 				var ff1 = dX-myBG.x>x0 && dX-myBG.x<x1;
 				var ff2 = dY-myBG.y>y0 && dY-myBG.y<y1;
@@ -443,7 +443,7 @@
 			item.style.display = 'none';
 			item.style.display = 'block';
 			
-			console.log(dT);
+			//console.log(dT);
 			/*var dT
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
