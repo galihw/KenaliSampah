@@ -340,6 +340,7 @@
 
 		let offsetX = 0;
 		let offsetY = 0;
+		var dT=null;
 
 		// -- MOUSE EVENTS (Desktop) --
 		//item.addEventListener('mousedown', startDrag);
@@ -351,7 +352,6 @@
 		document.addEventListener('touchmove', moveDrag, { passive: false });
 		document.addEventListener('touchend', stopDrag);
 
-		var dT
 		function moveDrag(e) {
 			if (item.dataset.dragging !== 'true') return;
 			e.preventDefault();
@@ -440,6 +440,9 @@
 			// Hide the item briefly to see what is underneath it
 			item.style.display = 'none';
 			item.style.display = 'block';
+			
+			dT.style.opacity = "0.5";
+			console.log(dT);
 			/*var dT
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
