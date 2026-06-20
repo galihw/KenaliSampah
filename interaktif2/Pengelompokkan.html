@@ -217,13 +217,15 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
+				persegi.style.left = (currentX-offsetX-myBG.x)+"px"
+				persegi.style.top = (currentY-offsetY-myBG.y)+"px"
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
-				
+				persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
+				persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
 			}
-			persegi.style.left = (currentX/fixscale-offsetX-myBG.x)+"px"
-			persegi.style.top = (currentY/fixscale-offsetY-myBG.y)+"px"
+			
 		}
 	</script>
 	
