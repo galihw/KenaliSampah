@@ -404,10 +404,12 @@
 			dT=null;
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
-				var ww = ARboximg[i-1].offsetWidth;
+				//var ww = ARboximg[i-1].offsetWidth;
+				var ww = ARboximg[i-1].getBoundingClientRect().width;
 				var x1 = x0+ww;
 				var y0 = ARboximg[i-1].getBoundingClientRect().y;
-				var hh = ARboximg[i-1].offsetHeight;
+				//var hh = ARboximg[i-1].offsetHeight;
+				var hh = ARboximg[i-1].getBoundingClientRect().height;
 				var y1 = y0+hh;
 				var ff1 = dX-myBG.x>x0 && dX-myBG.x<x1;
 				var ff2 = dY-myBG.y>y0 && dY-myBG.y<y1;
