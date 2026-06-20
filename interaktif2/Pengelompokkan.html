@@ -441,7 +441,6 @@
 			item.style.display = 'none';
 			item.style.display = 'block';
 			
-			dT.style.opacity = "0.5";
 			console.log(dT);
 			/*var dT
 			for(var i=1;i<=3;i++){
@@ -463,6 +462,7 @@
 			
 			// Check if target is your valid drop container
 			if (dT) {
+				dT.style.opacity = "0.5";
 				dT.appendChild(item);
 				item.style.position = 'static';
 				item.style.left = '0px';
