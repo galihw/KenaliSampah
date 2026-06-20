@@ -309,7 +309,7 @@
 		for (var i=1;i<=3;i++){
 			ARboximg[i-1].style.zIndex = ""+(100+i)+"";
 			ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
-			ARboximg[i-1].style.top = ''+(310)+'px';
+			ARboximg[i-1].style.top = ''+(312)+'px';
 		}
 		for (var i=1;i<=nn;i++){
 			ARimg[i-1].name=nama[i-1];
@@ -369,10 +369,10 @@
 			// Update element position
 			var dX = (currentX/fixscale - offsetX+myBG.x);
 			var dY = (currentY/fixscale - offsetY+myBG.y);
-			dX = Math.max(myBG.x,dX);
-			dY = Math.max(myBG.y,dY);
-			dX = Math.min(dX,myBG.x+840-item.width);
-			dY = Math.min(dY,myBG.y+472-item.height);
+			//dX = Math.max(myBG.x,dX);
+			//dY = Math.max(myBG.y,dY);
+			//dX = Math.min(dX,myBG.x+840-item.width);
+			//dY = Math.min(dY,myBG.y+472-item.height);
 			
 			lebarJendela = window.innerWidth;
 			tinggiJendela = window.innerHeight;
@@ -526,7 +526,7 @@
 			myBG.style.top = ''+(myBG.y)+'px';
 			for (var i=1;i<=3;i++){
 				ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
-				ARboximg[i-1].style.top = ''+(310)+'px';
+				ARboximg[i-1].style.top = ''+(312)+'px';
 			}
 			layar.style.left = 0+'px';
 			layar.style.top = 50+'px';
