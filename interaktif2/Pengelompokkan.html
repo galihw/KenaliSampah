@@ -358,8 +358,8 @@
 
 			if (e.type === 'touchmove') {
 				const touch = e.targetTouches[0];
-				currentX = touch.clientX;
-				currentY = touch.clientY;
+				currentX = touch.clientX-2*myBG.x;
+				currentY = touch.clientY-2*myBG.y;
 			} else {
 				currentX = e.clientX/fixscale;
 				currentY = e.clientY/fixscale;
