@@ -37,7 +37,6 @@
 			/*background-color: red;*/
 		}
 		.inlayar {
-			position: absolute;
 			max-width: 800px; /* Lebar maksimal halaman */
 			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
 			height: 195px;
@@ -385,6 +384,7 @@
 			itemAtas.style.visibility = "visible";
 			dT=null;
 			for(var i=1;i<=3;i++){
+				ARboximg[i-1].style.backgroundColor="transparent";
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
 				//var ww = ARboximg[i-1].offsetWidth;
 				var ww = ARboximg[i-1].offsetWidth-item.offsetWidth/2;
@@ -398,7 +398,8 @@
 				var fff = ff1 && ff2;
 				if(fff){
 					dT = ARboximg[i-1];
-					//ARboximg[i-1].style.opacity = "0.5";
+					ARboximg[i-1].style.backgroundColor="rgba(0, 0, 0, 0.5)";
+					//ARboximg[i-1].style.opacity = "0.3";
 				}else{
 					//ARboximg[i-1].style.opacity = "1";
 				}
@@ -430,6 +431,7 @@
 			// Check if target is your valid drop container
 			if (dT) {
 				//dT.style.opacity = "0.1";
+				dT.style.backgroundColor="transparent";
 				dT.appendChild(item);
 				item.style.position = 'static';
 				item.style.left = '0px';
