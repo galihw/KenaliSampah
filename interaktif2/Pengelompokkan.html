@@ -361,14 +361,14 @@
 				currentX = touch.clientX;
 				currentY = touch.clientY;
 			} else {
-				currentX = e.clientX;
-				currentY = e.clientY;
+				currentX = e.clientX/fixscale;
+				currentY = e.clientY/fixscale;
 			}
 			dragText.innerHTML = "Nama Benda = "+item.name;
 				
 			// Update element position
-			var dX = (currentX/fixscale - offsetX+myBG.x);
-			var dY = (currentY/fixscale - offsetY+myBG.y);
+			var dX = (currentX - offsetX+myBG.x);
+			var dY = (currentY - offsetY+myBG.y);
 			dX = Math.max(2*myBG.x,dX);
 			dY = Math.max(2*myBG.y,dY);
 			//dX = Math.min(dX,myBG.x+840-item.width);
