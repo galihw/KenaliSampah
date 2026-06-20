@@ -345,8 +345,8 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				dX = (currentX/fixscale - offsetX+myBG.x);
-				dY = (currentY/fixscale - offsetY+myBG.y);
+				dX = (currentX - offsetX+myBG.x);
+				dY = (currentY - offsetY+myBG.y);
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
