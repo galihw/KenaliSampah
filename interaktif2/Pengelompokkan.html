@@ -369,8 +369,8 @@
 			// Update element position
 			var dX = (currentX/fixscale - offsetX+myBG.x);
 			var dY = (currentY/fixscale - offsetY+myBG.y);
-			//dX = Math.max(myBG.x,dX);
-			//dY = Math.max(myBG.y,dY);
+			dX = Math.max(2*myBG.x,dX);
+			dY = Math.max(2*myBG.y,dY);
 			//dX = Math.min(dX,myBG.x+840-item.width);
 			//dY = Math.min(dY,myBG.y+472-item.height);
 			
@@ -393,7 +393,7 @@
 				itemAtas.style.top = `${dY-2*myBG.y}px`;
 			}
 			itemAtas.style.visibility = "visible";
-
+			dT=null;
 			persegi.style.left = (dX-2*myBG.x)+'px';
 			persegi.style.top = (dY-2*myBG.y)+'px';
 			for(var i=1;i<=3;i++){
