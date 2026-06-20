@@ -22,8 +22,8 @@
 			display: inline-block;
 			margin: 0px;
 			vertical-align: top;
-			background-color: #3498db;
-			opacity: 0.5;
+			/*background-color: #3498db;*/
+			opacity: 1;
 		}	
 		.redbox {
 			background-color: #3498db;
@@ -103,9 +103,9 @@
 			<img id="drag12" class="draggable">
 			<img id="drag13" class="draggable">
 		</div>
-		<div class="box" id="box1" style="background-color: #ff0000"></div>
-		<div class="box" id="box2" style="background-color: #00ff00"></div>
-		<div class="box" id="box3" style="background-color: #0000ff"></div>
+		<div class="box" id="box1"></div>
+		<div class="box" id="box2"></div>
+		<div class="box" id="box3"></div>
 		<div class="namabenda" id="textBenda"></div>
 		<img class="dragatas" id="atas">
 		<div class="klikbtn" id="lanjut">
@@ -387,20 +387,20 @@
 			for(var i=1;i<=3;i++){
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
 				//var ww = ARboximg[i-1].offsetWidth;
-				var ww = ARboximg[i-1].getBoundingClientRect().width-item.getBoundingClientRect().width;
+				var ww = ARboximg[i-1].offsetWidth-item.offsetWidth/2;
 				var x1 = x0+ww;
 				var y0 = ARboximg[i-1].getBoundingClientRect().y;
 				//var hh = ARboximg[i-1].offsetHeight;
-				var hh = ARboximg[i-1].getBoundingClientRect().height-item.getBoundingClientRect().height;
+				var hh = ARboximg[i-1].offsetHeight-item.offsetHeight/2;
 				var y1 = y0+hh;
 				var ff1 = dX-myBG.x>x0 && dX-myBG.x<x1;
 				var ff2 = dY-myBG.y>y0 && dY-myBG.y<y1;
 				var fff = ff1 && ff2;
 				if(fff){
 					dT = ARboximg[i-1];
-					ARboximg[i-1].style.opacity = "1";
+					//ARboximg[i-1].style.opacity = "0.5";
 				}else{
-					ARboximg[i-1].style.opacity = "0.5";
+					//ARboximg[i-1].style.opacity = "1";
 				}
 			}
 		}
@@ -425,28 +425,11 @@
 			item.style.display = 'none';
 			item.style.display = 'block';
 			
-			//console.log(dT);
-			/*var dT
-			for(var i=1;i<=3;i++){
-				var x0 = ARboximg[i-1].getBoundingClientRect().x;
-				var ww = ARboximg[i-1].offsetWidth;
-				var x1 = x0+ww;
-				var y0 = ARboximg[i-1].getBoundingClientRect().y;
-				var hh = ARboximg[i-1].offsetHeight;
-				var y1 = y0+hh;
-				var ff1 = releaseX>x0 && releaseX<x1;
-				var ff2 = releaseY>y0 && releaseY<y1;
-				var fff = ff1 && ff2;
-				if(fff){
-					dT = ARboximg[i-1];
-				}
-			}
-			*/
 			dragText.innerHTML = "Nama Benda = ...";
 			
 			// Check if target is your valid drop container
 			if (dT) {
-				dT.style.opacity = "0.5";
+				//dT.style.opacity = "0.1";
 				dT.appendChild(item);
 				item.style.position = 'static';
 				item.style.left = '0px';
