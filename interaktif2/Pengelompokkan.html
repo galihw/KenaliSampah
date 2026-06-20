@@ -355,20 +355,24 @@
 			e.preventDefault();
 
 			let currentX, currentY;
-
+			var dX,dY
 			if (e.type === 'touchmove') {
 				const touch = e.targetTouches[0];
-				currentX = touch.clientX+2*myBG.x;
-				currentY = touch.clientY+2*myBG.y;
+				currentX = touch.clientX;
+				currentY = touch.clientY;
+				dX = (currentX - offsetX+2*myBG.x);
+				dY = (currentY - offsetY+2*myBG.y);
 			} else {
-				currentX = e.clientX/fixscale;
-				currentY = e.clientY/fixscale;
+				currentX = e.clientX;
+				currentY = e.clientY;
+				dX = (currentX/fixscale - offsetX+myBG.x);
+				dY = (currentY/fixscale - offsetY+myBG.y);
 			}
 			dragText.innerHTML = "Nama Benda = "+item.name;
 				
 			// Update element position
-			var dX = (currentX - offsetX+myBG.x);
-			var dY = (currentY - offsetY+myBG.y);
+			//var dX = (currentX/fixscale - offsetX+myBG.x);
+			//var dY = (currentY/fixscale - offsetY+myBG.y);
 			dX = Math.max(2*myBG.x,dX);
 			dY = Math.max(2*myBG.y,dY);
 			//dX = Math.min(dX,myBG.x+840-item.width);
