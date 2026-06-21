@@ -400,10 +400,6 @@
 			for(var i=1;i<=4;i++){
 				document.getElementById('tombol'+i).style.left = ''+xybtn[i-1][0]+'px';
 				document.getElementById('tombol'+i).style.top = ''+xybtn[i-1][1]+'px';
-				document.getElementById('tombol'+i).src = arrData[i-1][1];
-				document.getElementById('tombol'+i).srckecil = arrData[i-1][2];
-				document.getElementById('tombol'+i).x0 = ''+xybtn[i-1][0]+'px';
-				document.getElementById('tombol'+i).y0 = ''+xybtn[i-1][1]+'px';\
 			}
 			document.getElementById('atas').style.left = ''+0+'px';
 			document.getElementById('atas').style.top = ''+0+'px';
@@ -414,13 +410,13 @@
 			document.getElementById('hasil').style.left = ''+xyhasil[0]+'px';
 			document.getElementById('hasil').style.top = ''+xyhasil[1]+'px';
 			document.getElementById('potensi').style.left = ''+xypotensi[0]+'px';
-			document.getElementById('potensi').style.top = ''+xypotensi[1]+'px';\
+			document.getElementById('potensi').style.top = ''+xypotensi[1]+'px';
 			document.getElementById('bubble').style.left = ''+(xybubble[0])+'px';
 			document.getElementById('bubble').style.top = ''+(xybubble[1])+'px';
 			document.getElementById('isibubble').style.left = ''+(xyisibubble[0])+'px';
 			document.getElementById('isibubble').style.top = ''+(xyisibubble[1])+'px';
 			document.getElementById('btnkembali').style.left = ''+(xykembali[0])+'px';
-			document.getElementById('btnkembali').style.top = ''+(xykembali[1])+'px';\
+			document.getElementById('btnkembali').style.top = ''+(xykembali[1])+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
