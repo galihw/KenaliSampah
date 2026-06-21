@@ -13,7 +13,7 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
+			position: absolute;
 		}
 		.klikbtn {
 			position: absolute;
@@ -38,24 +38,30 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="bg"></div>
-	<div class="klikbtn" id="tombol"></div>
-	<div class="klikbtn" id="aset"></div>
-	<div class="klikgithub" id="github"></div>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="tombol"></div>
+		<div class="klikbtn" id="aset"></div>
+		<div class="klikgithub" id="github"></div>
+	</div>
 	<script>
 		const myBtn = document.getElementById("tombol");
 		const myAset = document.getElementById("aset");
 		const myGithub = document.getElementById("github");
 		const myBG = document.getElementById("bg");
-		myBG.x = myBG.getBoundingClientRect().x;
-		myBG.y = myBG.getBoundingClientRect().y;
+		var scl = 1;
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
 		myBG.style.backgroundImage = "url(img/pengembang.png)";
-		myBtn.style.left = ''+(myBG.x+685)+'px';
-		myBtn.style.top = ''+(myBG.y+394)+'px';
-		myAset.style.left = ''+(myBG.x+685)+'px';
-		myAset.style.top = ''+(myBG.y+121)+'px';
-		myGithub.style.left = ''+(myBG.x+210)+'px';
-		myGithub.style.top = ''+(myBG.y+155)+'px';
+		myBtn.style.left = ''+(685)+'px';
+		myBtn.style.top = ''+(394)+'px';
+		myAset.style.left = ''+(685)+'px';
+		myAset.style.top = ''+(121)+'px';
+		myGithub.style.left = ''+(210)+'px';
+		myGithub.style.top = ''+(155)+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "../beranda/beranda.html";
 		});
@@ -76,21 +82,25 @@
 		});
 
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
-			myBtn.style.left = ''+(myBG.x+685 + xc)+'px';
-			myBtn.style.top = ''+(myBG.y+392 + yc)+'px';
-			myAset.style.left = ''+(myBG.x+685 + xc)+'px';
-			myAset.style.top = ''+(myBG.y+121 + yc)+'px';
-			myGithub.style.left = ''+(myBG.x+210 + xc)+'px';
-			myGithub.style.top = ''+(myBG.y+155 + yc)+'px';
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			myBtn.style.left = ''+(685)+'px';
+			myBtn.style.top = ''+(392)+'px';
+			myAset.style.left = ''+(685)+'px';
+			myAset.style.top = ''+(121)+'px';
+			myGithub.style.left = ''+(210)+'px';
+			myGithub.style.top = ''+(155)+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
+			scl = 0.95*Math.min(xscale,yscale);
 			fixscale = scl;
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";

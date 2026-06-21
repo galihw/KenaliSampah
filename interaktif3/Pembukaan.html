@@ -13,7 +13,7 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
+			position: absolute;
 		}
 		.klikbtn {
 			position: absolute;
@@ -48,22 +48,28 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="bg"></div>
-	<div class="klikbtn" id="tombol1"></div>
-	<div class="klikbtn" id="tombol2"></div>
-	<div class="klikbtn" id="tombol3"></div>
-	<img class="insert" id="img1" src="img/hitamtutup.png"></img>
-	<img class="insert" id="img2" src="img/hitamtutup.png"></img>
-	<img class="insert" id="img3" src="img/hitamtutup.png"></img>
-	<img class="kliknext" id="lanjut" src="img/btnlanjut.png"></img>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="tombol1"></div>
+		<div class="klikbtn" id="tombol2"></div>
+		<div class="klikbtn" id="tombol3"></div>
+		<img class="insert" id="img1" src="img/hitamtutup.png"></img>
+		<img class="insert" id="img2" src="img/hitamtutup.png"></img>
+		<img class="insert" id="img3" src="img/hitamtutup.png"></img>
+		<img class="kliknext" id="lanjut" src="img/btnlanjut.png"></img>
+	</div>
 	<script>
 		let DataSaya3 = localStorage.getItem("arCData");
 		let DataSini3 = DataSaya3.split(",");
 		console.log("DataSini3 = "+DataSini3)
 		
 		const myBG = document.getElementById("bg");
-		myBG.x = myBG.getBoundingClientRect().x;
-		myBG.y = myBG.getBoundingClientRect().y;
+		var scl = 1;
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
 		myBG.style.backgroundImage = "url(img/buka.png)";
 		var xy = [679,385];
 		var arbtn = [];
@@ -71,14 +77,12 @@
 		var linkbtn = ["1organik.html","2anorganik.html","3lainnya.html"];
 		for(var i=1;i<=3;i++){
 			arbtn[i-1] = document.getElementById('tombol'+i);
-			arbtn[i-1].style.position =  "absolute";
-			arbtn[i-1].style.left = ''+(myBG.x+xybtn[i-1][0])+'px';
-			arbtn[i-1].style.top = ''+(myBG.y+xybtn[i-1][1])+'px';
-			arbtn[i-1].style.zIndex = "auto";
+			arbtn[i-1].style.left = ''+(xybtn[i-1][0])+'px';
+			arbtn[i-1].style.top = ''+(xybtn[i-1][1])+'px';
 			arbtn[i-1].style.opacity = "0";
 			
-			document.getElementById('img'+i).style.left = ''+(myBG.x+xybtn[i-1][0])+'px';
-			document.getElementById('img'+i).style.top = ''+(myBG.y+xybtn[i-1][1])+'px';
+			document.getElementById('img'+i).style.left = ''+(xybtn[i-1][0])+'px';
+			document.getElementById('img'+i).style.top = ''+(xybtn[i-1][1])+'px';
 			document.getElementById('img'+i).style.display = "none";
 			
 			arbtn[i-1].link = linkbtn[i-1];
@@ -86,8 +90,8 @@
 				location.href = e.target.link;
 			});
 		}
-		document.getElementById("lanjut").style.left = ''+(myBG.x+xy[0])+'px';
-		document.getElementById("lanjut").style.top = ''+(myBG.y+xy[1])+'px';
+		document.getElementById("lanjut").style.left = ''+(xy[0])+'px';
+		document.getElementById("lanjut").style.top = ''+(xy[1])+'px';
 		document.getElementById("lanjut").style.display = "none";
 		
 		var ncek = 0;
@@ -115,31 +119,38 @@
 		});
 
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
 			for(var i=1;i<=3;i++){
-				arbtn[i-1].style.left = ''+(myBG.x+xybtn[i-1][0] + xc)+'px';
-				arbtn[i-1].style.top = ''+(myBG.y+xybtn[i-1][1] + yc)+'px';
-				document.getElementById('img'+i).style.left = ''+(myBG.x+xybtn[i-1][0] + xc)+'px';
-				document.getElementById('img'+i).style.top = ''+(myBG.y+xybtn[i-1][1] + yc)+'px';
+				arbtn[i-1] = document.getElementById('tombol'+i);
+				arbtn[i-1].style.left = ''+(xybtn[i-1][0])+'px';
+				arbtn[i-1].style.top = ''+(xybtn[i-1][1])+'px';
+				
+				document.getElementById('img'+i).style.left = ''+(xybtn[i-1][0])+'px';
+				document.getElementById('img'+i).style.top = ''+(xybtn[i-1][1])+'px';
 			}
-			document.getElementById("lanjut").style.left = ''+(myBG.x+xy[0] + xc)+'px';
-			document.getElementById("lanjut").style.top = ''+(myBG.y+xy[1] + yc)+'px';
-			
+			document.getElementById("lanjut").style.left = ''+(xy[0])+'px';
+			document.getElementById("lanjut").style.top = ''+(xy[1])+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
-			fixscale = scl;
+			scl = 0.95*Math.min(xscale,yscale);
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
+			//myBG.style.clipPath = "polygon(0 0, "+fixzoom+"% 0, "+fixzoom+"% "+fixzoom+"%, 0 "+fixzoom+"%)";
 			UbahWindow(0,0);
 		}
 		
 		ZoomAll();
+		//window.resizeTo(840, 472);
+		
 		function handleClick(event) {
 			console.log("handleClick");
 		}
@@ -148,12 +159,8 @@
 			console.log("handleClick")
 			ZoomAll();
 			myBG.removeEventListener('click', handleClick);
-		}, 100);
-		
-		// Membaca ukuran pertama kali saat halaman dibuka
-		//window.dispatchEvent(new Event("resize"));	
+		}, 50);
 	</script>
-	
 	
 	<script>
 	</script>

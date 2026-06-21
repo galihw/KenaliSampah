@@ -13,45 +13,7 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
-		}
-		.areaDrag {
 			position: absolute;
-			left: 15px;
-			top: 119px;
-			width: 220px;
-			height: 324px;
-			/*background-color: #220022;*/
-			user-select: none;
-			-webkit-user-select: none;
-		}
-		.areaDrop {
-			position: absolute;
-			left: 251px;
-			top: 149px;
-			width: 175px;
-			height: 162px;
-			/*background-color: #220022;*/
-			user-select: none;
-			-webkit-user-select: none;
-		}
-		.areaIn{
-			position: absolute;
-			left: 251px;
-			top: 149px;
-			width: 43px;
-			height: 80px;
-			/*background-color: #660022;*/
-			user-select: none;
-			-webkit-user-select: none;
-		}
-		.areaImage{
-			position: absolute;
-			left: 251px;
-			top: 149px;
-			width: 384px;
-			height: 217px;
-			/*background-color: #220022;*/
 			user-select: none;
 			-webkit-user-select: none;
 		}
@@ -62,10 +24,11 @@
 			width: 119px; 
 			height: 56px; 
 			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
 			user-select: none;
 			-webkit-user-select: none;
 		}
-		.klikbtn2 {
+		.klikkembali {
 			position: absolute;
 			cursor: pointer;
 			touch-action: none;
@@ -75,62 +38,53 @@
 			user-select: none;
 			-webkit-user-select: none;
 		}
-		.insert {
+		.bawahbtn {
 			position: absolute;
 			touch-action: none;
 			width: 43px; 
 			height: 20px; 
-			/*background-color: #220022;*/
+			/*total width: 104px; height: 90px; */
+			/*background-color: #ffff00;*/
+			/*opacity : 0.5;*/
 			user-select: none;
 			-webkit-user-select: none;
 		}
-		.center-text {
-			text-align: center;
-			userSelect: none;
+		.atasbtn {
 			position: absolute;
-			font-size:  24px;
-			width: 180px; 
-			height: 50px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-family: 'Arial Rounded MT Bold', sans-serif;
-			/*background-color: lightblue;*/
+			touch-action: none;
+			width: 119px; 
+			height: 56px; 
+			/*background-color: #ffff00;*/
+			/*opacity : 0.5;*/
 			user-select: none;
 			-webkit-user-select: none;
 		}
-		.bubble {
-			position: absolute; /* atau relative/fixed */
-		}
-		.dragatas {
-			position: absolute; /* atau relative/fixed */
-			z-index: 9999;
-		}
-		.namabenda {
-			text-align: center;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			/*background-color: lightblue;*/
-			width: 375px; 
-			height: 33px;
+		.areaDrop {
 			position: absolute;
-			font-family: 'Arial Rounded MT Bold', sans-serif;
-			font-size:  20px;
+			touch-action: none;
+			width: 174px; 
+			height: 165px; 
+			background-color: #ffff00;
+			opacity : 0;
 			user-select: none;
 			-webkit-user-select: none;
 		}
-		div img {
-			-webkit-user-drag: none; /* Untuk Safari/Chrome */
-			user-drag: none;
+		.areaHasil {
+			position: absolute;
+			touch-action: none;
+			width: 384px; 
+			height: 217px; 
+			/*background-color: #ff00ff;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
 		}
-		.potensi {
+		.areaPotensi {
 			text-align: center;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			/*background-color: red;*/
-			background-color: rgb(255 255 255 / 0.8); /* 50% opacity blue */
+			background-color: rgb(255 255 255 / 0.8); /* 80% opacity white */
 			width: 384px; 
 			height: 43px;
 			position: absolute;
@@ -140,30 +94,48 @@
 			user-select: none;
 			-webkit-user-select: none;
 		}
+		.bubble {
+			position: absolute;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.isibubble {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*background-color: rgb(255 255 255 / 0.8);*/ /* 80% opacity white */
+			width: 375px; 
+			height: 33px;
+			position: absolute;
+			font-family: 'Arial Rounded MT Bold', sans-serif;
+			font-size:  20px;
+			font-weight: bold;
+			user-select: none;
+			-webkit-user-select: none;
+		}
 	</style>
 </head>
 <body>
 	<div class ="bg" id="bg">
-	<div class="areaDrag" id="areaDrag"></div>
-	<div class="areaDrop" id="areaDrop"></div>
-	<img class="areaIn" id="areaIn"></img>
-	<img class="areaImage" src="img/Ahasil.png" id="areaImage"></img>
-	<img class="klikbtn" id="tombol1"></img>
-	<img class="klikbtn" id="tombol2"></img>
-	<img class="klikbtn" id="tombol3"></img>
-	<img class="klikbtn" id="tombol4"></img>
-	<img class="insert" id="insert1"></img>
-	<img class="insert" id="insert2"></img>
-	<img class="insert" id="insert3"></img>
-	<img class="insert" id="insert4"></img>
-	<img class="bubble" src="img/bubble.png" id="bubble"></img>
-	<div class="namabenda" id="dragtext"></div>
-	<div class="potensi" id="potensi"></div>
-	
-	<img class="dragatas" id="atas"></img>
-	<div class="klikbtn2" id="kembali" style="width: 101px; height: 41px;">
-		<img src="img/kembali.png" id="btnkembali"></img>
-	</div>
+		<img class="areaHasil" id="hasil">
+		<div class="areaPotensi" id="potensi"></div>
+		<img class="areaDrop" id="drop">
+		<div id="isibtn">
+			<img class="bawahbtn" id="bawah1">
+			<img class="bawahbtn" id="bawah2">
+			<img class="bawahbtn" id="bawah3">
+			<img class="bawahbtn" id="bawah4">
+			<img class="klikbtn" id="tombol1">
+			<img class="klikbtn" id="tombol2">
+			<img class="klikbtn" id="tombol3">
+			<img class="klikbtn" id="tombol4">
+		</div>
+		<img class="bubble" src="img/bubble.png" id="bubble">
+		<div class="isibubble" id="isibubble"></div>
+		<img class="klikkembali" src="img/kembali.png" id="btnkembali">
+		
+		<img class="atasbtn" id="atas">
 	</div>
 	<script>
 		function RandomAngkaAtoB(a,b){ 
@@ -181,109 +153,74 @@
 		}
 	</script>
 	<script>
+		const cX = window.scrollX;
+		const cY = window.scrollY;
 		const myBG = document.getElementById("bg");
-		myBG.x = myBG.getBoundingClientRect().x;
-		myBG.y = myBG.getBoundingClientRect().y;
-		myBG.style.backgroundImage = "url(img/1organik.png)";
+		myBG.style.backgroundImage = "url(img/2anorganik.png)";
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
 		var xybtn = [[65,147+0*70],[65,147+1*70],[65,147+2*70],[65,147+3*70]];
-		var xyinsert = [[297,205],[297,205+20],[297,205+2*20],[297,205+3*20]];
-		var arrData = [["Kulit semangka","img/Abig1.png","img/Asmall1.png",1],["Sisa sayuran","img/Abig2.png","img/Asmall2.png",2],["Daun","img/Abig3.png","img/Asmall3.png",3],["Kertas","img/Abig4.png","img/Asmall4.png",4]];
+		var xybawah = [[296,204.5],[296,204.5+20],[296,204.5+20*2],[296,204.5+20*3]]; // 265.5+30.5=296 // 199.5+5=204.5
+		var xydrop = [251,149];
+		var xyhasil = [441,119];
+		var xypotensi = [441,292];
+		var xybubble = [353,366];
+		var xyisibubble = [353+62,366];
+		var xykembali = [715,420];
+		var arrData = [["Kulit semangka","img/Abig1.png","img/Asmall1.png",1],
+						["Sisa sayuran","img/Abig2.png","img/Asmall2.png",2],
+						["Daun","img/Abig3.png","img/Asmall3.png",3],
+						["Kertas","img/Abig4.png","img/Asmall4.png",4]
+					  ];
 		arrData = RandomMyArray(arrData);
-		var namaPotensi = "Nama produk: Kompos <br>Bahan: Kulit semangka, Sisa sayuran, Daun, dan Kertas"
 		for(var i=1;i<=4;i++){
+			document.getElementById('tombol'+i).style.left = ''+xybtn[i-1][0]+'px';
+			document.getElementById('tombol'+i).style.top = ''+xybtn[i-1][1]+'px';
 			document.getElementById('tombol'+i).src = arrData[i-1][1];
-			document.getElementById('tombol'+i).name = arrData[i-1][0];
-			document.getElementById('tombol'+i).style.left = ''+(myBG.x+xybtn[i-1][0])+'px';
-			document.getElementById('tombol'+i).style.top = ''+(myBG.y+xybtn[i-1][1])+'px';
-			document.getElementById('tombol'+i).i = arrData[i-1][3];
-			
-			//document.getElementById('insert'+i).src = "img/Asmall"+i+".png";
-			document.getElementById('insert'+i).style.left = ''+(myBG.x+xyinsert[i-1][0])+'px';
-			document.getElementById('insert'+i).style.top = ''+(myBG.y+xyinsert[i-1][1])+'px';
-			document.getElementById('insert'+i).style.display = "none";//
+			document.getElementById('tombol'+i).srckecil = arrData[i-1][2];
+			document.getElementById('tombol'+i).x0 = ''+xybtn[i-1][0]+'px';
+			document.getElementById('tombol'+i).y0 = ''+xybtn[i-1][1]+'px';
+			document.getElementById('tombol'+i).ct = 0;
+			document.getElementById('tombol'+i).nama = arrData[i-1][0];
+			document.getElementById('tombol'+i).sudah = false;
+			document.getElementById('bawah'+i).style.left = ''+xybawah[i-1][0]+'px';
+			document.getElementById('bawah'+i).style.top = ''+xybawah[i-1][1]+'px';
+			document.getElementById('bawah'+i).style.display = "none";////hilangkan dulu
 		}
-		
-		
-		document.getElementById('kembali').style.left = ''+(myBG.x+715)+'px';
-		document.getElementById('kembali').style.top = ''+(myBG.y+420)+'px';
-		document.getElementById('areaDrag').style.left = ''+(myBG.x+15)+'px';
-		document.getElementById('areaDrag').style.top = ''+(myBG.y+119)+'px';
-		document.getElementById('areaDrop').style.left = ''+(myBG.x+251)+'px';
-		document.getElementById('areaDrop').style.top = ''+(myBG.y+149)+'px';
-		document.getElementById('dragtext').style.left = ''+(myBG.x+413)+'px';
-		document.getElementById('dragtext').style.top = ''+(myBG.y+366)+'px';
-		
-		document.getElementById('kembali').style.display = "none";//
-		document.getElementById('bubble').style.display = "none";//
-		document.getElementById('areaDrop').style.opacity = '0';
-		document.getElementById('areaImage').style.opacity = '0';
-		document.getElementById('areaIn').style.opacity = '0';
-		document.getElementById('areaIn').style.left = ''+(myBG.x+297)+'px';
-		document.getElementById('areaIn').style.top = ''+(myBG.y+205)+'px';
-		document.getElementById('areaImage').style.left = ''+(myBG.x+442)+'px';
-		document.getElementById('areaImage').style.top = ''+(myBG.y+119)+'px';
-		document.getElementById('bubble').style.left = ''+(myBG.x+353)+'px';
-		document.getElementById('bubble').style.top = ''+(myBG.y+366)+'px';
-		document.getElementById('potensi').style.left = ''+(myBG.x+441)+'px';
-		document.getElementById('potensi').style.top = ''+(myBG.y+292)+'px';
-		document.getElementById('potensi').innerHTML = namaPotensi;
-		document.getElementById('potensi').style.display = "none";//
-		
-		
-		window.addEventListener('resize', () => {
-			UbahWindow(0,0)
-		});
-		
-		window.addEventListener('scroll', () => {
-			const cX = window.scrollX || window.pageXOffset;
-			const cY = window.scrollY || window.pageYOffset;
-			UbahWindow(cX,cY)
-		});
-		
+		document.getElementById('atas').style.left = ''+0+'px';
+		document.getElementById('atas').style.top = ''+0+'px';
+		document.getElementById('atas').x0 = ''+0+'px';
+		document.getElementById('atas').y0 = ''+0+'px';
+		document.getElementById('drop').style.left = ''+xydrop[0]+'px';
+		document.getElementById('drop').style.top = ''+xydrop[1]+'px';
+		document.getElementById('hasil').style.left = ''+xyhasil[0]+'px';
+		document.getElementById('hasil').style.top = ''+xyhasil[1]+'px';
+		document.getElementById('potensi').style.left = ''+xypotensi[0]+'px';
+		document.getElementById('potensi').style.top = ''+xypotensi[1]+'px';
+		document.getElementById('potensi').innerHTML = "";
+		document.getElementById('bubble').style.left = ''+(xybubble[0])+'px';
+		document.getElementById('bubble').style.top = ''+(xybubble[1])+'px';
+		document.getElementById('isibubble').style.left = ''+(xyisibubble[0])+'px';
+		document.getElementById('isibubble').style.top = ''+(xyisibubble[1])+'px';
+		document.getElementById('btnkembali').style.left = ''+(xykembali[0])+'px';
+		document.getElementById('btnkembali').style.top = ''+(xykembali[1])+'px';
+		document.getElementById('atas').style.display = "none";////hilangkan dulu
+		document.getElementById('potensi').style.display = "none";////hilangkan dulu
+		document.getElementById('bubble').style.display = "none";////hilangkan dulu
+		document.getElementById('isibubble').style.display = "none";////hilangkan dulu
+		document.getElementById('btnkembali').style.display = "none";////hilangkan dulu
 	</script>
 	<script>
-		var ct = 0;
 		for (var i=1;i<=4;i++){
 			document.getElementById('tombol'+i).addEventListener('mousedown', startDrag);
 			document.getElementById('tombol'+i).addEventListener('touchstart', startDrag, { passive: false });
-
-			document.getElementById('tombol'+i).xAwal = document.getElementById('tombol'+i).getBoundingClientRect().left;
-			document.getElementById('tombol'+i).yAwal = document.getElementById('tombol'+i).getBoundingClientRect().top;
-		}
-
-		
-		var item = document.querySelector('.klikbtn');
-		const itemAtas = document.getElementById('atas');
-		itemAtas.style.visibility = "hidden";
-		function startDrag(e) {
-			// Prevent mobile screen scrolling while dragging
-			const targetElement = e.currentTarget || e.srcElement;
-			item = targetElement;
-			if (e.type === 'touchstart') {
-				e.preventDefault(); 
-				const touch = e.targetTouches[0];
-				offsetX = touch.clientX/fixscale - item.getBoundingClientRect().left;
-				offsetY = touch.clientY/fixscale - item.getBoundingClientRect().top;
-			} else {
-				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
-				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
-			}
-			item.style.cursor = 'grabbing';
-			item.dataset.dragging = 'true';
-			
-			itemAtas.src = item.src;
-			itemAtas.style.visibility = "hidden";
-			itemAtas.style.cursor = 'grabbing';
-			itemAtas.dataset.dragging = 'true';
-			document.getElementById('dragtext').innerHTML = item.name;
-			document.getElementById('bubble').style.display = "";//none
 		}
 		
-		//const item = document.querySelector('.draggable');
-
-		let offsetX = 0;
-		let offsetY = 0;
-
 		// -- MOUSE EVENTS (Desktop) --
 		//item.addEventListener('mousedown', startDrag);
 		document.addEventListener('mousemove', moveDrag);
@@ -293,126 +230,157 @@
 		//item.addEventListener('touchstart', startDrag, { passive: false });
 		document.addEventListener('touchmove', moveDrag, { passive: false });
 		document.addEventListener('touchend', stopDrag);
-
-
+		
+		var item = document.querySelector('.klikbtn');
+		const itemAtas = document.getElementById('atas');
+		//itemAtas.style.visibility = "hidden";
+		//itemAtas.style.visibility = "visible";
+		
+		function startDrag(e) {
+			// Prevent mobile screen scrolling while dragging
+			const targetElement = e.target || e.srcElement;
+			item = targetElement;
+			if (e.type === 'touchstart') {
+				e.preventDefault(); 
+				const touch = e.targetTouches[0];
+				offsetX = touch.clientX - item.getBoundingClientRect().left;
+				offsetY = touch.clientY - item.getBoundingClientRect().top;
+			} else {
+				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
+				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
+			}
+			item.style.cursor = 'grabbing';
+			item.dataset.dragging = 'true';
+			
+			itemAtas.src = item.src;
+			itemAtas.style.visibility = "visible";
+			itemAtas.style.cursor = 'grabbing';
+			itemAtas.dataset.dragging = 'true';
+			document.getElementById('bubble').style.display = "";
+			document.getElementById('isibubble').style.display = "";
+			document.getElementById('isibubble').innerHTML = item.nama;
+		}
+		
+		
+		
+		
+		var dT=null;
 		function moveDrag(e) {
 			if (item.dataset.dragging !== 'true') return;
 			e.preventDefault();
-
 			let currentX, currentY;
-
+			var dX,dY
 			if (e.type === 'touchmove') {
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
+				dX = (currentX - offsetX+myBG.x);
+				dY = (currentY - offsetY+myBG.y);
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
-				
+				dX = (currentX/fixscale - offsetX+myBG.x);
+				dY = (currentY/fixscale - offsetY+myBG.y);
 			}
-			document.getElementById('dragtext').innerHTML = item.name;
 			
-			var dX = (currentX/fixscale - offsetX);
-			var dY = (currentY/fixscale - offsetY);
-			dX = Math.max(myBG.x,dX);
-			dY = Math.max(myBG.y,dY);
-			dX = Math.min(dX,myBG.x+840-item.width);
-			dY = Math.min(dY,myBG.y+472-item.height);
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			dX = Math.max(2*myBG.x,dX);
+			dY = Math.max(2*myBG.y,dY);
+			dX = Math.min(dX,2*myBG.x+myBG.offsetWidth-item.width);
+			dY = Math.min(dY,2*myBG.y+myBG.offsetHeight-item.height);
+			
+			dT=null;
+			//periksa
+			var x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
+			var ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
+			var x1 = x0+ww;
+			var y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
+			var hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
+			var y1 = y0+hh;
+			var ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
+			var ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
+			var fff = ff1 && ff2;
+			if(fff){
+				dT = item;
+			}
+			
 			// Update element position
-			item.style.position = 'fixed';
-			item.style.left = `${dX}px`;
-			item.style.top = `${dY}px`;
-			itemAtas.style.left = `${dX}px`;
-			itemAtas.style.top = `${dY}px`;
+			item.style.left = `${dX-2*myBG.x}px`;
+			item.style.top = `${dY-2*myBG.y}px`;
+			if (e.type === 'touchmove') {
+				itemAtas.style.left = `${dX-2*myBG.x}px`;
+				itemAtas.style.top = `${dY-2*myBG.y}px`;
+			}else{
+				itemAtas.style.left = `${dX-2*myBG.x}px`;
+				itemAtas.style.top = `${dY-2*myBG.y}px`;
+			}
 			itemAtas.style.visibility = "visible";
-			document.getElementById('bubble').style.display = "";//none
-
+			itemAtas.style.display = "";
 		}
-
+		var arFIFO = []; // masuk dulu keluar dulu
 		function stopDrag(e) {
 			if (item.dataset.dragging !== 'true') return;
 			item.dataset.dragging = 'false';
-
-			let releaseX, releaseY;
-
-			if (e.type === 'touchend') {
-				// touchend changedTouches contains the touch point that was lifted
-				const touch = e.changedTouches[0];
-				releaseX = touch.clientX/fixscale;
-				releaseY = touch.clientY/fixscale;
-			} else {
-				releaseX = e.clientX/fixscale;
-				releaseY = e.clientY/fixscale;
-			}
 			
-			// Hide the item briefly to see what is underneath it
-			item.style.display = 'none';
-			item.style.display = 'block';
-			document.getElementById('bubble').style.display = "none";//
-			var dT;
-			
-			var x0 = document.getElementById('areaDrop').getBoundingClientRect().x;
-			var ww = document.getElementById('areaDrop').offsetWidth;
-			var x1 = x0+ww;
-			var y0 = document.getElementById('areaDrop').getBoundingClientRect().y;
-			var hh = document.getElementById('areaDrop').offsetHeight;
-			var y1 = y0+hh;
-			var dT = "";
-			var ff1 = releaseX>x0 && releaseX<x1;
-			var ff2 = releaseY>y0 && releaseY<y1;
-			var fff = ff1 && ff2;
-			if(fff){
-				dT = document.getElementById('areaDrop');
-			}
-			document.getElementById('dragtext').innerHTML = "";
-			document.getElementById('bubble').style.display = "none";//
-			
-			// Check if target is your valid drop container
 			if (dT) {
-				//dropTarget.appendChild(item);
-				ct++;
-				document.getElementById('insert'+ct).src = "img/Asmall"+item.i+".png";
-				document.getElementById('insert'+ct).style.display = "";
-				//item.style.transform = `scale(${0.39}, ${0.394})`;	
-				//document.getElementById('areaIn').appendChild(item);
-				item.style.display = "none";
-				item.style.position = 'static';
-				item.style.left = '0px';
-				item.style.top = '0px';
-				item.style.float = "left";
-				
-				DaftarIsiImg();
+				//sudah masuk sini//
+				item.sudah = true;
+				arFIFO.push(item);
+				item.style.display = "none"; //hilangkan kalau sudah
+				document.getElementById('bawah'+(arFIFO.length)).style.display = "";
+				document.getElementById('bawah'+arFIFO.length).src = arFIFO[arFIFO.length-1].srckecil;
 			}else{
-				item.style.left = ''+item.xAwal+'px';
-				item.style.top = ''+item.yAwal+'px';
-				//item.xAwal = item.style.left;
-				//item.yAwal = item.style.top;
-				item.style.position = 'fixed';
 			}
-			itemAtas.style.visibility = "hidden";
+			item.style.left = item.x0;
+			item.style.top = item.y0;
+			itemAtas.style.left = itemAtas.x0;
+			itemAtas.style.top = itemAtas.y0;
+			itemAtas.style.display = "none";
+			document.getElementById('bubble').style.display = "none";
+			document.getElementById('isibubble').style.display = "none";
+			DaftarIsiImg()
 		}
 		function DaftarIsiImg(){
-			if(ct==4){
+			var ctcoba = 0;
+			for(var i=1;i<=4;i++){
+				if(document.getElementById('tombol'+i).sudah){
+					ctcoba++;
+				}
+			}
+			localStorage.setItem("Ccoba1", ctcoba);
+			
+			
+			if(ctcoba==4){
 				DataSini[0] = 1;
 				console.log("DataSini = "+DataSini);
-				localStorage.setItem("arCData", DataSini);
-				document.getElementById('dragtext').innerHTML = "Good Job! \u{1F44D}";
-				document.getElementById('bubble').style.display = "";//none
-				document.getElementById('areaImage').style.opacity = '1';
-				document.getElementById('kembali').style.left = ''+(myBG.getBoundingClientRect().x+715)+'px';
 				
-				document.getElementById("kembali").style.display = "";
+				document.getElementById('hasil').src = "img/Ahasil.png";
+				document.getElementById('potensi').innerHTML = "Nama produk: Kompos <br>Bahan: Kulit semangka, Sisa sayuran, Daun, dan Kertas"
 				document.getElementById('potensi').style.display = "";
-				document.getElementById("kembali").addEventListener("click", function() {
+				
+				localStorage.setItem("arCData", DataSini);
+				document.getElementById('bubble').style.display = "";
+				document.getElementById('isibubble').style.display = "";
+				document.getElementById('btnkembali').style.display = "";
+				document.getElementById('isibubble').innerHTML = "Good Job! \u{1F44D}";
+				document.getElementById("btnkembali").addEventListener("click", function() {
 					location.href = "Pembukaan.html";
 				});
 			}
 		}
+		
+	</script>
+	<script>
+	</script>
+	<script>
 	</script>
 	<script>
 		let DataSaya = localStorage.getItem("arCData");
 		let DataSini = DataSaya.split(",");
-		console.log("DataSini = "+DataSini)
+		let Ccoba1 = localStorage.getItem("Ccoba1");
 	</script>
 	<script>
 		var fixscale = 1;
@@ -423,42 +391,43 @@
 		});
 
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
 			for(var i=1;i<=4;i++){
-				document.getElementById('tombol'+i).style.left = ''+(myBG.x+xybtn[i-1][0] + xc)+'px';
-				document.getElementById('tombol'+i).style.top = ''+(myBG.y+xybtn[i-1][1] + yc)+'px';
-				document.getElementById('insert'+i).style.left = ''+(myBG.x+xyinsert[i-1][0] + xc)+'px';
-				document.getElementById('insert'+i).style.top = ''+(myBG.y+xyinsert[i-1][1] + yc)+'px';
+				document.getElementById('tombol'+i).style.left = ''+xybtn[i-1][0]+'px';
+				document.getElementById('tombol'+i).style.top = ''+xybtn[i-1][1]+'px';
+				document.getElementById('tombol'+i).src = arrData[i-1][1];
+				document.getElementById('tombol'+i).srckecil = arrData[i-1][2];
+				document.getElementById('tombol'+i).x0 = ''+xybtn[i-1][0]+'px';
+				document.getElementById('tombol'+i).y0 = ''+xybtn[i-1][1]+'px';\
 			}
-			document.getElementById('kembali').style.left = ''+(myBG.x+715 + xc)+'px';
-			document.getElementById('kembali').style.top = ''+(myBG.y+420 + yc)+'px';
-			document.getElementById('areaDrag').style.left = ''+(myBG.x+15 + xc)+'px';
-			document.getElementById('areaDrag').style.top = ''+(myBG.y+119 + yc)+'px';
-			document.getElementById('areaDrop').style.left = ''+(myBG.x+251 + xc)+'px';
-			document.getElementById('areaDrop').style.top = ''+(myBG.y+149 + yc)+'px';
-			document.getElementById('dragtext').style.left = ''+(myBG.x+413 + xc)+'px';
-			document.getElementById('dragtext').style.top = ''+(myBG.y+366 + yc)+'px';
-			document.getElementById('areaIn').style.left = ''+(myBG.x+297 + xc)+'px';
-			document.getElementById('areaIn').style.top = ''+(myBG.y+205 + yc)+'px';
-			document.getElementById('areaImage').style.left = ''+(myBG.x+442 + xc)+'px';
-			document.getElementById('areaImage').style.top = ''+(myBG.y+119 + yc)+'px';
-			document.getElementById('bubble').style.left = ''+(myBG.x+353 + xc)+'px';
-			document.getElementById('bubble').style.top = ''+(myBG.y+366 + yc)+'px';
-			document.getElementById('potensi').style.left = ''+(myBG.x+441 + xc)+'px';
-			document.getElementById('potensi').style.top = ''+(myBG.y+292 + yc)+'px';
-			
-			for (var i=1;i<=4;i++){
-				document.getElementById('tombol'+i).xAwal = document.getElementById('tombol'+i).getBoundingClientRect().left;
-				document.getElementById('tombol'+i).yAwal = document.getElementById('tombol'+i).getBoundingClientRect().top;
-			}
+			document.getElementById('atas').style.left = ''+0+'px';
+			document.getElementById('atas').style.top = ''+0+'px';
+			document.getElementById('atas').x0 = ''+0+'px';
+			document.getElementById('atas').y0 = ''+0+'px';
+			document.getElementById('drop').style.left = ''+xydrop[0]+'px';
+			document.getElementById('drop').style.top = ''+xydrop[1]+'px';
+			document.getElementById('hasil').style.left = ''+xyhasil[0]+'px';
+			document.getElementById('hasil').style.top = ''+xyhasil[1]+'px';
+			document.getElementById('potensi').style.left = ''+xypotensi[0]+'px';
+			document.getElementById('potensi').style.top = ''+xypotensi[1]+'px';\
+			document.getElementById('bubble').style.left = ''+(xybubble[0])+'px';
+			document.getElementById('bubble').style.top = ''+(xybubble[1])+'px';
+			document.getElementById('isibubble').style.left = ''+(xyisibubble[0])+'px';
+			document.getElementById('isibubble').style.top = ''+(xyisibubble[1])+'px';
+			document.getElementById('btnkembali').style.left = ''+(xykembali[0])+'px';
+			document.getElementById('btnkembali').style.top = ''+(xykembali[1])+'px';\
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
+			scl = 0.95*Math.min(xscale,yscale);
 			fixscale = scl;
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
@@ -479,7 +448,5 @@
 		// Membaca ukuran pertama kali saat halaman dibuka
 		//window.dispatchEvent(new Event("resize"));	
 	</script>
-	
-	
 </body>
 </html>

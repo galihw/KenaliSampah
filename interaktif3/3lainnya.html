@@ -13,7 +13,9 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
+			position: absolute;
+			user-select: none;
+			-webkit-user-select: none;
 		}
 		.klikbtn {
 			position: absolute;
@@ -78,36 +80,43 @@
 		<div class="teksnama" id="teksnama"></div>
 		<div class="tekspenyusun" id="tekspenyusun"></div>
 		<img src="img/kembali.png" id="kembali"></img>
-		<div id="tombol1" class="klikbtn"></div>
-		<div id="tombol2" class="klikbtn"></div>
-		<div id="tombol3" class="klikbtn"></div>
+		<div id="btnPrev" class="klikbtn"></div>
+		<div id="btnNext" class="klikbtn"></div>
+		<div id="btnKembali" class="klikbtn"></div>
 		<img class="insert" id="insert"></img>
 	</div>
 	<script>
 		const myBG = document.getElementById("bg");
-		myBG.x = myBG.getBoundingClientRect().x;
-		myBG.y = myBG.getBoundingClientRect().y;
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
 		myBG.style.backgroundImage = "url(img/3lainnya.png)";
-		document.getElementById("tombol1").style.left = ''+(myBG.x+471)+'px';
-		document.getElementById("tombol1").style.top = ''+(myBG.y+387)+'px';
-		document.getElementById("tombol2").style.left = ''+(myBG.x+574)+'px';
-		document.getElementById("tombol2").style.top = ''+(myBG.y+387)+'px';
-		document.getElementById("tombol3").style.left = ''+(myBG.x+685)+'px';
-		document.getElementById("tombol3").style.top = ''+(myBG.y+387)+'px';
-		document.getElementById("kembali").style.left = ''+(myBG.x+685)+'px';
-		document.getElementById("kembali").style.top = ''+(myBG.y+387)+'px';
-		document.getElementById("insert").style.left = ''+(myBG.x+380)+'px';
-		document.getElementById("insert").style.top = ''+(myBG.y+128)+'px';
-		document.getElementById("teksnama").style.left = ''+(myBG.x+211)+'px';
-		document.getElementById("teksnama").style.top = ''+(myBG.y+170)+'px';
-		document.getElementById("tekspenyusun").style.left = ''+(myBG.x+211)+'px';
-		document.getElementById("tekspenyusun").style.top = ''+(myBG.y+288)+'px';
+		document.getElementById("btnPrev").style.left = ''+(471)+'px';
+		document.getElementById("btnPrev").style.top = ''+(387)+'px';
+		document.getElementById("btnNext").style.left = ''+(574)+'px';
+		document.getElementById("btnNext").style.top = ''+(387)+'px';
+		document.getElementById("btnKembali").style.left = ''+(685)+'px';
+		document.getElementById("btnKembali").style.top = ''+(387)+'px';
+		document.getElementById("kembali").style.left = ''+(685)+'px';
+		document.getElementById("kembali").style.top = ''+(387)+'px';
+		document.getElementById("insert").style.left = ''+(380)+'px';
+		document.getElementById("insert").style.top = ''+(128)+'px';
+		document.getElementById("teksnama").style.left = ''+(211)+'px';
+		document.getElementById("teksnama").style.top = ''+(170)+'px';
+		document.getElementById("tekspenyusun").style.left = ''+(211)+'px';
+		document.getElementById("tekspenyusun").style.top = ''+(288)+'px';
 		
-		document.getElementById("tombol3").style.display = "none";
+		document.getElementById("btnKembali").style.display = "none";
 		document.getElementById("kembali").style.display = "none";
-		document.getElementById("tombol1").style.opacity = '0';
-		document.getElementById("tombol2").style.opacity = '0';
-		document.getElementById("tombol3").style.opacity = '0';
+		document.getElementById("btnPrev").style.opacity = '0';
+		document.getElementById("btnNext").style.opacity = '0';
+		document.getElementById("btnKembali").style.opacity = '0';
+		
+		document.body.style.backgroundColor = "black";
 		
 		var arrData = [
 						["Meja dan kursi ecobrick","Botol plastik<br>Bungkus plastik"],
@@ -118,13 +127,13 @@
 						["Tatakan","Kain perca"],
 						["Lukisan","Tutup botol plastik"]
 						]
-		document.getElementById("tombol1").addEventListener("click", function() {
+		document.getElementById("btnPrev").addEventListener("click", function() {
 			Prev();
 		});
-		document.getElementById("tombol2").addEventListener("click", function() {
+		document.getElementById("btnNext").addEventListener("click", function() {
 			Next();
 		});
-		document.getElementById("tombol3").addEventListener("click", function() {
+		document.getElementById("btnKembali").addEventListener("click", function() {
 			location.href = "Pembukaan.html";
 		});
 		
@@ -154,7 +163,7 @@
 			
 			document.getElementById("insert").src = "img/Cbig"+ct+".png";
 			if(ff){
-				document.getElementById("tombol3").style.display = "";//none
+				document.getElementById("btnKembali").style.display = "";//none
 				document.getElementById("kembali").style.display = "";//none
 				DataSini[2]=1;
 				localStorage.setItem("Ccoba2", ctcoba);
@@ -170,30 +179,27 @@
 		let Ccoba2 = localStorage.getItem("Ccoba2");
 	</script>
 	<script>
-		var fixscale = 1;
-		var fixzoom
-		document.body.style.backgroundColor = "black";
-		window.addEventListener('resize', () => {
-			ZoomAll();
-		});
-
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
-			document.getElementById("tombol1").style.left = ''+(myBG.x+471 + xc)+'px';
-			document.getElementById("tombol1").style.top = ''+(myBG.y+387 + yc)+'px';
-			document.getElementById("tombol2").style.left = ''+(myBG.x+574 + xc)+'px';
-			document.getElementById("tombol2").style.top = ''+(myBG.y+387 + yc)+'px';
-			document.getElementById("tombol3").style.left = ''+(myBG.x+685 + xc)+'px';
-			document.getElementById("tombol3").style.top = ''+(myBG.y+387 + yc)+'px';
-			document.getElementById("kembali").style.left = ''+(myBG.x+685 + xc)+'px';
-			document.getElementById("kembali").style.top = ''+(myBG.y+387 + yc)+'px';
-			document.getElementById("insert").style.left = ''+(myBG.x+380 + xc)+'px';
-			document.getElementById("insert").style.top = ''+(myBG.y+128 + yc)+'px';
-			document.getElementById("teksnama").style.left = ''+(myBG.x+211 + xc)+'px';
-			document.getElementById("teksnama").style.top = ''+(myBG.y+170 + yc)+'px';
-			document.getElementById("tekspenyusun").style.left = ''+(myBG.x+211 + xc)+'px';
-			document.getElementById("tekspenyusun").style.top = ''+(myBG.y+288 + yc)+'px';
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			document.getElementById("btnPrev").style.left = ''+(471)+'px';
+			document.getElementById("btnPrev").style.top = ''+(387)+'px';
+			document.getElementById("btnNext").style.left = ''+(574)+'px';
+			document.getElementById("btnNext").style.top = ''+(387)+'px';
+			document.getElementById("btnKembali").style.left = ''+(685)+'px';
+			document.getElementById("btnKembali").style.top = ''+(387)+'px';
+			document.getElementById("kembali").style.left = ''+(685)+'px';
+			document.getElementById("kembali").style.top = ''+(387)+'px';
+			document.getElementById("insert").style.left = ''+(380)+'px';
+			document.getElementById("insert").style.top = ''+(128)+'px';
+			document.getElementById("teksnama").style.left = ''+(211)+'px';
+			document.getElementById("teksnama").style.top = ''+(170)+'px';
+			document.getElementById("tekspenyusun").style.left = ''+(211)+'px';
+			document.getElementById("tekspenyusun").style.top = ''+(288)+'px';
 			
 		}
 		function ZoomAll(){
@@ -201,14 +207,16 @@
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
-			fixscale = scl;
+			scl = 0.95*Math.min(xscale,yscale);
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
+			//myBG.style.clipPath = "polygon(0 0, "+fixzoom+"% 0, "+fixzoom+"% "+fixzoom+"%, 0 "+fixzoom+"%)";
 			UbahWindow(0,0);
 		}
 		
 		ZoomAll();
+		//window.resizeTo(840, 472);
+		
 		function handleClick(event) {
 			console.log("handleClick");
 		}
@@ -217,10 +225,12 @@
 			console.log("handleClick")
 			ZoomAll();
 			myBG.removeEventListener('click', handleClick);
-		}, 100);
-		
-		// Membaca ukuran pertama kali saat halaman dibuka
-		//window.dispatchEvent(new Event("resize"));	
+		}, 50);
+	</script>
+	<script>
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
 	</script>
 </body>
 </html>
