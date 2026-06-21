@@ -386,11 +386,9 @@
 			for(var i=1;i<=3;i++){
 				ARboximg[i-1].style.backgroundColor="transparent";
 				var x0 = ARboximg[i-1].getBoundingClientRect().x;
-				//var ww = ARboximg[i-1].offsetWidth;
 				var ww = ARboximg[i-1].offsetWidth-item.offsetWidth/2;
 				var x1 = x0+ww;
 				var y0 = ARboximg[i-1].getBoundingClientRect().y;
-				//var hh = ARboximg[i-1].offsetHeight;
 				var hh = ARboximg[i-1].offsetHeight-item.offsetHeight/2;
 				var y1 = y0+hh;
 				var ff1 = dX-myBG.x>x0 && dX-myBG.x<x1;
@@ -399,9 +397,6 @@
 				if(fff){
 					dT = ARboximg[i-1];
 					ARboximg[i-1].style.backgroundColor="rgba(0, 0, 0, 0.5)";
-					//ARboximg[i-1].style.opacity = "0.3";
-				}else{
-					//ARboximg[i-1].style.opacity = "1";
 				}
 			}
 		}
@@ -409,18 +404,6 @@
 		function stopDrag(e) {
 			if (item.dataset.dragging !== 'true') return;
 			item.dataset.dragging = 'false';
-
-			let releaseX, releaseY;
-
-			if (e.type === 'touchend') {
-				// touchend changedTouches contains the touch point that was lifted
-				const touch = e.changedTouches[0];
-				releaseX = touch.clientX/fixscale;
-				releaseY = touch.clientY/fixscale;
-			} else {
-				releaseX = e.clientX/fixscale;
-				releaseY = e.clientY/fixscale;
-			}
 
 			// Hide the item briefly to see what is underneath it
 			item.style.display = 'none';
