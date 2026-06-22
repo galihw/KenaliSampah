@@ -302,13 +302,14 @@
 				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
 				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
 				y1 = y0+hh;
-				ff1 = dX>x0 && dX<x1;
-				ff2 = dY>y0 && dY<y1;
-				fff = ff1 && ff2;
-				item.style.left = `${dX}px`;
-				item.style.top = `${dY}px`;
-				itemAtas.style.left = `${dX}px`;
-				itemAtas.style.top = `${dY}px`;
+				//ff1 = dX>x0 && dX<x1;
+				//ff2 = dY>y0 && dY<y1;
+				//fff = ff1 && ff2;
+				fff=true;
+				item.style.left = `${dX-2*myBG.x}px`;
+				item.style.top = `${dY-2*myBG.y}px`;
+				itemAtas.style.left = `${dX-2*myBG.x}px`;
+				itemAtas.style.top = `${dY-2*myBG.y}px`;
 			}else{
 				dX = Math.max(2*myBG.x,dX);
 				dY = Math.max(2*myBG.y,dY);
