@@ -243,8 +243,8 @@
 			if (e.type === 'touchstart') {
 				e.preventDefault(); 
 				const touch = e.targetTouches[0];
-				offsetX = touch.clientX/fixscale - item.getBoundingClientRect().left;
-				offsetY = touch.clientY/fixscale - item.getBoundingClientRect().top;
+				offsetX = touch.clientX - item.getBoundingClientRect().left;
+				offsetY = touch.clientY - item.getBoundingClientRect().top;
 			} else {
 				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
 				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
@@ -274,8 +274,8 @@
 				const touch = e.targetTouches[0];
 				currentX = touch.clientX;
 				currentY = touch.clientY;
-				dX = (currentX/fixscale - offsetX+myBG.x);
-				dY = (currentY/fixscale - offsetY+myBG.y);
+				dX = (currentX - offsetX+myBG.x);
+				dY = (currentY - offsetY+myBG.y);
 			} else {
 				currentX = e.clientX;
 				currentY = e.clientY;
@@ -310,10 +310,10 @@
 			// Update element position
 			
 			if (e.type === 'touchmove') {
-				item.style.left = `${dX-2*myBG.x}px`;
-				item.style.top = `${dY-2*myBG.x}px`;
-				itemAtas.style.left = `${dX-2*myBG.x}px`;
-				itemAtas.style.top = `${dY}-2*myBG.xpx`;
+				item.style.left = `${dX-1*myBG.x}px`;
+				item.style.top = `${dY-1*myBG.x}px`;
+				itemAtas.style.left = `${dX-1*myBG.x}px`;
+				itemAtas.style.top = `${dY}-1*myBG.xpx`;
 			}else{
 				item.style.left = `${dX-2*myBG.x}px`;
 				item.style.top = `${dY-2*myBG.y}px`;
