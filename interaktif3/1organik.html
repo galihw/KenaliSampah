@@ -302,8 +302,8 @@
 				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
 				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
 				y1 = y0+hh;
-				ff1 = dX>x0 && dX<x1;
-				ff2 = dY>y0 && dY<y1;
+				ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
+				ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
 				fff = ff1 && ff2;
 				item.style.left = `${dX-2*myBG.x}px`;
 				item.style.top = `${dY-2*myBG.y}px`;
