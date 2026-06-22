@@ -292,20 +292,19 @@
 			//periksa
 			var x0,ww,x1,y0,hh,y1,ff1,ff2,fff
 			if (e.type === 'touchmove') {
-				dX = Math.max(0,dX);
-				dY = Math.max(0,dY);
-				dX = Math.min(dX,myBG.offsetWidth-item.width);
-				dY = Math.min(dY,myBG.offsetHeight-item.height);
+				//dX = Math.max(0,dX);
+				//dY = Math.max(0,dY);
+				//dX = Math.min(dX,myBG.offsetWidth-item.width);
+				//dY = Math.min(dY,myBG.offsetHeight-item.height);
 				x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
 				ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
 				x1 = x0+ww;
 				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
 				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
 				y1 = y0+hh;
-				//ff1 = dX>x0 && dX<x1;
-				//ff2 = dY>y0 && dY<y1;
-				//fff = ff1 && ff2;
-				fff=true;
+				ff1 = dX>x0 && dX<x1;
+				ff2 = dY>y0 && dY<y1;
+				fff = ff1 && ff2;
 				item.style.left = `${dX-2*myBG.x}px`;
 				item.style.top = `${dY-2*myBG.y}px`;
 				itemAtas.style.left = `${dX-2*myBG.x}px`;
