@@ -279,29 +279,46 @@
 			dY = Math.min(dY,2*myBG.y+myBG.offsetHeight-item.height);
 			
 			dT=null;
-			//periksa
-			var x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
-			var ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
-			var x1 = x0+ww;
-			var y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
-			var hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
-			var y1 = y0+hh;
-			var ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
-			var ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
-			var fff = ff1 && ff2;
-			if(fff){
-				dT = item;
-			}
-			
-			// Update element position
-			item.style.left = `${dX-2*myBG.x}px`;
-			item.style.top = `${dY-2*myBG.y}px`;
+			var x0,ww,x1,y0,hh,y1,ff1,ff2,fff
 			if (e.type === 'touchmove') {
+				//dX = Math.max(0,dX);
+				//dY = Math.max(0,dY);
+				//dX = Math.min(dX,myBG.offsetWidth-item.width);
+				//dY = Math.min(dY,myBG.offsetHeight-item.height);
+				x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
+				ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
+				x1 = x0+ww;
+				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
+				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
+				y1 = y0+hh;
+				ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
+				ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
+				fff = ff1 && ff2;
+				item.style.left = `${dX-2*myBG.x}px`;
+				item.style.top = `${dY-2*myBG.y}px`;
 				itemAtas.style.left = `${dX-2*myBG.x}px`;
 				itemAtas.style.top = `${dY-2*myBG.y}px`;
 			}else{
+				dX = Math.max(2*myBG.x,dX);
+				dY = Math.max(2*myBG.y,dY);
+				dX = Math.min(dX,2*myBG.x+myBG.offsetWidth-item.width);
+				dY = Math.min(dY,2*myBG.y+myBG.offsetHeight-item.height);
+				x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
+				ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
+				x1 = x0+ww;
+				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
+				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
+				y1 = y0+hh;
+				ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
+				ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
+				fff = ff1 && ff2;
+				item.style.left = `${dX-2*myBG.x}px`;
+				item.style.top = `${dY-2*myBG.y}px`;
 				itemAtas.style.left = `${dX-2*myBG.x}px`;
 				itemAtas.style.top = `${dY-2*myBG.y}px`;
+			}
+			if(fff){
+				dT = item;
 			}
 			itemAtas.style.visibility = "visible";
 			itemAtas.style.display = "";
