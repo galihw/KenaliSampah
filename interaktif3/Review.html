@@ -13,7 +13,7 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: relative;
+			position: absolute
 		}
 		.klikbtn {
 			position: absolute;
@@ -44,16 +44,22 @@
 	</style>
 </head>
 <body>
-	<div class ="bg" id="buka"></div>
-	<div class="klikbtn" id="lanjut" style="width: 100px; height: 40px;"></div>
-	<div class="klikbtn" id="tidak" style="width: 100px; height: 40px;"></div>
-	<div class="teks" id="teks1"></div>
-	<div class="teks" id="teks2"></div>
-	<div class="teks" id="teks3"></div>
+	<div class ="bg" id="buka">
+		<div class="klikbtn" id="lanjut" style="width: 100px; height: 40px;"></div>
+		<div class="klikbtn" id="tidak" style="width: 100px; height: 40px;"></div>
+		<div class="teks" id="teks1"></div>
+		<div class="teks" id="teks2"></div>
+		<div class="teks" id="teks3"></div>
+	</div>
 	<script>
 		const myBG = document.getElementById("buka");
-		myBG.x = myBG.getBoundingClientRect().x;
-		myBG.y = myBG.getBoundingClientRect().y;
+		var scl = 1;
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
 		myBG.style.backgroundImage = "url(img/review.png)";
 		var xy = [[590,400],[690,400]];
 		document.getElementById("lanjut").addEventListener("click", function() {
@@ -63,13 +69,13 @@
 			location.href = "../beranda/beranda.html";
 		});
 		document.getElementById("lanjut").style.position =  "absolute";
-		document.getElementById("lanjut").style.left = ''+(myBG.x+xy[0][0])+'px';
-		document.getElementById("lanjut").style.top = ''+(myBG.y+xy[0][1])+'px';
+		document.getElementById("lanjut").style.left = ''+(xy[0][0])+'px';
+		document.getElementById("lanjut").style.top = ''+(xy[0][1])+'px';
 		document.getElementById("lanjut").style.zIndex = ""+(201)+"";
 		document.getElementById("lanjut").style.opacity = "0"; // mengatur hilang
 		document.getElementById("tidak").style.position =  "absolute";
-		document.getElementById("tidak").style.left = ''+(myBG.x+xy[1][0])+'px';
-		document.getElementById("tidak").style.top = ''+(myBG.y+xy[1][1])+'px';
+		document.getElementById("tidak").style.left = ''+(xy[1][0])+'px';
+		document.getElementById("tidak").style.top = ''+(xy[1][1])+'px';
 		document.getElementById("tidak").style.zIndex = ""+(202)+"";
 		document.getElementById("tidak").style.opacity = "0"; // mengatur hilang
 		
@@ -119,12 +125,12 @@
 		
 		var Teks1 = document.getElementById('teks1');
 		var Teks2 = document.getElementById('teks2');
-		document.getElementById("teks1").style.left = ''+(myBG.x+540)+'px';
-		document.getElementById("teks1").style.top = ''+(myBG.y+168)+'px';
-		document.getElementById("teks2").style.left = ''+(myBG.x+540)+'px';
-		document.getElementById("teks2").style.top = ''+(myBG.y+168+60+7)+'px';
-		document.getElementById("teks3").style.left = ''+(myBG.x+540)+'px';
-		document.getElementById("teks3").style.top = ''+(myBG.y+168+2*(60+7))+'px';
+		document.getElementById("teks1").style.left = ''+(540)+'px';
+		document.getElementById("teks1").style.top = ''+(168)+'px';
+		document.getElementById("teks2").style.left = ''+(540)+'px';
+		document.getElementById("teks2").style.top = ''+(168+60+7)+'px';
+		document.getElementById("teks3").style.left = ''+(540)+'px';
+		document.getElementById("teks3").style.top = ''+(168+2*(60+7))+'px';
 		document.getElementById("teks1").innerHTML = NilaiA;
 		document.getElementById("teks2").innerHTML = NilaiB;
 		document.getElementById("teks3").innerHTML = NilaiC;
@@ -142,27 +148,29 @@
 		});
 
 		function UbahWindow(xc,yc){
-			myBG.x = myBG.getBoundingClientRect().x;
-			myBG.y = myBG.getBoundingClientRect().y;
-			document.getElementById("lanjut").style.left = ''+(myBG.x+xy[0][0] + xc)+'px';
-			document.getElementById("lanjut").style.top = ''+(myBG.y+xy[0][1] + yc)+'px';
-			document.getElementById("tidak").style.left = ''+(myBG.x+xy[1][0] + xc)+'px';
-			document.getElementById("tidak").style.top = ''+(myBG.y+xy[1][1] + yc)+'px';
-			
-			document.getElementById("teks1").style.left = ''+(myBG.x+540 + xc)+'px';
-			document.getElementById("teks1").style.top = ''+(myBG.y+168 + yc)+'px';
-			document.getElementById("teks2").style.left = ''+(myBG.x+540 + xc)+'px';
-			document.getElementById("teks2").style.top = ''+(myBG.y+168+60+4 + yc)+'px';
-			document.getElementById("teks3").style.left = ''+(myBG.x+540 + xc)+'px';
-			document.getElementById("teks3").style.top = ''+(myBG.y+168+2*(60+4) + yc)+'px';
-			
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			document.getElementById("lanjut").style.left = ''+(xy[0][0])+'px';
+			document.getElementById("lanjut").style.top = ''+(xy[0][1])+'px';
+			document.getElementById("tidak").style.left = ''+(xy[1][0])+'px';
+			document.getElementById("tidak").style.top = ''+(xy[1][1])+'px';
+			document.getElementById("teks1").style.left = ''+(540)+'px';
+			document.getElementById("teks1").style.top = ''+(168)+'px';
+			document.getElementById("teks2").style.left = ''+(540)+'px';
+			document.getElementById("teks2").style.top = ''+(168+60+7)+'px';
+			document.getElementById("teks3").style.left = ''+(540)+'px';
+			document.getElementById("teks3").style.top = ''+(168+2*(60+7))+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;
 			let tinggiJendela = window.innerHeight;
 			var xscale = lebarJendela/840;
 			var yscale = tinggiJendela/472;
-			var scl = 0.95*Math.min(xscale,yscale);
+			scl = 0.95*Math.min(xscale,yscale);
 			fixscale = scl;
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
