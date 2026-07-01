@@ -186,7 +186,6 @@
 	</script>
 	<script>
 		var selectedEl = null;
-		const handleFunc = null;
 		const controller = new AbortController();
 		const { signal } = controller;
 
@@ -212,9 +211,8 @@
 			var ymin = 0;
 			let startX=0, startY=0, initialX=0, initialY=0;
 			let newX=0, newY=0;
-			handleDrag = (e) => dragMouseDown;
 			el.addEventListener('mousedown', dragMouseDown,{ signal });
-			el.addEventListener('touchstart', dragMouseDown, { passive: false },{ signal });
+			el.addEventListener('touchstart', dragMouseDown,{ signal }, { passive: false });
 			
 			
 			el.ff = false;
