@@ -14,7 +14,17 @@
 			width: 100%;
 			height: 472px;
 			position: absolute;
-		}
+		} 
+		.areaDrop {
+			position: absolute;
+			width: 840px;
+			height: 160px;
+			display: inline-block;
+			margin: 0px;
+			vertical-align: top;
+			/*background-color: #3498db;*/
+			opacity: 1;
+		}	
 		.box {
 			position: absolute;
 			width: 280px;
@@ -28,20 +38,6 @@
 		.redbox {
 			background-color: #3498db;
 		}	
-		.layar {
-			position: absolute;
-			max-width: 842px; /* Lebar maksimal halaman */
-			margin: 0 auto;    /*Otomatis rata tengah kiri-kanan */
-			width: 100%; 	  /* width: 842px; */
-			height: 195px;
-			/*background-color: red;*/
-		}
-		.inlayar {
-			max-width: 800px; /* Lebar maksimal halaman */
-			margin: 0 auto;   /* Otomatis rata tengah kiri-kanan */
-			height: 195px;
-			/*background-color: blue;*/
-		}
 		.namabenda {
 			position: absolute;
 			/*max-width: 842px;  Lebar maksimal halaman */
@@ -83,25 +79,34 @@
 			user-select: none;
 			-webkit-user-select: none;
 		}
+		.terseleksi {
+			box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.dropbenar {
+			box-shadow: inset 0 0 20px 5px #ffff00;
+			user-select: none;
+			-webkit-user-select: none;
+		}
 	</style>
 </head>
 <body>
 	<div class="bg" id="bg">
-		<div class="layar" id="layar">
-			<img id="drag1" class="draggable">
-			<img id="drag2" class="draggable">
-			<img id="drag3" class="draggable">
-			<img id="drag4" class="draggable">
-			<img id="drag5" class="draggable">
-			<img id="drag6" class="draggable">
-			<img id="drag7" class="draggable">
-			<img id="drag8" class="draggable">
-			<img id="drag9" class="draggable">
-			<img id="drag10" class="draggable">
-			<img id="drag11" class="draggable">
-			<img id="drag12" class="draggable">
-			<img id="drag13" class="draggable">
-		</div>
+		<img id="drag1" class="draggable">
+		<img id="drag2" class="draggable">
+		<img id="drag3" class="draggable">
+		<img id="drag4" class="draggable">
+		<img id="drag5" class="draggable">
+		<img id="drag6" class="draggable">
+		<img id="drag7" class="draggable">
+		<img id="drag8" class="draggable">
+		<img id="drag9" class="draggable">
+		<img id="drag10" class="draggable">
+		<img id="drag11" class="draggable">
+		<img id="drag12" class="draggable">
+		<img id="drag13" class="draggable">
+		<div class="areaDrop" id="areaDrop"></div>
 		<div class="box" id="box1"></div>
 		<div class="box" id="box2"></div>
 		<div class="box" id="box3"></div>
@@ -155,10 +160,11 @@
 	</script>
 	
 	<script>
-		const dragText = document.getElementById('textBenda');
-		const layar = document.getElementById('layar');
 		const myBG = document.getElementById('bg');
+		const dragText = document.getElementById('textBenda');
 		const btnLanjut = document.getElementById("lanjut");
+		const areaDrop = document.getElementById("areaDrop");
+		const atas = document.getElementById("atas");
 		btnLanjut.style.display = "none";//
 		let lebarJendela = window.innerWidth;
 		let tinggiJendela = window.innerHeight;
@@ -167,52 +173,166 @@
 		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 		myBG.style.left = ''+(myBG.x)+'px';
 		myBG.style.top = ''+(myBG.y)+'px';
-		layar.style.left = 0+'px';
-		layar.style.top = 50+'px';
+		myBG.w = 840;
+		myBG.h = 472;
 		btnLanjut.style.left = ''+(650)+'px';
 		btnLanjut.style.top = ''+(260)+'px';
 		dragText.style.left = 0+'px';
 		dragText.style.top = 255+'px';
+		var xydrop = [0,312];
+		areaDrop.x = xydrop[0]; areaDrop.y = xydrop[1]; areaDrop.w = areaDrop.offsetWidth; areaDrop.h = areaDrop.offsetHeight;
+		var whimg = [[50,42],[50,32],[50,25],[50,44],[47,50],[50,27],[17,50],[28,50],[37,50],[50,50],[50,34],[50,41],[50,26]];
 		
-		//var item = null
-		var item = document.querySelector('.draggable');
-		const itemAtas = document.getElementById('atas');
-		itemAtas.style.visibility = "hidden";
-		function startDrag(e) {
-			// Prevent mobile screen scrolling while dragging
-			const targetElement = e.target || e.srcElement;
-			item = targetElement;
-			if (e.type === 'touchstart') {
-				e.preventDefault(); 
-				const touch = e.targetTouches[0];
-				offsetX = touch.clientX - item.getBoundingClientRect().left;
-				offsetY = touch.clientY - item.getBoundingClientRect().top;
-			} else {
-				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
-				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
-			}
-			item.style.cursor = 'grabbing';
-			item.dataset.dragging = 'true';
-			
-			itemAtas.src = item.src;
-			itemAtas.style.visibility = "hidden";
-			itemAtas.style.cursor = 'grabbing';
-			itemAtas.dataset.dragging = 'true';
-			dragText.innerHTML = "Nama Benda = "+item.name;
-			
-			if (e.type === 'touchmove') {
-				const touch = e.targetTouches[0];
-				currentX = touch.clientX;
-				currentY = touch.clientY;
-			} else {
-				currentX = e.clientX;
-				currentY = e.clientY;
-			}
-			
-		}
 	</script>
-	
-	
+	<script>
+		var selectedEl = null;
+		const handleFunc = null;
+		const controller = new AbortController();
+		const { signal } = controller;
+
+        function selectElement(el) {
+            UnselectElement(el)
+            selectedEl = el;
+            //selectedEl.classList.add('terseleksi');
+        }
+        function UnselectElement(el) {
+            if (selectedEl) {
+                //selectedEl.classList.remove('terseleksi');
+                //selectedEl.classList.remove('dropbenar');
+				selectedEl = null;
+            }
+			atas.style.display = "none";
+        }
+		function setupDraggable(el,mc,mcdrop) {
+			//var xmax = (mc.offsetWidth-el.offsetWidth);
+			//var ymax = (mc.offsetHeight-el.offsetHeight);
+			var xmax = (myBG.w-el.w);
+			var ymax = (myBG.h-el.h);
+			var xmin = 0;
+			var ymin = 0;
+			let startX=0, startY=0, initialX=0, initialY=0;
+			let newX=0, newY=0;
+			handleDrag = (e) => dragMouseDown;
+			el.addEventListener('mousedown', dragMouseDown,{ signal });
+			el.addEventListener('touchstart', dragMouseDown, { passive: false },{ signal });
+			
+			
+			el.ff = false;
+            function dragMouseDown(e) {
+                e.preventDefault();
+                selectElement(el);
+				if(e.type==="touchstart"){
+					startX = e.touches[0].clientX;
+					startY = e.touches[0].clientY;
+					initialX = el.offsetLeft;
+					initialY = el.offsetTop;
+					document.addEventListener('touchend', dragMouseUp);
+					document.addEventListener('touchmove', dragMouseMove, { passive: false });
+				}else{
+					startX = e.clientX;
+					startY = e.clientY;
+					initialX = el.offsetLeft;
+					initialY = el.offsetTop;
+					document.addEventListener('mouseup', dragMouseUp);
+					document.addEventListener('mousemove', dragMouseMove);
+				}
+				el.inbox = 0;
+            }
+
+            function dragMouseMove(e) {
+                e.preventDefault();
+				let deltaX=0;
+				let deltaY=0;
+				if(e.type==="touchmove"){
+					deltaX = (e.touches[0].clientX - startX) / scl;
+					deltaY = (e.touches[0].clientY - startY) / scl;
+				}else{
+					deltaX = (e.clientX - startX) / scl;
+					deltaY = (e.clientY - startY) / scl;
+				}
+				newX = initialX + deltaX;
+				newY = initialY + deltaY;
+				newX = Math.max(xmin,Math.min(xmax,newX));
+				newY = Math.max(ymin,Math.min(ymax,newY));
+				el.style.left = newX + "px";
+				el.style.top = newY + "px";
+				atas.style.display = "";
+				atas.src = el.src;
+				atas.style.left = newX + "px";
+				atas.style.top = newY + "px";
+				el.ff = newX >= mcdrop.x-el.w/2 &&	newX <= mcdrop.x+mcdrop.w-el.w/2 && newY >= mcdrop.y-el.h/2 && newY <= mcdrop.y+mcdrop.h-el.h/2;
+				if(el.ff){
+					//el.classList.remove('terseleksi');
+					//el.classList.add('dropbenar');
+				}else{
+					//el.classList.add('terseleksi');
+					//el.classList.remove('dropbenar');
+				}
+            }
+			
+            function dragMouseUp() {
+                document.removeEventListener('mouseup', dragMouseUp);
+                document.removeEventListener('mousemove', dragMouseMove);
+                document.removeEventListener('touchend', dragMouseUp);
+                document.removeEventListener('touchmove', dragMouseMove);
+				CekDrop();
+            }
+			function CekDrop() {
+				//
+				if(el.ff && selectedEl){
+					//console.log("benar");
+					var ifix = Math.ceil(newX/280);
+					//console.log("ifix =  "+ifix
+					el.inbox = ifix;
+					DaftarIsiImg();
+				}else{
+					//console.log("salah");
+					el.ff = false;
+					el.style.left = el.x0+'px';
+					el.style.top = el.y0+'px';
+					el.xx = el.x0;
+					el.yy = el.y0;
+					UnselectElement(el);
+				}
+				//XYbenda();
+				UnselectElement(el);
+			}
+        }
+	</script>			
+	<script>
+		function DaftarIsiImg(){
+			var ff = true;
+			var isinama = [[],[],[]];
+			var ctisi = 0;
+			
+			for(i=1;i<=13;i++){
+				//console.log(ARimg[i-1].inbox);
+				ff = ff && (ARimg[i-1].inbox==ARimg[i-1].fixinbox);
+			}
+			
+			if(ff){
+				// semua benar
+				// jika sudah selesai semua
+				dragText.innerHTML = "Good Job! \u{1F44D}";
+				for (var i=1;i<=nn;i++){
+					controller.abort();
+					ARimg[i-1].style.cursor = "default";
+				}
+				localStorage.setItem("Bsalah", Bsalah);
+				btnLanjut.style.display = "";
+			}else{
+				if(!memulai){
+					memulai=true
+					Bsalah = 0;
+				}
+				if(ctisi==13){
+					dragText.innerHTML = "Ups ... Ada yang belum tepat!";
+					Bsalah++;
+				}
+				
+			}
+		}
+	</script>	
 	<script>
 		function RandomMyArray(Arr){
 			for (var i=0; i<Arr.length; i++){
@@ -244,29 +364,18 @@
 		centerTextDiv(dragText);
 		
 	</script>
-	
-	
-	
 	<script>		
 		var ntot = 16*3;//64;
 		var ARmybox = [];
 		var ARno = []
-		var inlayar = document.createElement('div');
-		inlayar.classList.add("inlayar");
-		layar.appendChild(inlayar);
+		var Sediaxy = [];
+		var kol=0,bar=0;
 		for (var i=1;i<=ntot;i++){
-			var myBox = document.createElement('div');
-			myBox.style.width = "50px";
-			myBox.style.height = "50px";
-			myBox.style.display = "inline-block";
-			myBox.style.margin = "0px";
-			inlayar.appendChild(myBox);
-			ARmybox.push(myBox);
-			ARno[i-1]=i-1;
-			ARmybox[i-1].x = myBox.style.left;
-			ARmybox[i-1].y = myBox.style.top;
+			kol = Math.ceil(i/16);
+			bar = i-16*(kol-1);
+			Sediaxy[i-1] = [20+50*(bar-1) , 60+50*(kol-1)];
 		}
-		ARno = RandomMyArray(ARno);
+		Sediaxy = RandomMyArray(Sediaxy);
 		
 		var nn = 13;
 		var ARimg = [];
@@ -277,34 +386,33 @@
 		}
 		for (var i=1;i<=nn;i++){
 			ARimg[i-1].src = "img/kecil"+i+".png";
-			ARimg[i-1].style.position = 'fixed';
 			ARimg[i-1].style.zIndex = ""+(200+i)+"";
-			ARmybox[ARno[i-1]].appendChild(ARimg[i-1]);
-			ARimg[i-1].nn = ARno[i-1];
-			ARimg[i-1].x0 = ARimg[i-1].getBoundingClientRect().left;
-			ARimg[i-1].y0 = ARimg[i-1].getBoundingClientRect().top;
+			ARimg[i-1].x0 = Sediaxy[i-1][0];
+			ARimg[i-1].y0 = Sediaxy[i-1][1];
+			ARimg[i-1].nn = i;
+			ARimg[i-1].name=nama[i-1];
+			ARimg[i-1].w = whimg[i-1][0];
+			ARimg[i-1].h = whimg[i-1][1];
+			ARimg[i-1].inbox = 0;
+			
+			if(i<=6)		ARimg[i-1].fixinbox = 1;
+			else if(i<=10)	ARimg[i-1].fixinbox = 2;
+			else 			ARimg[i-1].fixinbox = 3;
+			
+			ARimg[i-1].style.left = Sediaxy[i-1][0]+'px';
+			ARimg[i-1].style.top = Sediaxy[i-1][1]+'px'; 
 		}
 		
-		var warnaBG = ["#00ff00","#00c1c1","#f2aa1d"]
-		var arteks = ["sampah 1","sampah 2","sampah 3"]
+		var warnaBG = ["#00ff00","#00c1c1","#f2aa1d"];
 		for (var i=1;i<=3;i++){
-			ARboximg.push(document.getElementById('box'+i))
-		}
-			
-		for (var i=1;i<=3;i++){
+			ARboximg[i-1] = document.getElementById('box'+i)
 			ARboximg[i-1].style.zIndex = ""+(100+i)+"";
 			ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
 			ARboximg[i-1].style.top = ''+(312)+'px';
 		}
+		
 		for (var i=1;i<=nn;i++){
-			ARimg[i-1].name=nama[i-1];
-			ARimg[i-1].addEventListener('mousedown', startDrag);
-			ARimg[i-1].addEventListener('touchstart', startDrag, { passive: false });
-			
-			const rect = ARimg[i-1].getBoundingClientRect();
-			ARimg[i-1].xAwal = ARimg[i-1].getBoundingClientRect().left;
-			ARimg[i-1].yAwal = ARimg[i-1].getBoundingClientRect().top;
-			//console.log("Posisi X awal dari gambar:", ARimg[i-1].xAwal, ARimg[i-1].yAwal);
+			setupDraggable(ARimg[i-1], myBG, areaDrop);
 		}
 	</script>
 	<script>
@@ -319,157 +427,6 @@
 		
 	</script>
 	<script>
-		//const item = document.querySelector('.draggable');
-
-		let offsetX = 0;
-		let offsetY = 0;
-		var dT=null;
-
-		// -- MOUSE EVENTS (Desktop) --
-		//item.addEventListener('mousedown', startDrag);
-		document.addEventListener('mousemove', moveDrag);
-		document.addEventListener('mouseup', stopDrag);
-
-		// -- TOUCH EVENTS (Mobile/Tablet) --
-		//item.addEventListener('touchstart', startDrag, { passive: false });
-		document.addEventListener('touchmove', moveDrag, { passive: false });
-		document.addEventListener('touchend', stopDrag);
-
-		function moveDrag(e) {
-			if (item.dataset.dragging !== 'true') return;
-			e.preventDefault();
-
-			let currentX, currentY;
-			var dX,dY
-			if (e.type === 'touchmove') {
-				const touch = e.targetTouches[0];
-				currentX = touch.clientX;
-				currentY = touch.clientY;
-				dX = (currentX - offsetX+myBG.x);
-				dY = (currentY - offsetY+myBG.y);
-			} else {
-				currentX = e.clientX;
-				currentY = e.clientY;
-				dX = (currentX/fixscale - offsetX+myBG.x);
-				dY = (currentY/fixscale - offsetY+myBG.y);
-			}
-			dragText.innerHTML = "Nama Benda = "+item.name;
-				
-			// Update element position
-			lebarJendela = window.innerWidth;
-			tinggiJendela = window.innerHeight;
-			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
-			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
-			//var dX = (currentX/fixscale - offsetX+myBG.x);
-			//var dY = (currentY/fixscale - offsetY+myBG.y);
-			dX = Math.max(2*myBG.x,dX);
-			dY = Math.max(2*myBG.y,dY);
-			dX = Math.min(dX,2*myBG.x+myBG.offsetWidth-item.width);
-			dY = Math.min(dY,2*myBG.y+myBG.offsetHeight-item.height);
-			
-			
-			//console.log(item.width,item.height)
-			//var dX = (currentX - offsetX); //asli
-			//var dY = (currentY - offsetY); //asli
-			item.style.position = 'fixed';
-			item.style.left = `${dX-myBG.x}px`;
-			item.style.top = `${dY-myBG.y}px`;
-			if (e.type === 'touchmove') {
-				itemAtas.style.left = `${dX-2*myBG.x}px`;
-				itemAtas.style.top = `${dY-2*myBG.y}px`;
-			}else{
-				itemAtas.style.left = `${dX-2*myBG.x}px`;
-				itemAtas.style.top = `${dY-2*myBG.y}px`;
-			}
-			itemAtas.style.visibility = "visible";
-			dT=null;
-			for(var i=1;i<=3;i++){
-				ARboximg[i-1].style.backgroundColor="transparent";
-				var x0 = ARboximg[i-1].getBoundingClientRect().x;
-				var ww = ARboximg[i-1].offsetWidth-item.offsetWidth/2;
-				var x1 = x0+ww;
-				var y0 = ARboximg[i-1].getBoundingClientRect().y;
-				var hh = ARboximg[i-1].offsetHeight-item.offsetHeight/2;
-				var y1 = y0+hh;
-				var ff1 = dX-myBG.x>x0 && dX-myBG.x<x1;
-				var ff2 = dY-myBG.y>y0 && dY-myBG.y<y1;
-				var fff = ff1 && ff2;
-				if(fff){
-					dT = ARboximg[i-1];
-					ARboximg[i-1].style.backgroundColor="rgba(0, 0, 0, 0.5)";
-				}
-			}
-		}
-
-		function stopDrag(e) {
-			if (item.dataset.dragging !== 'true') return;
-			item.dataset.dragging = 'false';
-
-			// Hide the item briefly to see what is underneath it
-			item.style.display = 'none';
-			item.style.display = 'block';
-			
-			dragText.innerHTML = "Nama Benda = ...";
-			
-			// Check if target is your valid drop container
-			if (dT) {
-				//dT.style.opacity = "0.1";
-				dT.style.backgroundColor="transparent";
-				dT.appendChild(item);
-				item.style.position = 'static';
-				item.style.left = '0px';
-				item.style.top = '0px';
-				item.style.float = "left";
-				
-				DaftarIsiImg();
-			}else{
-				item.style.left = ''+item.xAwal+'px';
-				item.style.top = ''+item.yAwal+'px';
-				item.style.position = 'static';
-				ARmybox[item.nn].appendChild(item);
-			}
-			itemAtas.style.visibility = "hidden";
-		}
-		function DaftarIsiImg(){
-			var ff = true;
-			var isinama = [[],[],[]];
-			var ctisi = 0;
-			for(j=0;j<3;j++){
-				const anakElemen = ARboximg[j].children;
-				for (let i = 0; i < anakElemen.length; i++) {
-					if (anakElemen[i].tagName.toLowerCase() === 'img') {
-						isinama[j].push(anakElemen[i].name);
-						ctisi++;
-					}
-				}
-				isinama[j].sort();
-				ff = ff && arraysAreEqual(namatrue[j], isinama[j]);
-			}
-			if(ff){
-				// semua benar
-				// jika sudah selesai semua
-				dragText.innerHTML = "Good Job! \u{1F44D}";
-				for (var i=1;i<=nn;i++){
-					ARimg[i-1].removeEventListener('mousedown', startDrag);
-					ARimg[i-1].removeEventListener('touchstart', startDrag, { passive: false });
-				}
-				localStorage.setItem("Bsalah", Bsalah);
-				btnLanjut.style.display = "";
-			}else{
-				if(!memulai){
-					memulai=true
-					Bsalah = 0;
-				}
-				if(ctisi==13){
-					dragText.innerHTML = "Ups ... Ada yang belum tepat!";
-					Bsalah++;
-				}
-				
-			}
-		}
-		
-	</script>
-	<script>
 		var fixscale = 1;
 		var fixzoom
 		document.body.style.backgroundColor = "black";
@@ -478,7 +435,7 @@
 		});
 	</script>
 	<script>
-		function UbahWindow(xc,yc){
+		function XYbenda(){
 			lebarJendela = window.innerWidth;
 			tinggiJendela = window.innerHeight;
 			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
@@ -489,8 +446,6 @@
 				ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
 				ARboximg[i-1].style.top = ''+(312)+'px';
 			}
-			layar.style.left = 0+'px';
-			layar.style.top = 50+'px';
 			btnLanjut.style.left = ''+(650)+'px';
 			btnLanjut.style.top = ''+(260)+'px';
 			dragText.style.left = 0+'px';
@@ -505,7 +460,7 @@
 			fixscale = scl;
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
-			UbahWindow(0,0);
+			XYbenda();
 		}
 		
 		ZoomAll();
@@ -519,8 +474,6 @@
 			myBG.removeEventListener('click', handleClick);
 		}, 100);
 		
-		// Membaca ukuran pertama kali saat halaman dibuka
-		//window.dispatchEvent(new Event("resize"));
 	</script>
 </body>
 </html>
