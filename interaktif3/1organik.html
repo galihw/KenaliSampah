@@ -65,7 +65,7 @@
 			width: 174px; 
 			height: 165px; 
 			background-color: #ffff00;
-			opacity : 0;
+			opacity : 0.2;
 			user-select: none;
 			-webkit-user-select: none;
 		}
@@ -114,13 +114,23 @@
 			user-select: none;
 			-webkit-user-select: none;
 		}
+		.terseleksi {
+			box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.dropbenar {
+			box-shadow: inset 0 0 20px 5px #ffff00;
+			user-select: none;
+			-webkit-user-select: none;
+		}
 	</style>
 </head>
 <body>
 	<div class ="bg" id="bg">
 		<img class="areaHasil" id="hasil">
 		<div class="areaPotensi" id="potensi"></div>
-		<img class="areaDrop" id="drop">
+		<div class="areaDrop" id="drop"></div>
 		<div id="isibtn">
 			<img class="bawahbtn" id="bawah1">
 			<img class="bawahbtn" id="bawah2">
@@ -156,6 +166,8 @@
 		const cX = window.scrollX;
 		const cY = window.scrollY;
 		const myBG = document.getElementById("bg");
+		const drop = document.getElementById("drop");
+		const atas = document.getElementById("atas");
 		myBG.style.backgroundImage = "url(img/2anorganik.png)";
 		let lebarJendela = window.innerWidth;
 		let tinggiJendela = window.innerHeight;
@@ -164,12 +176,16 @@
 		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 		myBG.style.left = ''+(myBG.x)+'px';
 		myBG.style.top = ''+(myBG.y)+'px';
+		myBG.w = 840;
+		myBG.h = 472;
+		myBG.style.top = ''+(myBG.y)+'px';
 		var xybtn = [[65,147+0*70],[65,147+1*70],[65,147+2*70],[65,147+3*70]];
 		var xybawah = [[296,204.5],[296,204.5+20],[296,204.5+20*2],[296,204.5+20*3]]; // 265.5+30.5=296 // 199.5+5=204.5
 		var xydrop = [251,149];
+		drop.x = xydrop[0]; drop.y = xydrop[1]; drop.w = drop.offsetWidth; drop.h = drop.offsetHeight;
 		var xyhasil = [441,119];
 		var xypotensi = [441,292];
-		var xybubble = [353,366];
+		var xybubble = [351,365];
 		var xyisibubble = [353+62,366];
 		var xykembali = [715,420];
 		var arrData = [["Kulit semangka","img/Abig1.png","img/Asmall1.png",1],
@@ -180,6 +196,9 @@
 		arrData = RandomMyArray(arrData);
 		for(var i=1;i<=4;i++){
 			document.getElementById('tombol'+i).style.left = ''+xybtn[i-1][0]+'px';
+			document.getElementById('tombol'+i).style.top = ''+xybtn[i-1][1]+'px';
+			document.getElementById('tombol'+i).w = document.getElementById('tombol'+i).offsetWidth;
+			document.getElementById('tombol'+i).h = document.getElementById('tombol'+i).offsetHeight;
 			document.getElementById('tombol'+i).style.top = ''+xybtn[i-1][1]+'px';
 			document.getElementById('tombol'+i).src = arrData[i-1][1];
 			document.getElementById('tombol'+i).srckecil = arrData[i-1][2];
@@ -215,150 +234,121 @@
 		document.getElementById('isibubble').style.display = "none";////hilangkan dulu
 		document.getElementById('btnkembali').style.display = "none";////hilangkan dulu
 	</script>
-	<script>
-		for (var i=1;i<=4;i++){
-			document.getElementById('tombol'+i).addEventListener('mousedown', startDrag);
-			document.getElementById('tombol'+i).addEventListener('touchstart', startDrag, { passive: false });
-		}
-		
-		// -- MOUSE EVENTS (Desktop) --
-		//item.addEventListener('mousedown', startDrag);
-		document.addEventListener('mousemove', moveDrag);
-		document.addEventListener('mouseup', stopDrag);
 
-		// -- TOUCH EVENTS (Mobile/Tablet) --
-		//item.addEventListener('touchstart', startDrag, { passive: false });
-		document.addEventListener('touchmove', moveDrag, { passive: false });
-		document.addEventListener('touchend', stopDrag);
-		
-		var item = document.querySelector('.klikbtn');
-		const itemAtas = document.getElementById('atas');
-		//itemAtas.style.visibility = "hidden";
-		//itemAtas.style.visibility = "visible";
-		
-		function startDrag(e) {
-			// Prevent mobile screen scrolling while dragging
-			const targetElement = e.target || e.srcElement;
-			item = targetElement;
-			if (e.type === 'touchstart') {
-				e.preventDefault(); 
-				const touch = e.targetTouches[0];
-				offsetX = touch.clientX - item.getBoundingClientRect().left;
-				offsetY = touch.clientY - item.getBoundingClientRect().top;
-			} else {
-				offsetX = e.clientX/fixscale - item.getBoundingClientRect().left;
-				offsetY = e.clientY/fixscale - item.getBoundingClientRect().top;
+	<script>
+		var selectedEl = null;
+        function selectElement(el) {
+            UnselectElement(el)
+            selectedEl = el;
+            selectedEl.classList.add('terseleksi');
+        }
+        function UnselectElement(el) {
+            if (selectedEl) {
+                selectedEl.classList.remove('terseleksi');
+                selectedEl.classList.remove('dropbenar');
+				selectedEl = null;
+            }
+			atas.style.display = "none";
+        }
+		function setupDraggable(el,mc,mcdrop) {
+			//var xmax = (mc.offsetWidth-el.offsetWidth);
+			//var ymax = (mc.offsetHeight-el.offsetHeight);
+			var xmax = (myBG.w-el.offsetWidth);
+			var ymax = (myBG.h-el.offsetHeight);
+			var xmin = 0;
+			var ymin = 0;
+			let startX=0, startY=0, initialX=0, initialY=0;
+			let newX=0, newY=0;
+            el.addEventListener('mousedown', dragMouseDown);
+            el.addEventListener('touchstart', dragMouseDown, { passive: false });
+			
+			el.ff = false;
+            function dragMouseDown(e) {
+                e.preventDefault();
+                selectElement(el);
+				if(e.type==="touchstart"){
+					startX = e.touches[0].clientX;
+					startY = e.touches[0].clientY;
+					initialX = el.offsetLeft;
+					initialY = el.offsetTop;
+					document.addEventListener('touchend', dragMouseUp);
+					document.addEventListener('touchmove', dragMouseMove, { passive: false });
+				}else{
+					startX = e.clientX;
+					startY = e.clientY;
+					initialX = el.offsetLeft;
+					initialY = el.offsetTop;
+					document.addEventListener('mouseup', dragMouseUp);
+					document.addEventListener('mousemove', dragMouseMove);
+				}
+				document.getElementById('bubble').style.display = "";
+				document.getElementById('isibubble').style.display = "";
+				document.getElementById('isibubble').innerHTML = el.nama
+            }
+
+            function dragMouseMove(e) {
+                e.preventDefault();
+				let deltaX=0;
+				let deltaY=0;
+				if(e.type==="touchmove"){
+					deltaX = (e.touches[0].clientX - startX) / scl;
+					deltaY = (e.touches[0].clientY - startY) / scl;
+				}else{
+					deltaX = (e.clientX - startX) / scl;
+					deltaY = (e.clientY - startY) / scl;
+				}
+				newX = initialX + deltaX;
+				newY = initialY + deltaY;
+				newX = Math.max(xmin,Math.min(xmax,newX));
+				newY = Math.max(ymin,Math.min(ymax,newY));
+				//el.x = newX;
+				//el.y = newY;
+				el.style.left = newX + "px";
+				el.style.top = newY + "px";
+				atas.style.display = "";
+				atas.src = el.src;
+				atas.style.left = newX + "px";
+				atas.style.top = newY + "px";
+				el.ff = newX >= mcdrop.x-el.w/2 &&	newX <= mcdrop.x+mcdrop.w-el.w/2 && newY >= mcdrop.y-el.h/2 && newY <= mcdrop.y+mcdrop.h-el.h/2;
+				if(el.ff){
+					el.classList.remove('terseleksi');
+					el.classList.add('dropbenar');
+				}else{
+					el.classList.add('terseleksi');
+					el.classList.remove('dropbenar');
+				}
+            }
+			
+            function dragMouseUp() {
+                document.removeEventListener('mouseup', dragMouseUp);
+                document.removeEventListener('mousemove', dragMouseMove);
+                document.removeEventListener('touchend', dragMouseUp);
+                document.removeEventListener('touchmove', dragMouseMove);
+				CekDrop();
+            }
+			function CekDrop() {
+				XYbenda();
+				if(el.ff && selectedEl){
+					console.log("benar");
+					el.sudah = true;
+					arFIFO.push(el);
+					el.style.display = "none"; //hilangkan kalau sudah
+					document.getElementById('bawah'+(arFIFO.length)).style.display = "";
+					document.getElementById('bawah'+arFIFO.length).src = arFIFO[arFIFO.length-1].srckecil;
+					DaftarIsiImg();
+				}else{
+					document.getElementById('bubble').style.display = "none";
+					document.getElementById('isibubble').style.display = "none";
+				}
+				UnselectElement(el);
+				
 			}
-			item.style.cursor = 'grabbing';
-			item.dataset.dragging = 'true';
-			
-			itemAtas.src = item.src;
-			itemAtas.style.visibility = "visible";
-			itemAtas.style.cursor = 'grabbing';
-			itemAtas.dataset.dragging = 'true';
-			document.getElementById('bubble').style.display = "";
-			document.getElementById('isibubble').style.display = "";
-			document.getElementById('isibubble').innerHTML = item.nama;
-		}
-		
-		
-		
-		
-		var dT=null;
-		function moveDrag(e) {
-			if (item.dataset.dragging !== 'true') return;
-			e.preventDefault();
-			let currentX, currentY;
-			var dX,dY
-			if (e.type === 'touchmove') {
-				const touch = e.targetTouches[0];
-				currentX = touch.clientX;
-				currentY = touch.clientY;
-				dX = (currentX - offsetX+myBG.x);
-				dY = (currentY - offsetY+myBG.y);
-			} else {
-				currentX = e.clientX;
-				currentY = e.clientY;
-				dX = (currentX/fixscale - offsetX+myBG.x);
-				dY = (currentY/fixscale - offsetY+myBG.y);
-			}
-			
-			lebarJendela = window.innerWidth;
-			tinggiJendela = window.innerHeight;
-			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
-			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
-			
-			dT=null;
-			//periksa
-			var x0,ww,x1,y0,hh,y1,ff1,ff2,fff
-			if (e.type === 'touchmove') {
-				//dX = Math.max(0,dX);
-				//dY = Math.max(0,dY);
-				//dX = Math.min(dX,myBG.offsetWidth-item.width);
-				//dY = Math.min(dY,myBG.offsetHeight-item.height);
-				x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
-				ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
-				x1 = x0+ww;
-				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
-				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
-				y1 = y0+hh;
-				ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
-				ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
-				fff = ff1 && ff2;
-				item.style.left = `${dX-2*myBG.x}px`;
-				item.style.top = `${dY-2*myBG.y}px`;
-				itemAtas.style.left = `${dX-2*myBG.x}px`;
-				itemAtas.style.top = `${dY-2*myBG.y}px`;
-			}else{
-				dX = Math.max(2*myBG.x,dX);
-				dY = Math.max(2*myBG.y,dY);
-				dX = Math.min(dX,2*myBG.x+myBG.offsetWidth-item.width);
-				dY = Math.min(dY,2*myBG.y+myBG.offsetHeight-item.height);
-				x0 = xydrop[0]-item.offsetWidth/2; // setengah ke kiri
-				ww = document.getElementById('drop').offsetWidth-item.offsetWidth/2;
-				x1 = x0+ww;
-				y0 = xydrop[1]-item.offsetHeight/2; // setengah ke atas
-				hh = document.getElementById('drop').offsetHeight-item.offsetHeight/2;
-				y1 = y0+hh;
-				ff1 = dX-2*myBG.x>x0 && dX-2*myBG.x<x1;
-				ff2 = dY-2*myBG.y>y0 && dY-2*myBG.y<y1;
-				fff = ff1 && ff2;
-				item.style.left = `${dX-2*myBG.x}px`;
-				item.style.top = `${dY-2*myBG.y}px`;
-				itemAtas.style.left = `${dX-2*myBG.x}px`;
-				itemAtas.style.top = `${dY-2*myBG.y}px`;
-			}
-			if(fff){
-				dT = item;
-			}
-			
-			// Update element position
-			
-			itemAtas.style.visibility = "visible";
-			itemAtas.style.display = "";
-		}
+        }
+	</script>	
+	<script>
 		var arFIFO = []; // masuk dulu keluar dulu
-		function stopDrag(e) {
-			if (item.dataset.dragging !== 'true') return;
-			item.dataset.dragging = 'false';
-			
-			if (dT) {
-				//sudah masuk sini//
-				item.sudah = true;
-				arFIFO.push(item);
-				item.style.display = "none"; //hilangkan kalau sudah
-				document.getElementById('bawah'+(arFIFO.length)).style.display = "";
-				document.getElementById('bawah'+arFIFO.length).src = arFIFO[arFIFO.length-1].srckecil;
-			}else{
-			}
-			item.style.left = item.x0;
-			item.style.top = item.y0;
-			itemAtas.style.left = itemAtas.x0;
-			itemAtas.style.top = itemAtas.y0;
-			itemAtas.style.display = "none";
-			document.getElementById('bubble').style.display = "none";
-			document.getElementById('isibubble').style.display = "none";
-			DaftarIsiImg()
+		for (var i=1;i<=4;i++){
+			setupDraggable(document.getElementById('tombol'+i), myBG, drop);
 		}
 		function DaftarIsiImg(){
 			var ctcoba = 0;
@@ -368,7 +358,6 @@
 				}
 			}
 			localStorage.setItem("Ccoba1", ctcoba);
-			
 			
 			if(ctcoba==4){
 				DataSini[0] = 1;
@@ -406,8 +395,7 @@
 		window.addEventListener('resize', () => {
 			ZoomAll();
 		});
-
-		function UbahWindow(xc,yc){
+		function XYbenda(){
 			lebarJendela = window.innerWidth;
 			tinggiJendela = window.innerHeight;
 			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
@@ -417,6 +405,7 @@
 			for(var i=1;i<=4;i++){
 				document.getElementById('tombol'+i).style.left = ''+xybtn[i-1][0]+'px';
 				document.getElementById('tombol'+i).style.top = ''+xybtn[i-1][1]+'px';
+				setupDraggable(document.getElementById('tombol'+i), myBG, drop);
 			}
 			document.getElementById('atas').style.left = ''+0+'px';
 			document.getElementById('atas').style.top = ''+0+'px';
@@ -444,7 +433,7 @@
 			fixscale = scl;
 			fixzoom = scl*100;
 			document.body.style.zoom = ""+fixzoom+"%";
-			UbahWindow(0,0);
+			XYbenda();
 		}
 		
 		ZoomAll();
