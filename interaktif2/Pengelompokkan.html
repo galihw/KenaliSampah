@@ -236,6 +236,7 @@
 					document.addEventListener('mouseup', dragMouseUp);
 					document.addEventListener('mousemove', dragMouseMove);
 				}
+				dragText.innerHTML = "Nama Benda = "+el.name;
 				el.inbox = 0;
             }
 
@@ -278,7 +279,7 @@
 				CekDrop();
             }
 			function CekDrop() {
-				//
+				dragText.innerHTML = "Nama Benda = ,,,";
 				if(el.ff && selectedEl){
 					//console.log("benar");
 					var ifix = Math.ceil(newX/280);
