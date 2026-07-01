@@ -327,9 +327,9 @@
 				CekDrop();
             }
 			function CekDrop() {
-				XYbenda();
+				//
 				if(el.ff && selectedEl){
-					console.log("benar");
+					//console.log("benar");
 					el.sudah = true;
 					arFIFO.push(el);
 					el.style.display = "none"; //hilangkan kalau sudah
@@ -337,11 +337,16 @@
 					document.getElementById('bawah'+arFIFO.length).src = arFIFO[arFIFO.length-1].srckecil;
 					DaftarIsiImg();
 				}else{
+					//console.log("salah");
 					document.getElementById('bubble').style.display = "none";
 					document.getElementById('isibubble').style.display = "none";
+					el.ff = false;
+					el.style.left = el.x0;
+					el.style.top = el.y0;
+					UnselectElement(el);
 				}
+				//XYbenda();
 				UnselectElement(el);
-				
 			}
         }
 	</script>	
