@@ -240,12 +240,12 @@
         function selectElement(el) {
             UnselectElement(el)
             selectedEl = el;
-            selectedEl.classList.add('terseleksi');
+            //selectedEl.classList.add('terseleksi');
         }
         function UnselectElement(el) {
             if (selectedEl) {
-                selectedEl.classList.remove('terseleksi');
-                selectedEl.classList.remove('dropbenar');
+                //selectedEl.classList.remove('terseleksi');
+                //selectedEl.classList.remove('dropbenar');
 				selectedEl = null;
             }
 			atas.style.display = "none";
@@ -311,11 +311,11 @@
 				atas.style.top = newY + "px";
 				el.ff = newX >= mcdrop.x-el.w/2 &&	newX <= mcdrop.x+mcdrop.w-el.w/2 && newY >= mcdrop.y-el.h/2 && newY <= mcdrop.y+mcdrop.h-el.h/2;
 				if(el.ff){
-					el.classList.remove('terseleksi');
-					el.classList.add('dropbenar');
+					//el.classList.remove('terseleksi');
+					//el.classList.add('dropbenar');
 				}else{
-					el.classList.add('terseleksi');
-					el.classList.remove('dropbenar');
+					//el.classList.add('terseleksi');
+					//el.classList.remove('dropbenar');
 				}
             }
 			
