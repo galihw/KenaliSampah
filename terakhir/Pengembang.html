@@ -45,7 +45,6 @@
 	</div>
 	<script>
 		const myBtn = document.getElementById("tombol");
-		const myAset = document.getElementById("aset");
 		const myGithub = document.getElementById("github");
 		const myBG = document.getElementById("bg");
 		var scl = 1;
@@ -58,15 +57,10 @@
 		myBG.style.backgroundImage = "url(img/pengembang.png)";
 		myBtn.style.left = ''+(685)+'px';
 		myBtn.style.top = ''+(394)+'px';
-		myAset.style.left = ''+(685)+'px';
-		myAset.style.top = ''+(121)+'px';
 		myGithub.style.left = ''+(210)+'px';
 		myGithub.style.top = ''+(155)+'px';
 		myBtn.addEventListener("click", function() {
 			location.href = "../beranda/beranda.html";
-		});
-		myAset.addEventListener("click", function() {
-			location.href = "LinkGambar.html";
 		});
 		myGithub.addEventListener("click", function() {
 			location.href = "https://galihw.github.io/GalihWidosamodra/index.html";
@@ -90,8 +84,6 @@
 			myBG.style.top = ''+(myBG.y)+'px';
 			myBtn.style.left = ''+(685)+'px';
 			myBtn.style.top = ''+(392)+'px';
-			myAset.style.left = ''+(685)+'px';
-			myAset.style.top = ''+(121)+'px';
 			myGithub.style.left = ''+(210)+'px';
 			myGithub.style.top = ''+(155)+'px';
 		}
