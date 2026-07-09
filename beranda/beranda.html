@@ -33,6 +33,7 @@
 		<div class="klikbtn" id="tombol2"></div>
 		<div class="klikbtn" id="tombol3"></div>
 		<div class="klikbtn" id="tombol4"></div>
+		<div class="klikbtn" id="tombol5"></div>
 	</div>
 	<script>
 	</script>
@@ -49,9 +50,9 @@
 		
 		
 		var arbtn = [];
-		var xybtn = [[20,146],[20,220],[426,165],[20,294]];
-		var linkbtn = ["carapenggunaan.html","atp.html","../interaktif1/Pengantar.html","../terakhir/Pengembang.html"];
-		for(var i=1;i<=4;i++){
+		var xybtn = [[20,146],[20,220],[388,345],[20,294],[20,368]];
+		var linkbtn = ["carapenggunaan.html","atp.html","../interaktif1/Pengantar.html","../terakhir/Pengembang.html","../terakhir/LinkGambar.html"];
+		for(var i=1;i<=5;i++){
 			arbtn[i-1] = document.getElementById('tombol'+i);
 			arbtn[i-1].style.left = ''+(xybtn[i-1][0])+'px';
 			arbtn[i-1].style.top = ''+(xybtn[i-1][1])+'px';
@@ -78,7 +79,7 @@
 			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 			myBG.style.left = ''+(myBG.x)+'px';
 			myBG.style.top = ''+(myBG.y)+'px';
-			for(var i=1;i<=4;i++){
+			for(var i=1;i<=5;i++){
 				arbtn[i-1].style.left = ''+(xybtn[i-1][0])+'px';
 				arbtn[i-1].style.top = ''+(xybtn[i-1][1])+'px';
 			}

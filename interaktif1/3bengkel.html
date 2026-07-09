@@ -13,7 +13,8 @@
 			margin: 0 auto;
 			width: 100%;
 			height: 472px;
-			position: absolute
+			position: absolute;
+			background-size: contain;
 		}
 		.klikable {
 			position: absolute;
@@ -85,17 +86,17 @@
 		myBG.style.left = ''+(myBG.x)+'px';
 		myBG.style.top = ''+(myBG.y)+'px';
 		
-		/*					
+		/*		
 		var arDataBig = [
 						[["ranting","img/ranting1.png",256*100/256,144*100/256],["ranting","img/ranting2.png",200,115],["ranting","img/ranting3.png",200,164],["ranting","img/ranting4.png",200,105]],
 						[["baterai","img/baterai1.png",83*50/279,279*50/279],["baterai","img/baterai2.png",104*50/350,350*50/350],["baterai","img/baterai3.png",198*50/316,316*50/316],["baterai","img/baterai4.png",188*50/316,316*50/316]],
 						[["kaleng","img/kaleng1.png",104*100/200,200*100/200],["kaleng","img/kaleng2.png",139*100/200,200*100/200],["kaleng","img/kaleng3.png",102*100/200,200*100/200],["kaleng","img/kaleng4.png",96*100/200,200*100/200]]
 						];
 		*/
-		/*
+		/*			
 		var arDataBig = [
 						[["kertas","img/kertas1.png",200*100/200,127*100/200],["kertas","img/kertas2.png",200*100/200,127*100/200],["kertas","img/kertas3.png",200*100/200,127*100/200],["kertas","img/kertas4.png",200*100/200,127*100/200]],
-						[["botol","img/botol1.png",105*100/310,310*100/310],["botol","img/botol2.png",238*100/585,585*100/585],["botol","img/botol3.png",218*100/594,594*100/594],["kayu","img/botol4.png",227*100/605,605*100/605]],
+						[["botol plastik","img/botol1.png",105*100/310,310*100/310],["botol plastik","img/botol2.png",238*100/585,585*100/585],["botol plastik","img/botol3.png",218*100/594,594*100/594],["botol plastik","img/botol4.png",227*100/605,605*100/605]],
 						[["kain","img/kain1.png",451*100/451,167*100/451],["kain","img/kain2.png",300*100/300,191*100/300],["kain","img/kain3.png",276*100/276,176*100/276],["kain","img/kain4.png",200*100/200,140*100/200]]
 						];
 		*/
@@ -112,7 +113,7 @@
 						];
 		*/
 		
-		for(var i=0;i<3;i++) arDataBig[i] = RandomMyArray(arDataBig[i])
+		for(var i=0;i<3;i++) arDataBig[i] = RandomMyArray(arDataBig[i]);
 		var arData = [arDataBig[0][0], arDataBig[1][0], arDataBig[2][0]];
 		
 		arData = RandomMyArray(arData);
@@ -213,6 +214,7 @@
 			}
 			//console.log("DataSini = "+DataSini)
 		}
+		
 
 		document.body.style.backgroundColor = "black";
 		window.addEventListener('resize', () => {
