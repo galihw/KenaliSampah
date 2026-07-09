@@ -290,6 +290,8 @@
 					var ifix = Math.ceil(newX/280);
 					//console.log("ifix =  "+ifix
 					el.inbox = ifix;
+					el.xx = newX;
+					el.yy = newY;
 					DaftarIsiImg();
 				}else{
 					//console.log("salah");
@@ -407,6 +409,8 @@
 			
 			ARimg[i-1].style.left = Sediaxy[i-1][0]+'px';
 			ARimg[i-1].style.top = Sediaxy[i-1][1]+'px'; 
+			ARimg[i-1].xx = ARimg[i-1].x0;
+			ARimg[i-1].yy = ARimg[i-1].y0;
 		}
 		
 		var warnaBG = ["#00ff00","#00c1c1","#f2aa1d"];
@@ -461,6 +465,10 @@
 			for (var i=1;i<=3;i++){
 				ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
 				ARboximg[i-1].style.top = ''+(312)+'px';
+			}
+			for (var i=1;i<=nn;i++){
+				ARimg[i-1].style.left = ARimg[i-1].xx+'px';
+				ARimg[i-1].style.top = ARimg[i-1].yy+'px'; 
 			}
 			btnLanjut.style.left = ''+(650)+'px';
 			btnLanjut.style.top = ''+(260)+'px';
