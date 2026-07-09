@@ -14,6 +14,7 @@
 			width: 100%;
 			height: 472px;
 			position: absolute;
+			background-size: contain;
 			user-select: none;
 			-webkit-user-select: none;
 		}
@@ -88,7 +89,8 @@
 			width: 384px; 
 			height: 43px;
 			position: absolute;
-			font-family: 'Arial Rounded MT Bold', sans-serif;
+			/*font-family: 'Arial Rounded MT Bold', sans-serif;*/
+			font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 			font-weight: bold;
 			font-size:  12px;
 			user-select: none;
@@ -108,7 +110,8 @@
 			width: 375px; 
 			height: 33px;
 			position: absolute;
-			font-family: 'Arial Rounded MT Bold', sans-serif;
+			/*font-family: 'Arial Rounded MT Bold', sans-serif;*/
+			font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 			font-size:  20px;
 			font-weight: bold;
 			user-select: none;
@@ -178,7 +181,6 @@
 		myBG.style.top = ''+(myBG.y)+'px';
 		myBG.w = 840;
 		myBG.h = 472;
-		myBG.style.top = ''+(myBG.y)+'px';
 		var xybtn = [[65,147+0*70],[65,147+1*70],[65,147+2*70],[65,147+3*70]];
 		var xybawah = [[296,204.5],[296,204.5+20],[296,204.5+20*2],[296,204.5+20*3]]; // 265.5+30.5=296 // 199.5+5=204.5
 		var xydrop = [251,149];
@@ -327,7 +329,6 @@
 				CekDrop();
             }
 			function CekDrop() {
-				//
 				if(el.ff && selectedEl){
 					//console.log("benar");
 					el.sudah = true;
@@ -335,7 +336,7 @@
 					el.style.display = "none"; //hilangkan kalau sudah
 					document.getElementById('bawah'+(arFIFO.length)).style.display = "";
 					document.getElementById('bawah'+arFIFO.length).src = arFIFO[arFIFO.length-1].srckecil;
-					DaftarIsiImg();
+					
 				}else{
 					//console.log("salah");
 					document.getElementById('bubble').style.display = "none";
@@ -345,8 +346,10 @@
 					el.style.top = el.y0;
 					UnselectElement(el);
 				}
+				DaftarIsiImg();
 				//XYbenda();
 				UnselectElement(el);
+				
 			}
         }
 	</script>	
