@@ -175,6 +175,9 @@
 		let lebarJendela = window.innerWidth;
 		let tinggiJendela = window.innerHeight;
 		var scl = 1;
+		var xscale = lebarJendela/840;
+		var yscale = tinggiJendela/472;
+		scl = 0.95*Math.min(xscale,yscale);
 		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
 		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
 		myBG.style.left = ''+(myBG.x)+'px';
