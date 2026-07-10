@@ -194,6 +194,50 @@
 		
 	</script>
 	<script>
+		function XYbenda(){
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			for (var i=1;i<=3;i++){
+				ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
+				ARboximg[i-1].style.top = ''+(312)+'px';
+			}
+			for (var i=1;i<=nn;i++){
+				ARimg[i-1].style.left = ARimg[i-1].xx+'px';
+				ARimg[i-1].style.top = ARimg[i-1].yy+'px'; 
+			}
+			btnLanjut.style.left = ''+(650)+'px';
+			btnLanjut.style.top = ''+(260)+'px';
+			dragText.style.left = 0+'px';
+			dragText.style.top = 255+'px';
+		}
+		function ZoomAll(){
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			XYbenda();
+		}
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+	</script>
+	<script>
 		var selectedEl = null;
 		const controller = new AbortController();
 		//const { signal } = controller;
@@ -458,51 +502,6 @@
 		window.addEventListener('resize', () => {
 			ZoomAll();
 		});
-	</script>
-	<script>
-		function XYbenda(){
-			lebarJendela = window.innerWidth;
-			tinggiJendela = window.innerHeight;
-			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
-			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
-			myBG.style.left = ''+(myBG.x)+'px';
-			myBG.style.top = ''+(myBG.y)+'px';
-			for (var i=1;i<=3;i++){
-				ARboximg[i-1].style.left = ''+(280*(i-1))+'px';
-				ARboximg[i-1].style.top = ''+(312)+'px';
-			}
-			for (var i=1;i<=nn;i++){
-				ARimg[i-1].style.left = ARimg[i-1].xx+'px';
-				ARimg[i-1].style.top = ARimg[i-1].yy+'px'; 
-			}
-			btnLanjut.style.left = ''+(650)+'px';
-			btnLanjut.style.top = ''+(260)+'px';
-			dragText.style.left = 0+'px';
-			dragText.style.top = 255+'px';
-		}
-		function ZoomAll(){
-			lebarJendela = window.innerWidth;
-			tinggiJendela = window.innerHeight;
-			var xscale = lebarJendela/840;
-			var yscale = tinggiJendela/472;
-			scl = 0.95*Math.min(xscale,yscale);
-			fixscale = scl;
-			fixzoom = scl*100;
-			document.body.style.zoom = ""+fixzoom+"%";
-			XYbenda();
-		}
-		
-		ZoomAll();
-		function handleClick(event) {
-			console.log("handleClick");
-		}
-		myBG.addEventListener('click', handleClick);
-		setTimeout(() => {
-			console.log("handleClick")
-			ZoomAll();
-			myBG.removeEventListener('click', handleClick);
-		}, 100);
-		
 	</script>
 </body>
 </html>
